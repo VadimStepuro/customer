@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  db:
+    container_name: aviatickets_db
+    image: "postgres"
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: pg_isready -U $$POSTGRES_USER
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1111
+    volumes:
+      - db-data_1:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  app:
+    container_name: aviatickets_app
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1111
+    depends_on:
+      db:
+        condition: service_healthy
+
+  pgadmin:
+    container_name: aviatickets_pgadmin
+    image: dpage/pgadmin4:7
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin-data_1:/var/lib/pgadmin
+
+volumes:
+  db-data:
+  pgadmin-data:
