@@ -22,7 +22,7 @@ public class LoggingAspect {
 
     @Autowired
     private ObjectMapper mapper;
-    @Pointcut("@annotation(com.stepuro.aviatickets.api.annotations.Loggable)")
+    @Pointcut("@annotation(com.stepuro.customer.api.annotations.Loggable)")
     public void pointcut() {
     }
 

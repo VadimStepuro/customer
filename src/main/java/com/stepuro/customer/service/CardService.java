@@ -2,6 +2,7 @@ package com.stepuro.customer.service;
 
 import com.stepuro.customer.api.dto.CardDto;
 import com.stepuro.customer.api.dto.mapper.CardMapper;
+import com.stepuro.customer.api.dto.mapper.IndividualMapper;
 import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.Card;
 import com.stepuro.customer.repository.CardRepositoryJpa;
@@ -57,7 +58,10 @@ public class CardService {
         card.setCreatedDate(cardDto.getCreatedDate());
         card.setUpdatedDate(cardDto.getUpdatedDate());
         card.setStatus(cardDto.getStatus());
-        card.setIndividual(cardDto.getIndividual());
+        card.setIndividual(
+                IndividualMapper
+                        .INSTANCE
+                        .individualDtoToIndividual(cardDto.getIndividualDto()));
         card.setExpiryDate(cardDto.getExpiryDate());
 
         return CardMapper

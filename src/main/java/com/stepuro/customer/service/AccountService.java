@@ -2,6 +2,7 @@ package com.stepuro.customer.service;
 
 import com.stepuro.customer.api.dto.AccountDto;
 import com.stepuro.customer.api.dto.mapper.AccountMapper;
+import com.stepuro.customer.api.dto.mapper.LegalEntityMapper;
 import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.Account;
 import com.stepuro.customer.repository.AccountRepositoryJpa;
@@ -53,10 +54,13 @@ public class AccountService{
                 .orElseThrow(() -> new ResourceNotFoundException("Account with id " + accountDto.getId() + " not found"));
 
         account.setAccountNumber(accountDto.getAccountNumber());
-        account.setCreatedDate(accountDto.getCreated_date());
+        account.setCreatedDate(accountDto.getCreatedDate());
         account.setUpdatedDate(accountDto.getUpdatedDate());
         account.setStatus(accountDto.getStatus());
-        account.setLegalEntity(accountDto.getLegalEntity());
+        account.setLegalEntity(
+                LegalEntityMapper
+                    .INSTANCE
+                    .legalEntityDtoToLegalEntity(accountDto.getLegalEntityDto()));
 
         return AccountMapper
                 .INSTANCE

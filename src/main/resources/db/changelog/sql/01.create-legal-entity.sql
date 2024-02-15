@@ -11,18 +11,18 @@ CREATE TABLE public.legal_entity (
 	updated_date timestamp NULL,
 	address varchar NOT NULL,
 	city varchar NOT NULL,
-	inn INTEGER NOT NULL,
+	inn varchar NOT NULL,
 	CONSTRAINT legal_entity_pk PRIMARY KEY (legal_entity_id),
 	CONSTRAINT created_date_check CHECK (created_date >= CURRENT_TIMESTAMP),
 	CONSTRAINT updated_date_check CHECK (updated_date >= CURRENT_TIMESTAMP),
-	CONSTRAINT inn_check CHECK (inn BETWEEN 1 and 999999999999)
+	CONSTRAINT inn_check CHECK (inn ~* '^[\d+]{10,12}$')
 );
 
 CREATE TABLE public.account (
 	id uuid NOT NULL,
 	account_number varchar NOT NULL,
 	created_date timestamp NOT NULL,
-	updated_date timestamp NOT NULL,
+	updated_date timestamp NULL,
 	status varchar NOT NULL,
 	legal_entity_id int4 NULL,
 	CONSTRAINT account_pk PRIMARY KEY (id),

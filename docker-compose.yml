@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    container_name: aviatickets_db
+    container_name: customer_db
     image: "postgres"
     ports:
       - "5432:5432"
@@ -16,11 +16,11 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1111
     volumes:
-      - db-data_1:/var/lib/postgresql/data
+      - db-data-1:/var/lib/postgresql/data
     restart: unless-stopped
 
   app:
-    container_name: aviatickets_app
+    container_name: customer_app
     build: .
     ports:
       - "8080:8080"
@@ -33,7 +33,7 @@ services:
         condition: service_healthy
 
   pgadmin:
-    container_name: aviatickets_pgadmin
+    container_name: customer_pgadmin
     image: dpage/pgadmin4:7
     restart: always
     environment:
@@ -42,8 +42,8 @@ services:
     ports:
       - "5050:80"
     volumes:
-      - pgadmin-data_1:/var/lib/pgadmin
+      - pgadmin-data-1:/var/lib/pgadmin
 
 volumes:
-  db-data:
-  pgadmin-data:
+  db-data-1:
+  pgadmin-data-1:

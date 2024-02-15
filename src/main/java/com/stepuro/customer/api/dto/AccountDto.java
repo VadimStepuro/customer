@@ -1,8 +1,9 @@
 package com.stepuro.customer.api.dto;
 
-import com.stepuro.customer.model.LegalEntity;
 import com.stepuro.customer.model.status.AccountStatus;
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -18,15 +19,21 @@ import java.util.UUID;
 public class AccountDto {
     private UUID id;
 
+    @NotNull(message = "Account number can't be null")
+    @Pattern(regexp = "^[A-Z]{2}\\d{2}[A-Za-z\\d]{1,30}$", message = "Invalid IBAN number")
     private String accountNumber;
 
-    private Date created_date;
+    @NotNull(message = "Created date can't be null")
+    @PastOrPresent(message = "Created date can't be in future")
+    private Date createdDate;
 
+    @PastOrPresent(message = "Updated date can't be in future")
     private Date updatedDate;
 
+    @NotNull(message = "Status can't be null")
     private AccountStatus status;
 
-    private LegalEntity legalEntity;
+    private LegalEntityDto legalEntityDto;
 
     public UUID getId() {
         return id;
@@ -44,12 +51,12 @@ public class AccountDto {
         this.accountNumber = accountNumber;
     }
 
-    public Date getCreated_date() {
-        return created_date;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public Date getUpdatedDate() {
@@ -68,11 +75,11 @@ public class AccountDto {
         this.status = status;
     }
 
-    public LegalEntity getLegalEntity() {
-        return legalEntity;
+    public LegalEntityDto getLegalEntityDto() {
+        return legalEntityDto;
     }
 
-    public void setLegalEntity(LegalEntity legalEntity) {
-        this.legalEntity = legalEntity;
+    public void setLegalEntity(LegalEntityDto legalEntityDto) {
+        this.legalEntityDto = legalEntityDto;
     }
 }
