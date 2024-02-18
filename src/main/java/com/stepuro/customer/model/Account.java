@@ -55,7 +55,7 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public Date getCreated_date() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 

@@ -1,9 +1,6 @@
 package com.stepuro.customer.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -20,6 +17,8 @@ import java.util.Date;
 public class LegalEntity {
     @Id
     @Column(name = "legal_entity_id")
+    @GeneratedValue(generator = "legal_entity_id_sequence_generator")
+    @SequenceGenerator(name = "legal_entity_id_sequence_generator", sequenceName = "legal_entity_id_sequence", allocationSize = 1)
     private Integer legalEntityId;
 
     @Column(name = "name")
@@ -38,7 +37,7 @@ public class LegalEntity {
     private String city;
 
     @Column(name = "inn")
-    private int inn;
+    private String inn;
 
     public Integer getLegalEntityId() {
         return legalEntityId;
@@ -88,11 +87,11 @@ public class LegalEntity {
         this.city = city;
     }
 
-    public int getInn() {
+    public String getInn() {
         return inn;
     }
 
-    public void setInn(int inn) {
+    public void setInn(String inn) {
         this.inn = inn;
     }
 }

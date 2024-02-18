@@ -22,7 +22,7 @@ public class CardDto {
 
     @NotNull(message = "Credit card number can't be null")
     @CreditCardNumber(message = "Invalid credit card number")
-    private int cardNumber;
+    private String cardNumber;
 
     @NotNull(message = "Account number can't be null")
     @Pattern(regexp = "^[A-Z]{2}\\d{2}[A-Za-z\\d]{1,30}$", message = "Invalid account number")
@@ -51,11 +51,11 @@ public class CardDto {
         this.id = id;
     }
 
-    public int getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(int cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 

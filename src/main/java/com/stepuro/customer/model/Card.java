@@ -23,7 +23,7 @@ public class Card {
     private UUID id;
 
     @Column(name = "card_number")
-    private int cardNumber;
+    private String cardNumber;
 
     @Column(name = "account_number")
     private String accountNumber;
@@ -53,11 +53,11 @@ public class Card {
         this.id = id;
     }
 
-    public int getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(int cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 

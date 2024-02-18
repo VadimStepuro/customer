@@ -35,7 +35,7 @@ public class LegalEntityDto {
 
     @NotNull(message = "Inn can't be null")
     @Pattern(regexp = "^[\\d+]{10,12}$", message = "Invalid inn. It can contain only digits with length 10-12")
-    private int inn;
+    private String inn;
 
     public Integer getLegalEntityId() {
         return legalEntityId;
@@ -85,11 +85,11 @@ public class LegalEntityDto {
         this.city = city;
     }
 
-    public int getInn() {
+    public String getInn() {
         return inn;
     }
 
-    public void setInn(int inn) {
+    public void setInn(String inn) {
         this.inn = inn;
     }
 }

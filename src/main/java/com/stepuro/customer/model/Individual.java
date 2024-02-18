@@ -1,25 +1,24 @@
 package com.stepuro.customer.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "individual", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
 public class Individual {
     @Id
     @Column(name = "individual_id")
+    @GeneratedValue(generator = "individual_id_sequence_generator")
+    @SequenceGenerator(name = "individual_id_sequence_generator", sequenceName = "individual_id_sequence", allocationSize = 1)
     private Integer individualId;
 
     @Column(name = "name")
@@ -42,6 +41,9 @@ public class Individual {
 
     @Column(name = "city")
     private String city;
+
+    @OneToMany(mappedBy = "individual", cascade = CascadeType.REMOVE)
+    private List<Card> cards;
 
     public Integer getIndividualId() {
         return individualId;
@@ -105,5 +107,13 @@ public class Individual {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
     }
 }
