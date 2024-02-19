@@ -79,7 +79,7 @@ public class AccountDto {
         return legalEntityDto;
     }
 
-    public void setLegalEntity(LegalEntityDto legalEntityDto) {
+    public void setLegalEntityDto(LegalEntityDto legalEntityDto) {
         this.legalEntityDto = legalEntityDto;
     }
 }

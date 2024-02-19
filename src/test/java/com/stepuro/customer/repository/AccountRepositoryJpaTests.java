@@ -98,11 +98,11 @@ public class AccountRepositoryJpaTests {
         Account account = accountRepositoryJpa.findById(savedAccount.getId()).get();
 
         assertNotNull(account);
-        assertEquals(account1.getId(), account.getId());
-        assertEquals(account.getAccountNumber(), savedAccount.getAccountNumber());
-        assertEquals(account.getCreatedDate(), savedAccount.getCreatedDate());
-        assertEquals(account.getUpdatedDate(), savedAccount.getUpdatedDate());
-        assertEquals(account.getStatus(), savedAccount.getStatus());
+        assertEquals(savedAccount.getId(), account.getId());
+        assertEquals(savedAccount.getAccountNumber(), account.getAccountNumber());
+        assertEquals(savedAccount.getCreatedDate(), account.getCreatedDate());
+        assertEquals(savedAccount.getUpdatedDate(), account.getUpdatedDate());
+        assertEquals(savedAccount.getStatus(), account.getStatus());
     }
 
     @Test
