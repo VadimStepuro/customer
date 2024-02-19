@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+import static com.stepuro.customer.repository.Samples.IndividualSamples.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -18,70 +19,20 @@ public class IndividualRepositoryJpaTests {
 
     @Test
     public void IndividualRepository_Save_ReturnsSavedModel(){
-        //Arrange
-        Individual individual = Individual.builder()
-                .name("Vadim")
-                .lastName("Stepuro")
-                .address("Kletskova")
-                .city("Grodno")
-                .dayOfBirth(Date.valueOf(LocalDate.of(2003, 10, 18)))
-                .createdDate(Date.valueOf(LocalDate.now()))
-                .updatedDate(Date.valueOf(LocalDate.now()))
-                .build();
+        Individual savedIndividual = individualRepositoryJpa.save(individual1);
 
-        //Act
-        Individual savedIndividual = individualRepositoryJpa.save(individual);
-
-        //Assert
         assertNotNull(savedIndividual);
-        assertEquals(individual.getName(), savedIndividual.getName());
-        assertEquals(individual.getLastName(), savedIndividual.getLastName());
-        assertEquals(individual.getAddress(), savedIndividual.getAddress());
-        assertEquals(individual.getCity(), savedIndividual.getCity());
-        assertEquals(individual.getDayOfBirth(), savedIndividual.getDayOfBirth());
-        assertEquals(individual.getCreatedDate(), savedIndividual.getCreatedDate());
-        assertEquals(individual.getUpdatedDate(), savedIndividual.getUpdatedDate());
+        assertEquals(individual1.getName(), savedIndividual.getName());
+        assertEquals(individual1.getLastName(), savedIndividual.getLastName());
+        assertEquals(individual1.getAddress(), savedIndividual.getAddress());
+        assertEquals(individual1.getCity(), savedIndividual.getCity());
+        assertEquals(individual1.getDayOfBirth(), savedIndividual.getDayOfBirth());
+        assertEquals(individual1.getCreatedDate(), savedIndividual.getCreatedDate());
+        assertEquals(individual1.getUpdatedDate(), savedIndividual.getUpdatedDate());
     }
 
     @Test
     public void IndividualRepository_FindAll_ReturnsAllModels(){
-        Individual individual1 = Individual.builder()
-                .name("Vadim")
-                .lastName("Stepuro")
-                .address("Kletskova")
-                .city("Grodno")
-                .dayOfBirth(Date.valueOf(LocalDate.of(2003, 10, 18)))
-                .createdDate(Date.valueOf(LocalDate.now()))
-                .updatedDate(Date.valueOf(LocalDate.now()))
-                .build();
-        Individual individual2 = Individual.builder()
-                .name("Vadim")
-                .lastName("Stepuro")
-                .address("Kletskova")
-                .city("Grodno")
-                .dayOfBirth(Date.valueOf(LocalDate.of(2003, 10, 18)))
-                .createdDate(Date.valueOf(LocalDate.now()))
-                .updatedDate(Date.valueOf(LocalDate.now()))
-                .build();
-        Individual individual3 = Individual.builder()
-                .name("Vadim")
-                .lastName("Stepuro")
-                .address("Kletskova")
-                .city("Grodno")
-                .dayOfBirth(Date.valueOf(LocalDate.of(2003, 10, 18)))
-                .createdDate(Date.valueOf(LocalDate.now()))
-                .updatedDate(Date.valueOf(LocalDate.now()))
-                .build();
-        Individual individual4 = Individual.builder()
-                .name("Vadim")
-                .lastName("Stepuro")
-                .address("Kletskova")
-                .city("Grodno")
-                .dayOfBirth(Date.valueOf(LocalDate.of(2003, 10, 18)))
-                .createdDate(Date.valueOf(LocalDate.now()))
-                .updatedDate(Date.valueOf(LocalDate.now()))
-                .build();
-
         individualRepositoryJpa.save(individual1);
         individualRepositoryJpa.save(individual2);
         individualRepositoryJpa.save(individual3);
@@ -95,25 +46,6 @@ public class IndividualRepositoryJpaTests {
 
     @Test
     public void IndividualRepository_FindById_ReturnsModel(){
-        Individual individual1 = Individual.builder()
-                .name("Vadim")
-                .lastName("Stepuro")
-                .address("Kletskova")
-                .city("Grodno")
-                .dayOfBirth(Date.valueOf(LocalDate.of(2003, 10, 18)))
-                .createdDate(Date.valueOf(LocalDate.now()))
-                .updatedDate(Date.valueOf(LocalDate.now()))
-                .build();
-        Individual individual2 = Individual.builder()
-                .name("Konstantin")
-                .lastName("Ivanov")
-                .address("Lenina")
-                .city("Minsk")
-                .dayOfBirth(Date.valueOf(LocalDate.of(2001, 1, 6)))
-                .createdDate(Date.valueOf(LocalDate.now()))
-                .updatedDate(Date.valueOf(LocalDate.now()))
-                .build();
-
         Individual savedIndividual = individualRepositoryJpa.save(individual1);
         individualRepositoryJpa.save(individual2);
 
@@ -133,17 +65,6 @@ public class IndividualRepositoryJpaTests {
 
     @Test
     public void IndividualRepository_Update_ChangesModel(){
-        Individual individual1 = Individual.builder()
-                .name("Vadim")
-                .lastName("Stepuro")
-                .address("Kletskova")
-                .city("Grodno")
-                .dayOfBirth(Date.valueOf(LocalDate.of(2003, 10, 18)))
-                .createdDate(Date.valueOf(LocalDate.now()))
-                .updatedDate(Date.valueOf(LocalDate.now()))
-                .build();
-
-
         Individual savedIndividual = individualRepositoryJpa.save(individual1);
 
         savedIndividual.setName("Ivan");
@@ -169,16 +90,6 @@ public class IndividualRepositoryJpaTests {
 
     @Test
     public void IndividualRepository_Remove_RemovesModel(){
-        Individual individual1 = Individual.builder()
-                .name("Vadim")
-                .lastName("Stepuro")
-                .address("Kletskova")
-                .city("Grodno")
-                .dayOfBirth(Date.valueOf(LocalDate.of(2003, 10, 18)))
-                .createdDate(Date.valueOf(LocalDate.now()))
-                .updatedDate(Date.valueOf(LocalDate.now()))
-                .build();
-
         Individual savedIndividual = individualRepositoryJpa.save(individual1);
 
         individualRepositoryJpa.deleteById(savedIndividual.getIndividualId());

@@ -1,358 +1,165 @@
 #logback.classic pattern: %d [%thread] %-5level %logger{36} - %msg%n
-2024-02-19 10:51:40,909 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.IndividualRepositoryJpaTests]: IndividualRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 10:51:41,090 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.IndividualRepositoryJpaTests
+2024-02-20 00:03:17,203 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.AccountRepositoryJpaTests]: AccountRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20 00:03:17,354 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.AccountRepositoryJpaTests
 #logback.classic pattern: %d [%thread] %-5level %logger{36} - %msg%n
-2024-02-19 10:51:41,432 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2024-02-19 10:51:41,480 [main] INFO  c.s.c.r.IndividualRepositoryJpaTests - Starting IndividualRepositoryJpaTests using Java 21.0.1 with PID 27039 (started by vadimstepuro in /home/vadimstepuro/IdeaProjects/customer)
-2024-02-19 10:51:41,482 [main] INFO  c.s.c.r.IndividualRepositoryJpaTests - No active profile set, falling back to 1 default profile: "default"
-2024-02-19 10:51:42,136 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-02-19 10:51:42,138 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-02-19 10:51:42,327 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 176 ms. Found 4 JPA repository interfaces.
-2024-02-19 10:51:42,389 [main] INFO  o.s.b.t.a.j.TestDatabaseAutoConfiguration$EmbeddedDataSourceBeanFactoryPostProcessor - Replacing 'dataSource' DataSource bean with embedded version
-2024-02-19 10:51:42,597 [main] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:d8f25051-8563-4181-8bd0-b3119391045e;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-19 10:51:42,943 [main] INFO  liquibase.database - Set default schema name to PUBLIC
-2024-02-19 10:51:43,336 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
-2024-02-19 10:51:43,419 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 10:51:43,456 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
-2024-02-19 10:51:43,457 [main] INFO  liquibase.command - Using deploymentId: 8329103457
-2024-02-19 10:51:43,459 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 10:51:43,468 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::01-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 10:51:43,475 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::02-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 10:51:43,479 [main] INFO  liquibase.util - UPDATE SUMMARY
-2024-02-19 10:51:43,480 [main] INFO  liquibase.util - Run:                          2
-2024-02-19 10:51:43,480 [main] INFO  liquibase.util - Previously run:               0
-2024-02-19 10:51:43,480 [main] INFO  liquibase.util - Filtered out:                 0
-2024-02-19 10:51:43,480 [main] INFO  liquibase.util - -------------------------------
-2024-02-19 10:51:43,480 [main] INFO  liquibase.util - Total change sets:            2
-2024-02-19 10:51:43,480 [main] INFO  liquibase.util - Update summary generated
-2024-02-19 10:51:43,481 [main] INFO  liquibase.command - Update command completed successfully.
-2024-02-19 10:51:43,483 [main] INFO  liquibase.lockservice - Successfully released change log lock
-2024-02-19 10:51:43,484 [main] INFO  liquibase.command - Command execution complete
-2024-02-19 10:51:43,569 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-02-19 10:51:43,618 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
-2024-02-19 10:51:43,645 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2024-02-19 10:51:43,831 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-02-19 10:51:44,671 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-02-19 10:51:44,715 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 10:51:45,067 [main] INFO  c.s.c.r.IndividualRepositoryJpaTests - Started IndividualRepositoryJpaTests in 3.902 seconds (process running for 5.24)
-2024-02-19 10:51:45,974 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.AccountRepositoryJpaTests]: AccountRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 10:51:45,988 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.AccountRepositoryJpaTests
-2024-02-19 10:51:46,067 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.LegalEntityRepositoryJpaTests]: LegalEntityRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 10:51:46,078 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.LegalEntityRepositoryJpaTests
-2024-02-19 10:51:46,087 [main] ERROR c.s.c.utils.aspect.LoggingAspect - 1
-2024-02-19 10:51:46,140 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.CardRepositoryJpaTests]: CardRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 10:51:46,169 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.CardRepositoryJpaTests
-2024-02-19 10:51:46,234 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.CustomerApplicationTests]: CustomerApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 10:51:46,247 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.CustomerApplicationTests
-2024-02-19 10:51:46,296 [main] INFO  c.s.c.CustomerApplicationTests - Starting CustomerApplicationTests using Java 21.0.1 with PID 27039 (started by vadimstepuro in /home/vadimstepuro/IdeaProjects/customer)
-2024-02-19 10:51:46,296 [main] INFO  c.s.c.CustomerApplicationTests - No active profile set, falling back to 1 default profile: "default"
-2024-02-19 10:51:46,822 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-02-19 10:51:46,822 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2024-02-19 10:51:46,828 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.AccountRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 10:51:46,828 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.CardRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 10:51:46,828 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.IndividualRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 10:51:46,829 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.LegalEntityRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 10:51:46,829 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 6 ms. Found 0 JDBC repository interfaces.
-2024-02-19 10:51:46,832 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-02-19 10:51:46,833 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-02-19 10:51:46,842 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 4 JPA repository interfaces.
-2024-02-19 10:51:47,378 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2024-02-19 10:51:47,386 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn24: url=jdbc:h2:mem:Customer user=SA
-2024-02-19 10:51:47,387 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2024-02-19 10:51:47,395 [main] INFO  liquibase.database - Set default schema name to PUBLIC
-2024-02-19 10:51:47,427 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
-2024-02-19 10:51:47,431 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 10:51:47,441 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
-2024-02-19 10:51:47,442 [main] INFO  liquibase.command - Using deploymentId: 8329107442
-2024-02-19 10:51:47,443 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 10:51:47,444 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::01-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 10:51:47,447 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::02-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 10:51:47,449 [main] INFO  liquibase.util - UPDATE SUMMARY
-2024-02-19 10:51:47,449 [main] INFO  liquibase.util - Run:                          2
-2024-02-19 10:51:47,449 [main] INFO  liquibase.util - Previously run:               0
-2024-02-19 10:51:47,450 [main] INFO  liquibase.util - Filtered out:                 0
-2024-02-19 10:51:47,450 [main] INFO  liquibase.util - -------------------------------
-2024-02-19 10:51:47,450 [main] INFO  liquibase.util - Total change sets:            2
-2024-02-19 10:51:47,450 [main] INFO  liquibase.util - Update summary generated
-2024-02-19 10:51:47,450 [main] INFO  liquibase.command - Update command completed successfully.
-2024-02-19 10:51:47,452 [main] INFO  liquibase.lockservice - Successfully released change log lock
-2024-02-19 10:51:47,452 [main] INFO  liquibase.command - Command execution complete
-2024-02-19 10:51:47,548 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-02-19 10:51:47,551 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2024-02-19 10:51:47,553 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-02-19 10:51:47,662 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-02-19 10:51:47,677 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 10:51:49,968 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-02-19 10:51:51,730 [main] INFO  c.s.c.CustomerApplicationTests - Started CustomerApplicationTests in 5.469 seconds (process running for 11.902)
-2024-02-19 10:51:51,755 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 10:51:51,759 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 10:51:51,760 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2024-02-19 10:51:51,763 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-02-20 00:03:17,692 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-02-20 00:03:17,767 [main] INFO  c.s.c.r.AccountRepositoryJpaTests - Starting AccountRepositoryJpaTests using Java 21.0.1 with PID 109554 (started by vadimstepuro in /home/vadimstepuro/IdeaProjects/customer)
+2024-02-20 00:03:17,768 [main] INFO  c.s.c.r.AccountRepositoryJpaTests - No active profile set, falling back to 1 default profile: "default"
+2024-02-20 00:03:18,188 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-20 00:03:18,190 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-20 00:03:18,339 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 140 ms. Found 4 JPA repository interfaces.
+2024-02-20 00:03:18,398 [main] INFO  o.s.b.t.a.j.TestDatabaseAutoConfiguration$EmbeddedDataSourceBeanFactoryPostProcessor - Replacing 'dataSource' DataSource bean with embedded version
+2024-02-20 00:03:18,563 [main] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:65f59e37-2626-4552-bae4-fa28568c489a;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-20 00:03:18,846 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+2024-02-20 00:03:19,149 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+2024-02-20 00:03:19,228 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+2024-02-20 00:03:19,268 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+2024-02-20 00:03:19,269 [main] INFO  liquibase.command - Using deploymentId: 8376599269
+2024-02-20 00:03:19,271 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+2024-02-20 00:03:19,283 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::01-migration::Stepuro Vadim ran successfully in 0ms
+2024-02-20 00:03:19,290 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::02-migration::Stepuro Vadim ran successfully in 0ms
+2024-02-20 00:03:19,295 [main] INFO  liquibase.util - UPDATE SUMMARY
+2024-02-20 00:03:19,295 [main] INFO  liquibase.util - Run:                          2
+2024-02-20 00:03:19,295 [main] INFO  liquibase.util - Previously run:               0
+2024-02-20 00:03:19,295 [main] INFO  liquibase.util - Filtered out:                 0
+2024-02-20 00:03:19,295 [main] INFO  liquibase.util - -------------------------------
+2024-02-20 00:03:19,295 [main] INFO  liquibase.util - Total change sets:            2
+2024-02-20 00:03:19,295 [main] INFO  liquibase.util - Update summary generated
+2024-02-20 00:03:19,297 [main] INFO  liquibase.command - Update command completed successfully.
+2024-02-20 00:03:19,299 [main] INFO  liquibase.lockservice - Successfully released change log lock
+2024-02-20 00:03:19,299 [main] INFO  liquibase.command - Command execution complete
+2024-02-20 00:03:19,396 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-20 00:03:19,463 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-02-20 00:03:19,502 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-02-20 00:03:19,735 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-20 00:03:20,691 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-02-20 00:03:20,729 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-20 00:03:21,077 [main] INFO  c.s.c.r.AccountRepositoryJpaTests - Started AccountRepositoryJpaTests in 3.632 seconds (process running for 4.987)
+2024-02-20 00:03:22,138 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.IndividualRepositoryJpaTests]: IndividualRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20 00:03:22,147 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.IndividualRepositoryJpaTests
+2024-02-20 00:03:22,220 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.LegalEntityRepositoryJpaTests]: LegalEntityRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20 00:03:22,229 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.LegalEntityRepositoryJpaTests
+2024-02-20 00:03:22,298 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.CardRepositoryJpaTests]: CardRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20 00:03:22,328 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.CardRepositoryJpaTests
+2024-02-20 00:03:22,416 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.AccountRepositoryJDBCTests]: AccountRepositoryJDBCTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20 00:03:22,422 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.AccountRepositoryJDBCTests
+2024-02-20 00:03:22,474 [main] INFO  c.s.c.r.AccountRepositoryJDBCTests - Starting AccountRepositoryJDBCTests using Java 21.0.1 with PID 109554 (started by vadimstepuro in /home/vadimstepuro/IdeaProjects/customer)
+2024-02-20 00:03:22,475 [main] INFO  c.s.c.r.AccountRepositoryJDBCTests - No active profile set, falling back to 1 default profile: "default"
+2024-02-20 00:03:22,865 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-20 00:03:22,866 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-02-20 00:03:22,868 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 1 ms. Found 0 JDBC repository interfaces.
+2024-02-20 00:03:23,163 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-20 00:03:23,164 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-20 00:03:23,181 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 16 ms. Found 4 JPA repository interfaces.
+2024-02-20 00:03:23,649 [main] ERROR c.s.c.configuration.SpringJDBCConfig - org.h2.Driver
+2024-02-20 00:03:23,672 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+2024-02-20 00:03:23,702 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+2024-02-20 00:03:23,705 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+2024-02-20 00:03:23,716 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+2024-02-20 00:03:23,716 [main] INFO  liquibase.command - Using deploymentId: 8376603716
+2024-02-20 00:03:23,717 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+2024-02-20 00:03:23,719 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::01-migration::Stepuro Vadim ran successfully in 0ms
+2024-02-20 00:03:23,722 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::02-migration::Stepuro Vadim ran successfully in 0ms
+2024-02-20 00:03:23,724 [main] INFO  liquibase.util - UPDATE SUMMARY
+2024-02-20 00:03:23,724 [main] INFO  liquibase.util - Run:                          2
+2024-02-20 00:03:23,724 [main] INFO  liquibase.util - Previously run:               0
+2024-02-20 00:03:23,724 [main] INFO  liquibase.util - Filtered out:                 0
+2024-02-20 00:03:23,724 [main] INFO  liquibase.util - -------------------------------
+2024-02-20 00:03:23,724 [main] INFO  liquibase.util - Total change sets:            2
+2024-02-20 00:03:23,724 [main] INFO  liquibase.util - Update summary generated
+2024-02-20 00:03:23,725 [main] INFO  liquibase.command - Update command completed successfully.
+2024-02-20 00:03:23,726 [main] INFO  liquibase.lockservice - Successfully released change log lock
+2024-02-20 00:03:23,726 [main] INFO  liquibase.command - Command execution complete
+2024-02-20 00:03:23,886 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-20 00:03:23,887 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-02-20 00:03:23,890 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-20 00:03:24,003 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-02-20 00:03:24,014 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-20 00:03:26,561 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-02-20 00:03:28,025 [main] INFO  c.s.c.r.AccountRepositoryJDBCTests - Started AccountRepositoryJDBCTests in 5.586 seconds (process running for 11.935)
+2024-02-20 00:03:28,732 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.CustomerApplicationTests]: CustomerApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20 00:03:28,748 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.CustomerApplicationTests
+2024-02-20 00:03:28,772 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-02-20 00:03:28,785 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 #logback.classic pattern: %d [%thread] %-5level %logger{36} - %msg%n
-2024-02-19 10:56:25,708 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.IndividualRepositoryJpaTests]: IndividualRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 10:56:25,894 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.IndividualRepositoryJpaTests
+2024-02-20 00:06:51,511 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.AccountRepositoryJpaTests]: AccountRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20 00:06:51,654 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.AccountRepositoryJpaTests
 #logback.classic pattern: %d [%thread] %-5level %logger{36} - %msg%n
-2024-02-19 10:56:26,239 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2024-02-19 10:56:26,275 [main] INFO  c.s.c.r.IndividualRepositoryJpaTests - Starting IndividualRepositoryJpaTests using Java 21.0.1 with PID 28041 (started by vadimstepuro in /home/vadimstepuro/IdeaProjects/customer)
-2024-02-19 10:56:26,276 [main] INFO  c.s.c.r.IndividualRepositoryJpaTests - No active profile set, falling back to 1 default profile: "default"
-2024-02-19 10:56:26,733 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-02-19 10:56:26,734 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-02-19 10:56:26,872 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 132 ms. Found 4 JPA repository interfaces.
-2024-02-19 10:56:26,941 [main] INFO  o.s.b.t.a.j.TestDatabaseAutoConfiguration$EmbeddedDataSourceBeanFactoryPostProcessor - Replacing 'dataSource' DataSource bean with embedded version
-2024-02-19 10:56:27,127 [main] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:43c2ed89-2c72-4ee8-b17c-04a695c1aee5;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-19 10:56:27,444 [main] INFO  liquibase.database - Set default schema name to PUBLIC
-2024-02-19 10:56:27,824 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
-2024-02-19 10:56:27,916 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 10:56:27,969 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
-2024-02-19 10:56:27,971 [main] INFO  liquibase.command - Using deploymentId: 8329387970
-2024-02-19 10:56:27,973 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 10:56:27,984 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::01-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 10:56:27,990 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::02-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 10:56:27,995 [main] INFO  liquibase.util - UPDATE SUMMARY
-2024-02-19 10:56:27,995 [main] INFO  liquibase.util - Run:                          2
-2024-02-19 10:56:27,995 [main] INFO  liquibase.util - Previously run:               0
-2024-02-19 10:56:27,995 [main] INFO  liquibase.util - Filtered out:                 0
-2024-02-19 10:56:27,996 [main] INFO  liquibase.util - -------------------------------
-2024-02-19 10:56:27,996 [main] INFO  liquibase.util - Total change sets:            2
-2024-02-19 10:56:27,996 [main] INFO  liquibase.util - Update summary generated
-2024-02-19 10:56:27,997 [main] INFO  liquibase.command - Update command completed successfully.
-2024-02-19 10:56:28,000 [main] INFO  liquibase.lockservice - Successfully released change log lock
-2024-02-19 10:56:28,000 [main] INFO  liquibase.command - Command execution complete
-2024-02-19 10:56:28,098 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-02-19 10:56:28,140 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
-2024-02-19 10:56:28,169 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2024-02-19 10:56:28,335 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-02-19 10:56:29,223 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-02-19 10:56:29,272 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 10:56:29,632 [main] INFO  c.s.c.r.IndividualRepositoryJpaTests - Started IndividualRepositoryJpaTests in 3.672 seconds (process running for 5.215)
-2024-02-19 10:56:30,537 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.AccountRepositoryJpaTests]: AccountRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 10:56:30,552 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.AccountRepositoryJpaTests
-2024-02-19 10:56:30,633 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.LegalEntityRepositoryJpaTests]: LegalEntityRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 10:56:30,643 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.LegalEntityRepositoryJpaTests
-2024-02-19 10:56:30,652 [main] ERROR c.s.c.utils.aspect.LoggingAspect - 1
-2024-02-19 10:56:30,707 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.CardRepositoryJpaTests]: CardRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 10:56:30,718 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.CardRepositoryJpaTests
-2024-02-19 10:56:30,803 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.CustomerApplicationTests]: CustomerApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 10:56:30,813 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.CustomerApplicationTests
-2024-02-19 10:56:30,858 [main] INFO  c.s.c.CustomerApplicationTests - Starting CustomerApplicationTests using Java 21.0.1 with PID 28041 (started by vadimstepuro in /home/vadimstepuro/IdeaProjects/customer)
-2024-02-19 10:56:30,858 [main] INFO  c.s.c.CustomerApplicationTests - No active profile set, falling back to 1 default profile: "default"
-2024-02-19 10:56:31,311 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-02-19 10:56:31,312 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2024-02-19 10:56:31,318 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.AccountRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 10:56:31,318 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.CardRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 10:56:31,318 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.IndividualRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 10:56:31,318 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.LegalEntityRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 10:56:31,318 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 6 ms. Found 0 JDBC repository interfaces.
-2024-02-19 10:56:31,322 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-02-19 10:56:31,323 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-02-19 10:56:31,332 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 4 JPA repository interfaces.
-2024-02-19 10:56:31,863 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2024-02-19 10:56:31,874 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn24: url=jdbc:h2:mem:Customer user=SA
-2024-02-19 10:56:31,876 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2024-02-19 10:56:31,885 [main] INFO  liquibase.database - Set default schema name to PUBLIC
-2024-02-19 10:56:31,928 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
-2024-02-19 10:56:31,933 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 10:56:31,946 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
-2024-02-19 10:56:31,947 [main] INFO  liquibase.command - Using deploymentId: 8329391947
-2024-02-19 10:56:31,948 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 10:56:31,950 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::01-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 10:56:31,953 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::02-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 10:56:31,956 [main] INFO  liquibase.util - UPDATE SUMMARY
-2024-02-19 10:56:31,956 [main] INFO  liquibase.util - Run:                          2
-2024-02-19 10:56:31,956 [main] INFO  liquibase.util - Previously run:               0
-2024-02-19 10:56:31,956 [main] INFO  liquibase.util - Filtered out:                 0
-2024-02-19 10:56:31,956 [main] INFO  liquibase.util - -------------------------------
-2024-02-19 10:56:31,956 [main] INFO  liquibase.util - Total change sets:            2
-2024-02-19 10:56:31,957 [main] INFO  liquibase.util - Update summary generated
-2024-02-19 10:56:31,957 [main] INFO  liquibase.command - Update command completed successfully.
-2024-02-19 10:56:31,958 [main] INFO  liquibase.lockservice - Successfully released change log lock
-2024-02-19 10:56:31,959 [main] INFO  liquibase.command - Command execution complete
-2024-02-19 10:56:32,064 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-02-19 10:56:32,066 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2024-02-19 10:56:32,069 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-02-19 10:56:32,158 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-02-19 10:56:32,168 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 10:56:34,168 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-02-19 10:56:35,813 [main] INFO  c.s.c.CustomerApplicationTests - Started CustomerApplicationTests in 4.986 seconds (process running for 11.396)
-2024-02-19 10:56:35,837 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 10:56:35,841 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 10:56:35,842 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2024-02-19 10:56:35,845 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-#logback.classic pattern: %d [%thread] %-5level %logger{36} - %msg%n
-2024-02-19 12:36:29,452 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.IndividualRepositoryJpaTests]: IndividualRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 12:36:29,626 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.IndividualRepositoryJpaTests
-#logback.classic pattern: %d [%thread] %-5level %logger{36} - %msg%n
-2024-02-19 12:36:29,968 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2024-02-19 12:36:29,998 [main] INFO  c.s.c.r.IndividualRepositoryJpaTests - Starting IndividualRepositoryJpaTests using Java 21.0.1 with PID 44520 (started by vadimstepuro in /home/vadimstepuro/IdeaProjects/customer)
-2024-02-19 12:36:29,999 [main] INFO  c.s.c.r.IndividualRepositoryJpaTests - No active profile set, falling back to 1 default profile: "default"
-2024-02-19 12:36:30,433 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-02-19 12:36:30,435 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-02-19 12:36:30,572 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 131 ms. Found 4 JPA repository interfaces.
-2024-02-19 12:36:30,639 [main] INFO  o.s.b.t.a.j.TestDatabaseAutoConfiguration$EmbeddedDataSourceBeanFactoryPostProcessor - Replacing 'dataSource' DataSource bean with embedded version
-2024-02-19 12:36:30,854 [main] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:3791035c-5b4a-423d-9f98-87c41985e80f;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-19 12:36:31,150 [main] INFO  liquibase.database - Set default schema name to PUBLIC
-2024-02-19 12:36:31,480 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
-2024-02-19 12:36:31,556 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 12:36:31,601 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
-2024-02-19 12:36:31,603 [main] INFO  liquibase.command - Using deploymentId: 8335391602
-2024-02-19 12:36:31,604 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 12:36:31,613 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::01-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 12:36:31,620 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::02-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 12:36:31,625 [main] INFO  liquibase.util - UPDATE SUMMARY
-2024-02-19 12:36:31,625 [main] INFO  liquibase.util - Run:                          2
-2024-02-19 12:36:31,626 [main] INFO  liquibase.util - Previously run:               0
-2024-02-19 12:36:31,626 [main] INFO  liquibase.util - Filtered out:                 0
-2024-02-19 12:36:31,626 [main] INFO  liquibase.util - -------------------------------
-2024-02-19 12:36:31,626 [main] INFO  liquibase.util - Total change sets:            2
-2024-02-19 12:36:31,626 [main] INFO  liquibase.util - Update summary generated
-2024-02-19 12:36:31,628 [main] INFO  liquibase.command - Update command completed successfully.
-2024-02-19 12:36:31,632 [main] INFO  liquibase.lockservice - Successfully released change log lock
-2024-02-19 12:36:31,632 [main] INFO  liquibase.command - Command execution complete
-2024-02-19 12:36:31,719 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-02-19 12:36:31,762 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
-2024-02-19 12:36:31,791 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2024-02-19 12:36:31,965 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-02-19 12:36:32,766 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-02-19 12:36:32,809 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 12:36:33,135 [main] INFO  c.s.c.r.IndividualRepositoryJpaTests - Started IndividualRepositoryJpaTests in 3.424 seconds (process running for 4.781)
-2024-02-19 12:36:34,017 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.AccountRepositoryJpaTests]: AccountRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 12:36:34,028 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.AccountRepositoryJpaTests
-2024-02-19 12:36:34,124 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.LegalEntityRepositoryJpaTests]: LegalEntityRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 12:36:34,132 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.LegalEntityRepositoryJpaTests
-2024-02-19 12:36:34,206 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.CardRepositoryJpaTests]: CardRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 12:36:34,218 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.CardRepositoryJpaTests
-2024-02-19 12:36:34,930 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.CustomerApplicationTests]: CustomerApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 12:36:34,949 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.CustomerApplicationTests
-2024-02-19 12:36:35,020 [main] INFO  c.s.c.CustomerApplicationTests - Starting CustomerApplicationTests using Java 21.0.1 with PID 44520 (started by vadimstepuro in /home/vadimstepuro/IdeaProjects/customer)
-2024-02-19 12:36:35,020 [main] INFO  c.s.c.CustomerApplicationTests - No active profile set, falling back to 1 default profile: "default"
-2024-02-19 12:36:35,566 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-02-19 12:36:35,567 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2024-02-19 12:36:35,575 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.AccountRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 12:36:35,576 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.CardRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 12:36:35,576 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.IndividualRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 12:36:35,576 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.LegalEntityRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 12:36:35,577 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
-2024-02-19 12:36:35,581 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-02-19 12:36:35,581 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-02-19 12:36:35,594 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 13 ms. Found 4 JPA repository interfaces.
-2024-02-19 12:36:36,212 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2024-02-19 12:36:36,224 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn24: url=jdbc:h2:mem:Customer user=SA
-2024-02-19 12:36:36,226 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2024-02-19 12:36:36,237 [main] INFO  liquibase.database - Set default schema name to PUBLIC
-2024-02-19 12:36:36,291 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
-2024-02-19 12:36:36,296 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 12:36:36,310 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
-2024-02-19 12:36:36,311 [main] INFO  liquibase.command - Using deploymentId: 8335396310
-2024-02-19 12:36:36,312 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 12:36:36,314 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::01-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 12:36:36,318 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::02-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 12:36:36,321 [main] INFO  liquibase.util - UPDATE SUMMARY
-2024-02-19 12:36:36,321 [main] INFO  liquibase.util - Run:                          2
-2024-02-19 12:36:36,321 [main] INFO  liquibase.util - Previously run:               0
-2024-02-19 12:36:36,321 [main] INFO  liquibase.util - Filtered out:                 0
-2024-02-19 12:36:36,321 [main] INFO  liquibase.util - -------------------------------
-2024-02-19 12:36:36,321 [main] INFO  liquibase.util - Total change sets:            2
-2024-02-19 12:36:36,321 [main] INFO  liquibase.util - Update summary generated
-2024-02-19 12:36:36,322 [main] INFO  liquibase.command - Update command completed successfully.
-2024-02-19 12:36:36,323 [main] INFO  liquibase.lockservice - Successfully released change log lock
-2024-02-19 12:36:36,324 [main] INFO  liquibase.command - Command execution complete
-2024-02-19 12:36:36,459 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-02-19 12:36:36,461 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2024-02-19 12:36:36,464 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-02-19 12:36:36,567 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-02-19 12:36:36,581 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 12:36:38,561 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-02-19 12:36:40,238 [main] INFO  c.s.c.CustomerApplicationTests - Started CustomerApplicationTests in 5.273 seconds (process running for 11.884)
-2024-02-19 12:36:40,266 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 12:36:40,270 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 12:36:40,271 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2024-02-19 12:36:40,274 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-#logback.classic pattern: %d [%thread] %-5level %logger{36} - %msg%n
-2024-02-19 12:38:18,319 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.IndividualRepositoryJpaTests]: IndividualRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 12:38:18,488 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.IndividualRepositoryJpaTests
-#logback.classic pattern: %d [%thread] %-5level %logger{36} - %msg%n
-2024-02-19 12:38:18,864 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2024-02-19 12:38:18,907 [main] INFO  c.s.c.r.IndividualRepositoryJpaTests - Starting IndividualRepositoryJpaTests using Java 21.0.1 with PID 44900 (started by vadimstepuro in /home/vadimstepuro/IdeaProjects/customer)
-2024-02-19 12:38:18,908 [main] INFO  c.s.c.r.IndividualRepositoryJpaTests - No active profile set, falling back to 1 default profile: "default"
-2024-02-19 12:38:19,442 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-02-19 12:38:19,443 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-02-19 12:38:19,586 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 134 ms. Found 4 JPA repository interfaces.
-2024-02-19 12:38:19,667 [main] INFO  o.s.b.t.a.j.TestDatabaseAutoConfiguration$EmbeddedDataSourceBeanFactoryPostProcessor - Replacing 'dataSource' DataSource bean with embedded version
-2024-02-19 12:38:19,866 [main] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:b78c3b09-9c4c-4553-8e2b-19c5ffabcf2a;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-19 12:38:20,177 [main] INFO  liquibase.database - Set default schema name to PUBLIC
-2024-02-19 12:38:20,506 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
-2024-02-19 12:38:20,579 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 12:38:20,620 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
-2024-02-19 12:38:20,622 [main] INFO  liquibase.command - Using deploymentId: 8335500621
-2024-02-19 12:38:20,624 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 12:38:20,636 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::01-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 12:38:20,642 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::02-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 12:38:20,646 [main] INFO  liquibase.util - UPDATE SUMMARY
-2024-02-19 12:38:20,646 [main] INFO  liquibase.util - Run:                          2
-2024-02-19 12:38:20,647 [main] INFO  liquibase.util - Previously run:               0
-2024-02-19 12:38:20,647 [main] INFO  liquibase.util - Filtered out:                 0
-2024-02-19 12:38:20,647 [main] INFO  liquibase.util - -------------------------------
-2024-02-19 12:38:20,647 [main] INFO  liquibase.util - Total change sets:            2
-2024-02-19 12:38:20,647 [main] INFO  liquibase.util - Update summary generated
-2024-02-19 12:38:20,648 [main] INFO  liquibase.command - Update command completed successfully.
-2024-02-19 12:38:20,651 [main] INFO  liquibase.lockservice - Successfully released change log lock
-2024-02-19 12:38:20,651 [main] INFO  liquibase.command - Command execution complete
-2024-02-19 12:38:20,724 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-02-19 12:38:20,762 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
-2024-02-19 12:38:20,785 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2024-02-19 12:38:20,954 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-02-19 12:38:21,816 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-02-19 12:38:21,865 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 12:38:22,231 [main] INFO  c.s.c.r.IndividualRepositoryJpaTests - Started IndividualRepositoryJpaTests in 3.664 seconds (process running for 5.001)
-2024-02-19 12:38:23,174 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.AccountRepositoryJpaTests]: AccountRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 12:38:23,188 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.AccountRepositoryJpaTests
-2024-02-19 12:38:23,291 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.LegalEntityRepositoryJpaTests]: LegalEntityRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 12:38:23,305 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.LegalEntityRepositoryJpaTests
-2024-02-19 12:38:23,391 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.CardRepositoryJpaTests]: CardRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 12:38:23,405 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.CardRepositoryJpaTests
-2024-02-19 12:38:24,170 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.CustomerApplicationTests]: CustomerApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19 12:38:24,185 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.CustomerApplicationTests
-2024-02-19 12:38:24,253 [main] INFO  c.s.c.CustomerApplicationTests - Starting CustomerApplicationTests using Java 21.0.1 with PID 44900 (started by vadimstepuro in /home/vadimstepuro/IdeaProjects/customer)
-2024-02-19 12:38:24,254 [main] INFO  c.s.c.CustomerApplicationTests - No active profile set, falling back to 1 default profile: "default"
-2024-02-19 12:38:24,845 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-02-19 12:38:24,845 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2024-02-19 12:38:24,853 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.AccountRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 12:38:24,854 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.CardRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 12:38:24,854 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.IndividualRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 12:38:24,854 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.stepuro.customer.repository.LegalEntityRepositoryJpa; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2024-02-19 12:38:24,855 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 0 JDBC repository interfaces.
-2024-02-19 12:38:24,859 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-02-19 12:38:24,860 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-02-19 12:38:24,874 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 13 ms. Found 4 JPA repository interfaces.
-2024-02-19 12:38:25,471 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2024-02-19 12:38:25,483 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn24: url=jdbc:h2:mem:Customer user=SA
-2024-02-19 12:38:25,485 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2024-02-19 12:38:25,495 [main] INFO  liquibase.database - Set default schema name to PUBLIC
-2024-02-19 12:38:25,551 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
-2024-02-19 12:38:25,556 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 12:38:25,572 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
-2024-02-19 12:38:25,573 [main] INFO  liquibase.command - Using deploymentId: 8335505573
-2024-02-19 12:38:25,574 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
-2024-02-19 12:38:25,576 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::01-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 12:38:25,580 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::02-migration::Stepuro Vadim ran successfully in 0ms
-2024-02-19 12:38:25,583 [main] INFO  liquibase.util - UPDATE SUMMARY
-2024-02-19 12:38:25,583 [main] INFO  liquibase.util - Run:                          2
-2024-02-19 12:38:25,583 [main] INFO  liquibase.util - Previously run:               0
-2024-02-19 12:38:25,583 [main] INFO  liquibase.util - Filtered out:                 0
-2024-02-19 12:38:25,584 [main] INFO  liquibase.util - -------------------------------
-2024-02-19 12:38:25,584 [main] INFO  liquibase.util - Total change sets:            2
-2024-02-19 12:38:25,584 [main] INFO  liquibase.util - Update summary generated
-2024-02-19 12:38:25,584 [main] INFO  liquibase.command - Update command completed successfully.
-2024-02-19 12:38:25,586 [main] INFO  liquibase.lockservice - Successfully released change log lock
-2024-02-19 12:38:25,586 [main] INFO  liquibase.command - Command execution complete
-2024-02-19 12:38:25,731 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-02-19 12:38:25,733 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2024-02-19 12:38:25,736 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-02-19 12:38:25,854 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-02-19 12:38:25,868 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 12:38:27,897 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-02-19 12:38:29,616 [main] INFO  c.s.c.CustomerApplicationTests - Started CustomerApplicationTests in 5.417 seconds (process running for 12.386)
-2024-02-19 12:38:29,642 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 12:38:29,646 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2024-02-19 12:38:29,647 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2024-02-19 12:38:29,650 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-02-20 00:06:52,007 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-02-20 00:06:52,057 [main] INFO  c.s.c.r.AccountRepositoryJpaTests - Starting AccountRepositoryJpaTests using Java 21.0.1 with PID 110307 (started by vadimstepuro in /home/vadimstepuro/IdeaProjects/customer)
+2024-02-20 00:06:52,058 [main] INFO  c.s.c.r.AccountRepositoryJpaTests - No active profile set, falling back to 1 default profile: "default"
+2024-02-20 00:06:52,520 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-20 00:06:52,522 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-20 00:06:52,715 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 185 ms. Found 4 JPA repository interfaces.
+2024-02-20 00:06:52,801 [main] INFO  o.s.b.t.a.j.TestDatabaseAutoConfiguration$EmbeddedDataSourceBeanFactoryPostProcessor - Replacing 'dataSource' DataSource bean with embedded version
+2024-02-20 00:06:52,996 [main] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:9a3b04d9-d136-4cb6-b0df-fdbc155565fb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-20 00:06:53,289 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+2024-02-20 00:06:53,620 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+2024-02-20 00:06:53,697 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+2024-02-20 00:06:53,737 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+2024-02-20 00:06:53,738 [main] INFO  liquibase.command - Using deploymentId: 8376813738
+2024-02-20 00:06:53,740 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+2024-02-20 00:06:53,752 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::01-migration::Stepuro Vadim ran successfully in 1ms
+2024-02-20 00:06:53,758 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::02-migration::Stepuro Vadim ran successfully in 0ms
+2024-02-20 00:06:53,762 [main] INFO  liquibase.util - UPDATE SUMMARY
+2024-02-20 00:06:53,763 [main] INFO  liquibase.util - Run:                          2
+2024-02-20 00:06:53,763 [main] INFO  liquibase.util - Previously run:               0
+2024-02-20 00:06:53,763 [main] INFO  liquibase.util - Filtered out:                 0
+2024-02-20 00:06:53,763 [main] INFO  liquibase.util - -------------------------------
+2024-02-20 00:06:53,763 [main] INFO  liquibase.util - Total change sets:            2
+2024-02-20 00:06:53,763 [main] INFO  liquibase.util - Update summary generated
+2024-02-20 00:06:53,765 [main] INFO  liquibase.command - Update command completed successfully.
+2024-02-20 00:06:53,768 [main] INFO  liquibase.lockservice - Successfully released change log lock
+2024-02-20 00:06:53,768 [main] INFO  liquibase.command - Command execution complete
+2024-02-20 00:06:53,856 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-20 00:06:53,929 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-02-20 00:06:53,971 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-02-20 00:06:54,204 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-20 00:06:55,143 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-02-20 00:06:55,194 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-20 00:06:55,542 [main] INFO  c.s.c.r.AccountRepositoryJpaTests - Started AccountRepositoryJpaTests in 3.799 seconds (process running for 5.23)
+2024-02-20 00:06:56,526 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.IndividualRepositoryJpaTests]: IndividualRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20 00:06:56,536 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.IndividualRepositoryJpaTests
+2024-02-20 00:06:56,623 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.LegalEntityRepositoryJpaTests]: LegalEntityRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20 00:06:56,637 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.LegalEntityRepositoryJpaTests
+2024-02-20 00:06:56,709 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.CardRepositoryJpaTests]: CardRepositoryJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20 00:06:56,734 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.CardRepositoryJpaTests
+2024-02-20 00:06:56,790 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.repository.AccountRepositoryJDBCTests]: AccountRepositoryJDBCTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20 00:06:56,795 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.repository.AccountRepositoryJDBCTests
+2024-02-20 00:06:56,842 [main] INFO  c.s.c.r.AccountRepositoryJDBCTests - Starting AccountRepositoryJDBCTests using Java 21.0.1 with PID 110307 (started by vadimstepuro in /home/vadimstepuro/IdeaProjects/customer)
+2024-02-20 00:06:56,842 [main] INFO  c.s.c.r.AccountRepositoryJDBCTests - No active profile set, falling back to 1 default profile: "default"
+2024-02-20 00:06:57,106 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-20 00:06:57,106 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-02-20 00:06:57,108 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 1 ms. Found 0 JDBC repository interfaces.
+2024-02-20 00:06:57,328 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-20 00:06:57,328 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-20 00:06:57,343 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 14 ms. Found 4 JPA repository interfaces.
+2024-02-20 00:06:58,113 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+2024-02-20 00:06:58,158 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+2024-02-20 00:06:58,162 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+2024-02-20 00:06:58,176 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+2024-02-20 00:06:58,177 [main] INFO  liquibase.command - Using deploymentId: 8376818176
+2024-02-20 00:06:58,178 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+2024-02-20 00:06:58,180 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::01-migration::Stepuro Vadim ran successfully in 0ms
+2024-02-20 00:06:58,183 [main] INFO  liquibase.changelog - ChangeSet db/changelog/db.changelog-master.yaml::02-migration::Stepuro Vadim ran successfully in 0ms
+2024-02-20 00:06:58,186 [main] INFO  liquibase.util - UPDATE SUMMARY
+2024-02-20 00:06:58,187 [main] INFO  liquibase.util - Run:                          2
+2024-02-20 00:06:58,187 [main] INFO  liquibase.util - Previously run:               0
+2024-02-20 00:06:58,187 [main] INFO  liquibase.util - Filtered out:                 0
+2024-02-20 00:06:58,187 [main] INFO  liquibase.util - -------------------------------
+2024-02-20 00:06:58,187 [main] INFO  liquibase.util - Total change sets:            2
+2024-02-20 00:06:58,187 [main] INFO  liquibase.util - Update summary generated
+2024-02-20 00:06:58,188 [main] INFO  liquibase.command - Update command completed successfully.
+2024-02-20 00:06:58,189 [main] INFO  liquibase.lockservice - Successfully released change log lock
+2024-02-20 00:06:58,190 [main] INFO  liquibase.command - Command execution complete
+2024-02-20 00:06:58,810 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-20 00:06:58,814 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-02-20 00:06:58,819 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-20 00:06:58,922 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-02-20 00:06:58,930 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-20 00:07:01,671 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-02-20 00:07:03,247 [main] INFO  c.s.c.r.AccountRepositoryJDBCTests - Started AccountRepositoryJDBCTests in 6.437 seconds (process running for 12.935)
+2024-02-20 00:07:04,041 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.stepuro.customer.CustomerApplicationTests]: CustomerApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20 00:07:04,055 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.stepuro.customer.CustomerApplication for test class com.stepuro.customer.CustomerApplicationTests
+2024-02-20 00:07:04,088 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-02-20 00:07:04,102 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'

@@ -1,13 +1,10 @@
 package com.stepuro.customer.api.dto;
 
-import com.stepuro.customer.model.status.AccountStatus;
+import com.stepuro.customer.model.enums.AccountStatus;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
 import java.util.UUID;
@@ -16,6 +13,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @ToString
+@Setter
+@Getter
 public class AccountDto {
     private UUID id;
 
@@ -34,52 +33,4 @@ public class AccountDto {
     private AccountStatus status;
 
     private LegalEntityDto legalEntityDto;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public AccountStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(AccountStatus status) {
-        this.status = status;
-    }
-
-    public LegalEntityDto getLegalEntityDto() {
-        return legalEntityDto;
-    }
-
-    public void setLegalEntityDto(LegalEntityDto legalEntityDto) {
-        this.legalEntityDto = legalEntityDto;
-    }
 }

@@ -1,10 +1,7 @@
 package com.stepuro.customer.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -14,6 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
+@Setter
 public class Individual {
     @Id
     @Column(name = "individual_id")
@@ -45,75 +44,4 @@ public class Individual {
     @OneToMany(mappedBy = "individual", cascade = CascadeType.REMOVE)
     private List<Card> cards;
 
-    public Integer getIndividualId() {
-        return individualId;
-    }
-
-    public void setIndividualId(Integer individualId) {
-        this.individualId = individualId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public java.sql.Date getDayOfBirth() {
-        return dayOfBirth;
-    }
-
-    public void setDayOfBirth(java.sql.Date dayOfBirth) {
-        this.dayOfBirth = dayOfBirth;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date created_date) {
-        this.createdDate = created_date;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public List<Card> getCards() {
-        return cards;
-    }
-
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
-    }
 }

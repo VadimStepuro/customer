@@ -1,13 +1,10 @@
 package com.stepuro.customer.api.dto;
 
-import com.stepuro.customer.model.status.CardStatus;
+import com.stepuro.customer.model.enums.CardStatus;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import java.util.Date;
@@ -17,6 +14,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @ToString
+@Setter
+@Getter
 public class CardDto {
     private UUID id;
 
@@ -42,68 +41,4 @@ public class CardDto {
     private CardStatus status;
 
     private IndividualDto individualDto;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date created_date) {
-        this.createdDate = created_date;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public java.sql.Date getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(java.sql.Date expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-
-    public CardStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(CardStatus status) {
-        this.status = status;
-    }
-
-    public IndividualDto getIndividualDto() {
-        return individualDto;
-    }
-
-    public void setIndividualDto(IndividualDto individualDto) {
-        this.individualDto = individualDto;
-    }
 }

@@ -37,9 +37,6 @@ public class CardController {
     public ResponseEntity<List<CardDto>> findAll(){
         List<CardDto> allCards = cardService.findAll();
 
-        if(allCards.isEmpty())
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
         return new ResponseEntity<>(allCards, HttpStatus.OK);
     }
 

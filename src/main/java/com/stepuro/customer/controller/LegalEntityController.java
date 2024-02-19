@@ -36,9 +36,6 @@ public class LegalEntityController {
     public ResponseEntity<List<LegalEntityDto>> findAll(){
         List<LegalEntityDto> allLegalEntities = legalEntityService.findAll();
 
-        if(allLegalEntities.isEmpty())
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
         return new ResponseEntity<>(allLegalEntities, HttpStatus.OK);
     }
 

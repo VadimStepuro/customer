@@ -3,10 +3,7 @@ package com.stepuro.customer.api.dto;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
 
@@ -14,6 +11,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @ToString
+@Getter
+@Setter
 public class LegalEntityDto {
     private Integer legalEntityId;
 
@@ -36,60 +35,4 @@ public class LegalEntityDto {
     @NotNull(message = "Inn can't be null")
     @Pattern(regexp = "^[\\d+]{10,12}$", message = "Invalid inn. It can contain only digits with length 10-12")
     private String inn;
-
-    public Integer getLegalEntityId() {
-        return legalEntityId;
-    }
-
-    public void setLegalEntityId(Integer legalEntityId) {
-        this.legalEntityId = legalEntityId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date created_date) {
-        this.createdDate = created_date;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getInn() {
-        return inn;
-    }
-
-    public void setInn(String inn) {
-        this.inn = inn;
-    }
 }
