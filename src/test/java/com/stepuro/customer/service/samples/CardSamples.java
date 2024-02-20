@@ -6,7 +6,9 @@ import com.stepuro.customer.model.Card;
 import com.stepuro.customer.model.enums.CardStatus;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class CardSamples {
@@ -15,8 +17,8 @@ public class CardSamples {
             .accountNumber("IE12BOFI90000112345678")
             .cardNumber("5425233430109903")
             .status(CardStatus.ACTIVE)
-            .createdDate(Date.valueOf(LocalDate.now()))
-            .updatedDate(Date.valueOf(LocalDate.now()))
+            .createdDate(Timestamp.valueOf(LocalDateTime.now()))
+            .updatedDate(Timestamp.valueOf(LocalDateTime.now()))
             .expiryDate(Date.valueOf(LocalDate.now().plusYears(3)))
             .build();
     public static Card card2 = Card.builder()
@@ -24,8 +26,8 @@ public class CardSamples {
             .accountNumber("IE12BOFI90000112345678")
             .cardNumber("5425233430109903")
             .status(CardStatus.ACTIVE)
-            .createdDate(Date.valueOf(LocalDate.now()))
-            .updatedDate(Date.valueOf(LocalDate.now()))
+            .createdDate(Timestamp.valueOf(LocalDateTime.now()))
+            .updatedDate(Timestamp.valueOf(LocalDateTime.now()))
             .expiryDate(Date.valueOf(LocalDate.now().plusYears(3)))
             .build();
     public static Card card3 = Card.builder()
@@ -33,8 +35,8 @@ public class CardSamples {
             .accountNumber("IE12BOFI90000112345678")
             .cardNumber("5425233430109903")
             .status(CardStatus.ACTIVE)
-            .createdDate(Date.valueOf(LocalDate.now()))
-            .updatedDate(Date.valueOf(LocalDate.now()))
+            .createdDate(Timestamp.valueOf(LocalDateTime.now()))
+            .updatedDate(Timestamp.valueOf(LocalDateTime.now()))
             .expiryDate(Date.valueOf(LocalDate.now().plusYears(3)))
             .build();
     public static Card card4 = Card.builder()
@@ -42,8 +44,8 @@ public class CardSamples {
             .accountNumber("IE12BOFI90000112345678")
             .cardNumber("5425233430109903")
             .status(CardStatus.ACTIVE)
-            .createdDate(Date.valueOf(LocalDate.now()))
-            .updatedDate(Date.valueOf(LocalDate.now()))
+            .createdDate(Timestamp.valueOf(LocalDateTime.now()))
+            .updatedDate(Timestamp.valueOf(LocalDateTime.now()))
             .expiryDate(Date.valueOf(LocalDate.now().plusYears(3)))
             .build();
 

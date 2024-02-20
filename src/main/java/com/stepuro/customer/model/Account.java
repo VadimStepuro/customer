@@ -4,7 +4,7 @@ import com.stepuro.customer.model.enums.AccountStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Entity
@@ -25,10 +25,10 @@ public class Account {
     private String accountNumber;
 
     @Column(name = "created_date")
-    private Date createdDate;
+    private Timestamp createdDate;
 
     @Column(name = "updated_date")
-    private Date updatedDate;
+    private Timestamp updatedDate;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)

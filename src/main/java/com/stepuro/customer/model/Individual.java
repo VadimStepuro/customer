@@ -3,7 +3,8 @@ package com.stepuro.customer.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -27,13 +28,13 @@ public class Individual {
     private String lastName;
 
     @Column(name = "day_of_birth")
-    private java.sql.Date dayOfBirth;
+    private Date dayOfBirth;
 
     @Column(name = "created_date")
-    private Date createdDate;
+    private Timestamp createdDate;
 
     @Column(name = "updated_date")
-    private Date updatedDate;
+    private Timestamp updatedDate;
 
     @Column(name = "address")
     private String address;
@@ -41,7 +42,7 @@ public class Individual {
     @Column(name = "city")
     private String city;
 
-    @OneToMany(mappedBy = "individual", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "individual", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Card> cards;
 
 }

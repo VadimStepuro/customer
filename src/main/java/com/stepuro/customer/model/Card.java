@@ -4,7 +4,8 @@ import com.stepuro.customer.model.enums.CardStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Entity
@@ -28,13 +29,13 @@ public class Card {
     private String accountNumber;
 
     @Column(name = "created_date")
-    private Date createdDate;
+    private Timestamp createdDate;
 
     @Column(name = "updated_date")
-    private Date updatedDate;
+    private Timestamp updatedDate;
 
     @Column(name = "expiry_date")
-    private java.sql.Date expiryDate;
+    private Date expiryDate;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)

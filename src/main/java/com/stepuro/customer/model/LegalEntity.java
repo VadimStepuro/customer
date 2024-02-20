@@ -3,7 +3,8 @@ package com.stepuro.customer.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Timestamp;
+import java.util.List;
 
 
 @Entity
@@ -11,7 +12,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
 @Setter
 @Getter
 public class LegalEntity {
@@ -25,10 +25,10 @@ public class LegalEntity {
     private String name;
 
     @Column(name = "created_date")
-    private Date createdDate;
+    private Timestamp createdDate;
 
     @Column(name = "updated_date")
-    private Date updatedDate;
+    private Timestamp updatedDate;
 
     @Column(name = "address")
     private String address;
@@ -39,4 +39,6 @@ public class LegalEntity {
     @Column(name = "inn")
     private String inn;
 
+    @OneToMany(mappedBy = "legalEntity", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Account> accounts;
 }

@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.stepuro.customer.repository.Samples.AccountSamples.*;
@@ -64,8 +64,8 @@ public class AccountRepositoryJpaTests {
 
         savedAccount.setStatus(AccountStatus.CLOSED);
         savedAccount.setAccountNumber("IE12BOFI90000112345555");
-        savedAccount.setCreatedDate(Date.valueOf(LocalDate.now().minusMonths(5)));
-        savedAccount.setUpdatedDate(Date.valueOf(LocalDate.now().minusMonths(3)));
+        savedAccount.setCreatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(5)));
+        savedAccount.setUpdatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(3)));
 
         Account updatedAccount = accountRepositoryJpa.save(savedAccount);
 

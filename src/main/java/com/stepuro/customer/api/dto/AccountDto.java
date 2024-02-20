@@ -6,7 +6,7 @@ import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -24,10 +24,10 @@ public class AccountDto {
 
     @NotNull(message = "Created date can't be null")
     @PastOrPresent(message = "Created date can't be in future")
-    private Date createdDate;
+    private Timestamp createdDate;
 
     @PastOrPresent(message = "Updated date can't be in future")
-    private Date updatedDate;
+    private Timestamp updatedDate;
 
     @NotNull(message = "Status can't be null")
     private AccountStatus status;

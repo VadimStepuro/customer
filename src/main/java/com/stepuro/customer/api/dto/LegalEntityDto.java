@@ -5,7 +5,7 @@ import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,10 +21,10 @@ public class LegalEntityDto {
 
     @NotNull(message = "Created date can't be null")
     @PastOrPresent(message = "Created date can't be in future")
-    private Date createdDate;
+    private Timestamp createdDate;
 
     @PastOrPresent(message = "Updated date can't be in future")
-    private Date updatedDate;
+    private Timestamp updatedDate;
 
     @NotNull(message = "Address can't be null")
     private String address;

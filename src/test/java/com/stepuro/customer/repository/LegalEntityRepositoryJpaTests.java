@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.stepuro.customer.repository.Samples.LegalEntitySamples.*;
@@ -69,8 +69,8 @@ public class LegalEntityRepositoryJpaTests {
         savedLegalEntity.setAddress("Lenina");
         savedLegalEntity.setCity("Minsk");
         savedLegalEntity.setInn("2222222222");
-        savedLegalEntity.setCreatedDate(Date.valueOf(LocalDate.now().minusMonths(5)));
-        savedLegalEntity.setUpdatedDate(Date.valueOf(LocalDate.now().minusMonths(3)));
+        savedLegalEntity.setCreatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(5)));
+        savedLegalEntity.setUpdatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(3)));
 
         LegalEntity updatedLegalEntity = legalEntityRepositoryJpa.save(savedLegalEntity);
 

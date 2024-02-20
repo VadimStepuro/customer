@@ -10,6 +10,7 @@ import org.mapstruct.factory.Mappers;
 public interface AccountMapper {
     AccountMapper INSTANCE = Mappers.getMapper(AccountMapper.class);
     @Mapping(source = "legalEntityDto", target = "legalEntity")
+    @Mapping(target = "legalEntity.accounts", ignore = true)
     Account accountDtoToAccount(AccountDto accountDto);
 
     @Mapping(source = "legalEntity", target = "legalEntityDto")

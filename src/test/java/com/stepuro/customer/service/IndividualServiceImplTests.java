@@ -12,7 +12,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,8 +87,8 @@ public class IndividualServiceImplTests {
         savedIndividual.setAddress("Lenina");
         savedIndividual.setCity("Minsk");
         savedIndividual.setDayOfBirth(Date.valueOf(LocalDate.of(2000, 3, 21)));
-        savedIndividual.setCreatedDate(Date.valueOf(LocalDate.now().minusMonths(5)));
-        savedIndividual.setUpdatedDate(Date.valueOf(LocalDate.now().minusMonths(3)));
+        savedIndividual.setCreatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(5)));
+        savedIndividual.setUpdatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(3)));
 
         IndividualDto updatedIndividual = individualServiceImpl.edit(savedIndividual);
 

@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public class AccountRepositoryJDBC {
+public class AccountRepositoryJdbc {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -33,8 +33,8 @@ public class AccountRepositoryJDBC {
                         "VALUES (?, ?, ?, ?, ?, ?)",
                 account.getId(),
                 account.getAccountNumber(),
-                account.getCreatedDate(),
-                account.getUpdatedDate(),
+                account.getCreatedDate().toString(),
+                account.getUpdatedDate().toString(),
                 account.getStatus().toString(),
                 account.getLegalEntity() == null ? null : account.getLegalEntity().getLegalEntityId());
 
@@ -51,8 +51,8 @@ public class AccountRepositoryJDBC {
                 "legal_entity_id = ? " +
                 "WHERE id = ? ",
                 account.getAccountNumber(),
-                account.getCreatedDate(),
-                account.getUpdatedDate(),
+                account.getCreatedDate().toString(),
+                account.getUpdatedDate().toString(),
                 account.getStatus().toString(),
                 account.getLegalEntity() == null ? null : account.getLegalEntity().getLegalEntityId(),
                 account.getId());
@@ -73,8 +73,8 @@ public class AccountRepositoryJDBC {
                             "LEFT JOIN legal_entity " +
                             "ON account.legal_entity_id = legal_entity.legal_entity_id " +
                             "WHERE account.id = ?",
-                    new Object[]{id},
-                    new AccountMapper());
+                    new AccountMapper(),
+                    id);
         }
         catch (EmptyResultDataAccessException exception){
             return null;
@@ -99,6 +99,9 @@ public class AccountRepositoryJDBC {
                     .createdDate(rs.getTimestamp(8))
                     .updatedDate(rs.getTimestamp(9))
                     .build();
+
+
+
             Account account = new Account();
             account.setId(UUID.fromString(rs.getString("id")));
             account.setAccountNumber(rs.getString("account_number"));
@@ -106,6 +109,12 @@ public class AccountRepositoryJDBC {
             account.setUpdatedDate(rs.getTimestamp(3));
             account.setStatus(AccountStatus.valueOf(rs.getString("status")));
             account.setLegalEntity(legalEntity);
+
+            if(rs.getInt("legal_entity_id") == 0)
+                account.setLegalEntity(null);
+            else
+                account.setLegalEntity(legalEntity);
+
             return account;
         }
     }

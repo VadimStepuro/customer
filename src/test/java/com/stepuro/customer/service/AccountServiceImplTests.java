@@ -13,8 +13,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -80,8 +80,8 @@ public class AccountServiceImplTests {
 
         savedAccount.setStatus(AccountStatus.CLOSED);
         savedAccount.setAccountNumber("IE12BOFI90000112345555");
-        savedAccount.setCreatedDate(Date.valueOf(LocalDate.now().minusMonths(5)));
-        savedAccount.setUpdatedDate(Date.valueOf(LocalDate.now().minusMonths(3)));
+        savedAccount.setCreatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(5)));
+        savedAccount.setUpdatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(3)));
 
 
         AccountDto editedAccount = accountServiceImpl.edit(savedAccount);

@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.stepuro.customer.repository.Samples.IndividualSamples.*;
@@ -72,8 +74,8 @@ public class IndividualRepositoryJpaTests {
         savedIndividual.setAddress("Lenina");
         savedIndividual.setCity("Minsk");
         savedIndividual.setDayOfBirth(Date.valueOf(LocalDate.of(2000, 3, 21)));
-        savedIndividual.setCreatedDate(Date.valueOf(LocalDate.now().minusMonths(5)));
-        savedIndividual.setUpdatedDate(Date.valueOf(LocalDate.now().minusMonths(3)));
+        savedIndividual.setCreatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(5)));
+        savedIndividual.setUpdatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(3)));
 
         Individual updatedIndividual = individualRepositoryJpa.save(savedIndividual);
 

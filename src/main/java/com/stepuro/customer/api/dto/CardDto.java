@@ -7,7 +7,8 @@ import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -29,13 +30,13 @@ public class CardDto {
 
     @NotNull(message = "Created date can't be null")
     @PastOrPresent(message = "Created date can't be in future")
-    private Date createdDate;
+    private Timestamp createdDate;
 
     @PastOrPresent(message = "Updated date can't be in future")
-    private Date updatedDate;
+    private Timestamp updatedDate;
 
     @NotNull(message = "Expiry date can't be null")
-    private java.sql.Date expiryDate;
+    private Date expiryDate;
 
     @NotNull(message = "Status can't be null")
     private CardStatus status;

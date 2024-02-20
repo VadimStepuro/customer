@@ -13,7 +13,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -86,8 +88,8 @@ public class CardServiceImplTests {
 
         savedCard.setStatus(CardStatus.UNREACHABLE);
         savedCard.setAccountNumber("IE12BOFI90000112346666");
-        savedCard.setCreatedDate(Date.valueOf(LocalDate.now().minusMonths(5)));
-        savedCard.setUpdatedDate(Date.valueOf(LocalDate.now().minusMonths(3)));
+        savedCard.setCreatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(5)));
+        savedCard.setUpdatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(3)));
         savedCard.setCardNumber("5425233430109333");
         savedCard.setExpiryDate(Date.valueOf(LocalDate.now().plusYears(4)));
 

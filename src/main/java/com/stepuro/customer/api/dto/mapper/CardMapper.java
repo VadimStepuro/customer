@@ -11,6 +11,7 @@ public interface CardMapper {
     CardMapper INSTANCE = Mappers.getMapper(CardMapper.class);
 
     @Mapping(source = "individualDto", target = "individual")
+    @Mapping(target = "individual.cards", ignore = true)
     Card cardDtoToCard(CardDto cardDto);
 
     @Mapping(source = "individual", target = "individualDto")
