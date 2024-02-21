@@ -8,6 +8,7 @@ import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.Account;
 import com.stepuro.customer.repository.AccountRepositoryJpa;
 import com.stepuro.customer.service.AccountService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepositoryJpa accountRepositoryJpa;
 
+    @Override
     public List<AccountDto> findAll(){
         List<AccountDto> accountDtos = accountRepositoryJpa
                 .findAll()
@@ -32,6 +34,7 @@ public class AccountServiceImpl implements AccountService {
         return accountDtos;
     }
 
+    @Override
     public AccountDto findById(UUID id){
         return AccountMapper
                 .INSTANCE
@@ -42,6 +45,8 @@ public class AccountServiceImpl implements AccountService {
                 );
     }
 
+    @Override
+    @Transactional
     public AccountDto create(AccountDto accountDto){
         return AccountMapper
                 .INSTANCE
@@ -53,6 +58,8 @@ public class AccountServiceImpl implements AccountService {
                 );
     }
 
+    @Override
+    @Transactional
     public AccountDto edit(AccountDto accountDto){
         Account account = accountRepositoryJpa
                 .findById(accountDto.getId())
@@ -72,6 +79,8 @@ public class AccountServiceImpl implements AccountService {
                 .accountToAccountDto(accountRepositoryJpa.save(account));
     }
 
+    @Override
+    @Transactional
     public void delete(UUID id){
         accountRepositoryJpa.deleteById(id);
     }

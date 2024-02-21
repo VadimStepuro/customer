@@ -45,6 +45,7 @@ public class IndividualServiceImpl implements IndividualService {
     }
 
     @Override
+    @Transactional
     public IndividualDto create(IndividualDto individualDto){
         return IndividualMapper
                 .INSTANCE
@@ -57,6 +58,7 @@ public class IndividualServiceImpl implements IndividualService {
     }
 
     @Override
+    @Transactional
     public IndividualDto edit(IndividualDto individualDto){
         Individual individual = individualRepositoryJpa
                 .findById(individualDto.getIndividualId())
@@ -76,6 +78,7 @@ public class IndividualServiceImpl implements IndividualService {
     }
 
     @Override
+    @Transactional
     public void delete(Integer id){
         individualRepositoryJpa.deleteById(id);
     }

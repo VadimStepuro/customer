@@ -8,6 +8,7 @@ import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.Card;
 import com.stepuro.customer.repository.CardRepositoryJpa;
 import com.stepuro.customer.service.CardService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    @Transactional
     public CardDto create(CardDto cardDto){
         return CardMapper
                 .INSTANCE
@@ -57,6 +59,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    @Transactional
     public CardDto edit(CardDto cardDto){
         Card card = cardRepositoryJpa
                 .findById(cardDto.getId())
@@ -79,6 +82,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    @Transactional
     public void delete(UUID id){
         cardRepositoryJpa.deleteById(id);
     }
