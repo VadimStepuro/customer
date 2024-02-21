@@ -45,6 +45,7 @@ public class LegalEntityServiceImpl implements LegalEntityService {
     }
 
     @Override
+    @Transactional
     public LegalEntityDto create(LegalEntityDto legalEntityDto){
         return LegalEntityMapper
                 .INSTANCE
@@ -57,6 +58,7 @@ public class LegalEntityServiceImpl implements LegalEntityService {
     }
 
     @Override
+    @Transactional
     public LegalEntityDto edit(LegalEntityDto legalEntityDto){
         LegalEntity legalEntity = individualRepositoryJpa
                 .findById(legalEntityDto.getLegalEntityId())
@@ -75,6 +77,7 @@ public class LegalEntityServiceImpl implements LegalEntityService {
     }
 
     @Override
+    @Transactional
     public void delete(Integer id){
         individualRepositoryJpa.deleteById(id);
     }
