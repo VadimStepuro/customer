@@ -16,4 +16,12 @@ public class ResourceNotFoundExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(NoContentException.class)
+    public ResponseEntity<Object> handleNoContentException(ResourceNotFoundException ex) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("message", ex.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.NO_CONTENT);
+    }
 }

@@ -1,75 +1,22 @@
 package com.stepuro.customer.service;
 
 import com.stepuro.customer.api.dto.CardDto;
-import com.stepuro.customer.api.dto.mapper.CardMapper;
-import com.stepuro.customer.api.dto.mapper.IndividualMapper;
-import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
-import com.stepuro.customer.model.Card;
-import com.stepuro.customer.repository.CardRepositoryJpa;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
-@Service
-@Transactional
-public class CardService {
-    @Autowired
-    private CardRepositoryJpa cardRepositoryJpa;
+public interface CardService {
+    List<CardDto> findAll();
 
-    public List<CardDto> findAll(){
-        return cardRepositoryJpa
-                .findAll()
-                .stream()
-                .map(CardMapper.INSTANCE::cardToCardDto)
-                .toList();
-    }
+    CardDto findById(UUID id);
 
-    public CardDto findById(UUID id){
-        return CardMapper
-                .INSTANCE
-                .cardToCardDto(
-                        cardRepositoryJpa
-                                .findById(id)
-                                .orElseThrow(() -> new ResourceNotFoundException("Card with id " + id + " not found"))
-                );
-    }
+    @Transactional
+    CardDto create(CardDto cardDto);
 
-    public CardDto create(CardDto cardDto){
-        return CardMapper
-                .INSTANCE
-                .cardToCardDto(
-                        cardRepositoryJpa
-                                .save(CardMapper
-                                        .INSTANCE
-                                        .cardDtoToCard(cardDto))
-                );
-    }
+    @Transactional
+    CardDto edit(CardDto cardDto);
 
-    public CardDto edit(CardDto cardDto){
-        Card card = cardRepositoryJpa
-                .findById(cardDto.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Card with id " + cardDto.getId() + " not found"));
-
-        card.setAccountNumber(cardDto.getAccountNumber());
-        card.setCardNumber(cardDto.getCardNumber());
-        card.setCreatedDate(cardDto.getCreatedDate());
-        card.setUpdatedDate(cardDto.getUpdatedDate());
-        card.setStatus(cardDto.getStatus());
-        card.setIndividual(
-                IndividualMapper
-                        .INSTANCE
-                        .individualDtoToIndividual(cardDto.getIndividualDto()));
-        card.setExpiryDate(cardDto.getExpiryDate());
-
-        return CardMapper
-                .INSTANCE
-                .cardToCardDto(cardRepositoryJpa.save(card));
-    }
-
-    public void delete(UUID id){
-        cardRepositoryJpa.deleteById(id);
-    }
+    @Transactional
+    void delete(UUID id);
 }

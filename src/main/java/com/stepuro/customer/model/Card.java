@@ -1,13 +1,11 @@
 package com.stepuro.customer.model;
 
-import com.stepuro.customer.model.status.CardStatus;
+import com.stepuro.customer.model.enums.CardStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +14,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @ToString
+@Getter
+@Setter
 public class Card {
     @Id
     @Column(name = "id")
@@ -29,13 +29,13 @@ public class Card {
     private String accountNumber;
 
     @Column(name = "created_date")
-    private Date createdDate;
+    private Timestamp createdDate;
 
     @Column(name = "updated_date")
-    private Date updatedDate;
+    private Timestamp updatedDate;
 
     @Column(name = "expiry_date")
-    private java.sql.Date expiryDate;
+    private Date expiryDate;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
@@ -44,68 +44,4 @@ public class Card {
     @ManyToOne
     @JoinColumn(name = "individual_id", referencedColumnName = "individual_id")
     private Individual individual;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date created_date) {
-        this.createdDate = created_date;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public java.sql.Date getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(java.sql.Date expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-
-    public CardStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(CardStatus status) {
-        this.status = status;
-    }
-
-    public Individual getIndividual() {
-        return individual;
-    }
-
-    public void setIndividual(Individual individual) {
-        this.individual = individual;
-    }
 }

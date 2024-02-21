@@ -19,7 +19,7 @@ CREATE TABLE public.legal_entity (
 );
 
 CREATE TABLE public.account (
-	id uuid NOT NULL,
+	id uuid DEFAULT gen_random_uuid(),
 	account_number varchar NOT NULL,
 	created_date timestamp NOT NULL,
 	updated_date timestamp NULL,

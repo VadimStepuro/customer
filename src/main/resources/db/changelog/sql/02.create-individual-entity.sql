@@ -20,7 +20,7 @@ CREATE TABLE public.individual (
 );
 
 CREATE TABLE public.card (
-	id uuid NOT NULL,
+	id uuid DEFAULT gen_random_uuid(),
 	card_number varchar NOT NULL,
 	account_number varchar NOT NULL,
 	created_date timestamp NOT NULL,

@@ -1,13 +1,10 @@
 package com.stepuro.customer.model;
 
-import com.stepuro.customer.model.status.AccountStatus;
+import com.stepuro.customer.model.enums.AccountStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +13,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @ToString
+@Getter
+@Setter
 public class Account {
     @Id
     @Column(name = "id")
@@ -26,10 +25,10 @@ public class Account {
     private String accountNumber;
 
     @Column(name = "created_date")
-    private Date createdDate;
+    private Timestamp createdDate;
 
     @Column(name = "updated_date")
-    private Date updatedDate;
+    private Timestamp updatedDate;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
@@ -38,52 +37,4 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "legal_entity_id", referencedColumnName = "legal_entity_id")
     private LegalEntity legalEntity;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date created_date) {
-        this.createdDate = created_date;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public AccountStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(AccountStatus status) {
-        this.status = status;
-    }
-
-    public LegalEntity getLegalEntity() {
-        return legalEntity;
-    }
-
-    public void setLegalEntity(LegalEntity legalEntity) {
-        this.legalEntity = legalEntity;
-    }
 }

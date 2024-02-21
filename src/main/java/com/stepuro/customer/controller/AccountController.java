@@ -37,9 +37,6 @@ public class AccountController {
     public ResponseEntity<List<AccountDto>> findAll(){
         List<AccountDto> allAccounts = accountService.findAll();
 
-        if(allAccounts.isEmpty())
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
         return new ResponseEntity<>(allAccounts, HttpStatus.OK);
     }
 

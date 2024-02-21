@@ -36,9 +36,6 @@ public class IndividualController {
     public ResponseEntity<List<IndividualDto>> findAll(){
         List<IndividualDto> allIndividuals = individualService.findAll();
 
-        if(allIndividuals.isEmpty())
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
         return new ResponseEntity<>(allIndividuals, HttpStatus.OK);
     }
 

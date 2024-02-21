@@ -1,4 +1,4 @@
-package com.stepuro.customer.model.status;
+package com.stepuro.customer.model.enums;
 
 public enum AccountStatus {
     ACTIVE,
