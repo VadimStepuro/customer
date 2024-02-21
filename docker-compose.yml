@@ -16,7 +16,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1111
     volumes:
-      - db-data-1:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     restart: unless-stopped
 
   app:
@@ -46,8 +46,8 @@ services:
     ports:
       - "5050:80"
     volumes:
-      - pgadmin-data-1:/var/lib/pgadmin
+      - pgadmin_data:/var/lib/pgadmin
 
 volumes:
-  db-data-1:
-  pgadmin-data-1:
+  db_data:
+  pgadmin_data:

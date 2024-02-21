@@ -28,7 +28,7 @@ public class ValidationHandlers {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(SQLException.class)
-    public String handleSqlExeptions(SQLException ex){
+    public String handleSqlExceptions(SQLException ex){
         return ex.getLocalizedMessage();
     }
 }
