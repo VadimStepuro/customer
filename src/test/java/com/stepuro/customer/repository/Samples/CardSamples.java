@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class CardSamples {
     public static Card card1 = Card.builder()
             .accountNumber("IE12BOFI90000112345678")
-            .cardNumber("5425233430109903")
+            .cardNumber("5425233430109933")
             .status(CardStatus.ACTIVE)
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))
@@ -20,8 +20,8 @@ public class CardSamples {
             .balance(new BigDecimal("300.00"))
             .build();
     public static Card card2 = Card.builder()
-            .accountNumber("IE12BOFI90000112345678")
-            .cardNumber("5425233430109903")
+            .accountNumber("IE12BOFI90000112345644")
+            .cardNumber("5425233430109944")
             .status(CardStatus.ACTIVE)
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))
@@ -29,8 +29,8 @@ public class CardSamples {
             .balance(new BigDecimal("400.00"))
             .build();
     public static Card card3 = Card.builder()
-            .accountNumber("IE12BOFI90000112345678")
-            .cardNumber("5425233430109903")
+            .accountNumber("IE12BOFI90000112345655")
+            .cardNumber("5425233430109955")
             .status(CardStatus.ACTIVE)
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))
@@ -38,8 +38,8 @@ public class CardSamples {
             .balance(new BigDecimal("350.00"))
             .build();
     public static Card card4 = Card.builder()
-            .accountNumber("IE12BOFI90000112345678")
-            .cardNumber("5425233430109903")
+            .accountNumber("IE12BOFI90000112345666")
+            .cardNumber("5425233430109966")
             .status(CardStatus.ACTIVE)
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))

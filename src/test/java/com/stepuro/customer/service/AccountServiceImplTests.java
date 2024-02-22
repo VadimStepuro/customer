@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -59,6 +60,46 @@ public class AccountServiceImplTests {
     }
 
     @Test
+    public void AccountService_FindByNumber_ReturnsModel(){
+        when(accountRepositoryJpa.findByAccountNumber(any(String.class))).thenReturn(Optional.of(account1));
+
+        AccountDto foundAccount = accountServiceImpl.findByAccountNumber("");
+
+        assertNotNull(foundAccount);
+        assertEquals(accountDto.getAccountNumber(), foundAccount.getAccountNumber());
+        assertEquals(accountDto.getCreatedDate(), foundAccount.getCreatedDate());
+        assertEquals(accountDto.getUpdatedDate(), foundAccount.getUpdatedDate());
+        assertEquals(accountDto.getStatus(), foundAccount.getStatus());
+    }
+
+    @Test
+    public void AccountService_ExistsByAccountNumber_ReturnsTrue(){
+        when(accountRepositoryJpa.existsByAccountNumber(any(String.class))).thenReturn(true);
+
+        boolean result = accountServiceImpl.existsByAccountNumber("");
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void AccountService_CheckLegalEntity_ReturnsFalse(){
+        when(accountRepositoryJpa.findByAccountNumber(any(String.class))).thenReturn(Optional.of(account1));
+
+        boolean result = accountServiceImpl.checkLegalEntityOwner(account1.getAccountNumber(), 1);
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void AccountService_CheckAmount_ReturnsTrue(){
+        when(accountRepositoryJpa.findByAccountNumber(any(String.class))).thenReturn(Optional.of(account1));
+
+        boolean result = accountServiceImpl.validateAccountBalance(account1.getAccountNumber(), new BigDecimal("120.53"));
+
+        assertTrue(result);
+    }
+
+    @Test
     public void AccountService_Save_ReturnsSavedModel(){
         when(accountRepositoryJpa.save(any(Account.class))).thenReturn(account1);
 
@@ -82,7 +123,7 @@ public class AccountServiceImplTests {
         savedAccount.setAccountNumber("IE12BOFI90000112345555");
         savedAccount.setCreatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(5)));
         savedAccount.setUpdatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(3)));
-
+        savedAccount.setBalance(new BigDecimal("550.00"));
 
         AccountDto editedAccount = accountServiceImpl.edit(savedAccount);
 

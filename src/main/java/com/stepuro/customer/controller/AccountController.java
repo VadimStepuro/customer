@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,6 +54,60 @@ public class AccountController {
         AccountDto foundAccount = accountService.findById(id);
 
         return new ResponseEntity<>(foundAccount, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Get account by account number")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found account by account number",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AccountDto.class))}),
+            @ApiResponse(responseCode = "404", description = "Account not found",
+                    content = @Content) })
+    @Loggable
+    @GetMapping("/accounts/get_by_account_number/{accountNumber}")
+    public ResponseEntity<AccountDto> findByAccountNumber(@PathVariable("accountNumber") String accountNumber){
+        AccountDto foundAccount = accountService.findByAccountNumber(accountNumber);
+
+        return new ResponseEntity<>(foundAccount, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Check if account with specified number exists")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "True if account exists, False if there's no account with specified number",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Boolean.class))})})
+    @Loggable
+    @GetMapping("/accounts/exists_by_account_number/{accountNumber}")
+    public ResponseEntity<Boolean> existsByAccountNumber(@PathVariable("accountNumber") String accountNumber){
+        Boolean result = accountService.existsByAccountNumber(accountNumber);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Check if specified legal entity id is owner of account with specified number")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "True if account legal entity is owner, False if legal entity isn't owner",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Boolean.class))})})
+    @Loggable
+    @GetMapping("/accounts/check_legal_entity/{accountNumber}/{legal_entity_id}")
+    public ResponseEntity<Boolean> checkLegalEntity(@PathVariable("accountNumber") String accountNumber, @PathVariable("legal_entity_id") Integer legalEntityId){
+        Boolean result = accountService.checkLegalEntityOwner(accountNumber, legalEntityId);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Check if account with specified number has enough balance for operation")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "True if account has enough money, False if account doesn't have enough money",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Boolean.class))})})
+    @Loggable
+    @GetMapping("/accounts/check_amount/{accountNumber}/{amount}")
+    public ResponseEntity<Boolean> checkAmount(@PathVariable("accountNumber") String accountNumber, @PathVariable("amount") BigDecimal amount){
+        Boolean result = accountService.validateAccountBalance(accountNumber, amount);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @Operation(summary = "Create account")

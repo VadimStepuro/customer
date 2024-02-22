@@ -68,6 +68,33 @@ public class CardRepositoryJpaTests {
     }
 
     @Test
+    public void CardRepository_FindByNumber_ReturnsModel(){
+        Card savedCard = cardRepositoryJpa.save(card1);
+        cardRepositoryJpa.save(card2);
+
+        Card card = cardRepositoryJpa.findByCardNumber(savedCard.getCardNumber()).get();
+
+        assertNotNull(card);
+        assertEquals(savedCard.getId(), card.getId());
+        assertEquals(savedCard.getAccountNumber(), card.getAccountNumber());
+        assertEquals(savedCard.getCreatedDate(), card.getCreatedDate());
+        assertEquals(savedCard.getUpdatedDate(), card.getUpdatedDate());
+        assertEquals(savedCard.getStatus(), card.getStatus());
+        assertEquals(savedCard.getCardNumber(), card.getCardNumber());
+        assertEquals(savedCard.getExpiryDate(), card.getExpiryDate());
+        assertEquals(savedCard.getBalance(), card.getBalance());
+    }
+
+    @Test
+    public void CardRepository_ExistsByNumber_ReturnsTrue(){
+        Card savedCard = cardRepositoryJpa.save(card1);
+
+        Boolean result = cardRepositoryJpa.existsByCardNumber(savedCard.getCardNumber());
+
+        assertTrue(result);
+    }
+
+    @Test
     public void CardRepository_Update_ChangesModel(){
         Card savedCard = cardRepositoryJpa.save(card1);
 

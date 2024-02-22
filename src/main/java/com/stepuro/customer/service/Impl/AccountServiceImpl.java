@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,6 +44,53 @@ public class AccountServiceImpl implements AccountService {
                                 .findById(id)
                                 .orElseThrow(() -> new ResourceNotFoundException("Account with id " + id + " not found"))
                 );
+    }
+
+    @Override
+    public AccountDto findByAccountNumber(String accountNumber) {
+        return AccountMapper
+                .INSTANCE
+                .accountToAccountDto(
+                        accountRepositoryJpa
+                                .findByAccountNumber(accountNumber)
+                                .orElseThrow(() -> new ResourceNotFoundException(
+                                        "Account with account number " +
+                                                accountNumber +
+                                                " not found")));
+    }
+
+    @Override
+    public boolean existsByAccountNumber(String accountNumber) {
+        return accountRepositoryJpa.existsByAccountNumber(accountNumber);
+    }
+
+    @Override
+    public boolean checkLegalEntityOwner(String accountNumber, Integer legalEntityId) {
+        Account foundAccount = accountRepositoryJpa
+                .findByAccountNumber(accountNumber)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Account with account number " +
+                                accountNumber +
+                                " not found"));
+
+        if(foundAccount.getLegalEntity() == null)
+            return false;
+
+        return foundAccount.getLegalEntity().getLegalEntityId().equals(legalEntityId);
+    }
+
+    @Override
+    public boolean validateAccountBalance(String accountNumber, BigDecimal amount) {
+        Account foundAccount = accountRepositoryJpa
+                .findByAccountNumber(accountNumber)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Account with account number " +
+                                accountNumber +
+                                " not found"));
+
+        int result = foundAccount.getBalance().compareTo(amount);
+
+        return result >= 0;
     }
 
     @Override
@@ -85,4 +133,6 @@ public class AccountServiceImpl implements AccountService {
     public void delete(UUID id){
         accountRepositoryJpa.deleteById(id);
     }
+
+
 }

@@ -61,6 +61,31 @@ public class AccountRepositoryJpaTests {
     }
 
     @Test
+    public void AccountRepository_FindByNumber_ReturnsModel(){
+        Account savedAccount = accountRepositoryJpa.save(account1);
+        accountRepositoryJpa.save(account2);
+
+        Account account = accountRepositoryJpa.findByAccountNumber(savedAccount.getAccountNumber()).get();
+
+        assertNotNull(account);
+        assertEquals(savedAccount.getId(), account.getId());
+        assertEquals(savedAccount.getAccountNumber(), account.getAccountNumber());
+        assertEquals(savedAccount.getCreatedDate(), account.getCreatedDate());
+        assertEquals(savedAccount.getUpdatedDate(), account.getUpdatedDate());
+        assertEquals(savedAccount.getStatus(), account.getStatus());
+        assertEquals(savedAccount.getBalance(), account.getBalance());
+    }
+
+    @Test
+    public void AccountRepository_ExistsByNumber_ReturnsTrue(){
+        Account savedAccount = accountRepositoryJpa.save(account1);
+
+        Boolean result = accountRepositoryJpa.existsByAccountNumber(savedAccount.getAccountNumber());
+
+        assertTrue(result);
+    }
+
+    @Test
     public void AccountRepository_Update_ChangesModel(){
         Account savedAccount = accountRepositoryJpa.save(account1);
 

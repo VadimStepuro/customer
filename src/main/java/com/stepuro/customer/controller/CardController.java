@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,6 +54,60 @@ public class CardController {
         CardDto foundCard = cardService.findById(id);
 
         return new ResponseEntity<>(foundCard, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Get card by card number")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found card by card number",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CardDto.class))}),
+            @ApiResponse(responseCode = "404", description = "Card not found",
+                    content = @Content) })
+    @Loggable
+    @GetMapping("/cards/get_by_card_number/{cardNumber}")
+    public ResponseEntity<CardDto> findByAccountNumber(@PathVariable("cardNumber") String cardNumber){
+        CardDto foundCard = cardService.findByCardNumber(cardNumber);
+
+        return new ResponseEntity<>(foundCard, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Check if card with specified number exists")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "True if card exists, False if there's no card with specified number",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Boolean.class))})})
+    @Loggable
+    @GetMapping("/cards/exists_by_card_number/{cardNumber}")
+    public ResponseEntity<Boolean> existsByAccountNumber(@PathVariable("cardNumber") String cardNumber){
+        Boolean result = cardService.existsByCardNumber(cardNumber);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Check if specified individual id is owner of card with specified number")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "True if individual is owner, False if legal entity isn't owner",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Boolean.class))})})
+    @Loggable
+    @GetMapping("/cards/check_individual/{cardNumber}/{individualId}")
+    public ResponseEntity<Boolean> checkIndividual(@PathVariable("cardNumber") String cardNumber, @PathVariable("individual_id") Integer individualId){
+        Boolean result = cardService.checkCardOwner(cardNumber, individualId);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Check if card with specified number has enough balance for operation")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "True if card has enough money, False if card doesn't have enough money",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Boolean.class))})})
+    @Loggable
+    @GetMapping("/cards/check_amount/{cardNumber}/{amount}")
+    public ResponseEntity<Boolean> checkAmount(@PathVariable("cardNumber") String cardNumber, @PathVariable("amount") BigDecimal amount){
+        Boolean result = cardService.validateCardBalance(cardNumber, amount);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @Operation(summary = "Create card")

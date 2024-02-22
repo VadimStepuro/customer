@@ -17,7 +17,7 @@ public class AccountSamples {
             .build();
 
     public static Account account2 = Account.builder()
-            .accountNumber("IE12BOFI90000112345678")
+            .accountNumber("IE12BOFI90000112345666")
             .status(AccountStatus.ACTIVE)
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))
@@ -25,7 +25,7 @@ public class AccountSamples {
             .build();
 
     public static Account account3 = Account.builder()
-            .accountNumber("IE12BOFI90000112345678")
+            .accountNumber("IE12BOFI90000112345655")
             .status(AccountStatus.ACTIVE)
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))
@@ -33,7 +33,7 @@ public class AccountSamples {
             .build();
 
     public static Account account4 = Account.builder()
-            .accountNumber("IE12BOFI90000112345678")
+            .accountNumber("IE12BOFI90000112345644")
             .status(AccountStatus.ACTIVE)
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))

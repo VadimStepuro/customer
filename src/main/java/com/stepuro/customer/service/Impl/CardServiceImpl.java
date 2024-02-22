@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,6 +45,48 @@ public class CardServiceImpl implements CardService {
                                 .orElseThrow(() -> new ResourceNotFoundException("Card with id " + id + " not found"))
                 );
     }
+
+    @Override
+    public CardDto findByCardNumber(String cardNumber) {
+        return CardMapper
+                .INSTANCE
+                .cardToCardDto(
+                        cardRepositoryJpa
+                                .findByCardNumber(cardNumber)
+                                .orElseThrow(() -> new ResourceNotFoundException(
+                                        "Card with card number" +
+                                                cardNumber +
+                                                " not found")));
+    }
+
+    @Override
+    public boolean existsByCardNumber(String cardNumber) {
+        return cardRepositoryJpa.existsByCardNumber(cardNumber);
+    }
+
+    @Override
+    public boolean checkCardOwner(String cardNumber, Integer individualId) {
+        Card foundCard = cardRepositoryJpa
+                .findByCardNumber(cardNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("Card with card number" + cardNumber + " not found"));
+
+        if(foundCard.getIndividual() == null)
+            return false;
+
+        return foundCard.getIndividual().getIndividualId().equals(individualId);
+    }
+
+    @Override
+    public boolean validateCardBalance(String cardNumber, BigDecimal amount) {
+        Card foundCard = cardRepositoryJpa
+                .findByCardNumber(cardNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("Card with card number" + cardNumber + " not found"));
+
+        int result = foundCard.getBalance().compareTo(amount);
+
+        return result >= 0;
+    }
+
 
     @Override
     @Transactional
