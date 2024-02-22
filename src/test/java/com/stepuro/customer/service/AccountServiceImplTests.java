@@ -51,7 +51,7 @@ public class AccountServiceImplTests {
 
         AccountDto foundAccount = accountServiceImpl.findById(UUID.randomUUID());
 
-        assertNotNull(account1);
+        assertNotNull(foundAccount);
         assertEquals(accountDto.getAccountNumber(), foundAccount.getAccountNumber());
         assertEquals(accountDto.getCreatedDate(), foundAccount.getCreatedDate());
         assertEquals(accountDto.getUpdatedDate(), foundAccount.getUpdatedDate());

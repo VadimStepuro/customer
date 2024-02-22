@@ -3,6 +3,7 @@ package com.stepuro.customer.repository.Samples;
 import com.stepuro.customer.model.Card;
 import com.stepuro.customer.model.enums.CardStatus;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -16,6 +17,7 @@ public class CardSamples {
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))
             .expiryDate(Date.valueOf(LocalDate.now().plusYears(3)))
+            .balance(new BigDecimal("300.00"))
             .build();
     public static Card card2 = Card.builder()
             .accountNumber("IE12BOFI90000112345678")
@@ -24,6 +26,7 @@ public class CardSamples {
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))
             .expiryDate(Date.valueOf(LocalDate.now().plusYears(3)))
+            .balance(new BigDecimal("400.00"))
             .build();
     public static Card card3 = Card.builder()
             .accountNumber("IE12BOFI90000112345678")
@@ -32,6 +35,7 @@ public class CardSamples {
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))
             .expiryDate(java.sql.Date.valueOf(LocalDate.now().plusYears(3)))
+            .balance(new BigDecimal("350.00"))
             .build();
     public static Card card4 = Card.builder()
             .accountNumber("IE12BOFI90000112345678")
@@ -40,6 +44,7 @@ public class CardSamples {
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))
             .expiryDate(Date.valueOf(LocalDate.now().plusYears(3)))
+            .balance(new BigDecimal("200.00"))
             .build();
 
 }

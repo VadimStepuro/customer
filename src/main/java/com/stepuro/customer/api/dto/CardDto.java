@@ -4,9 +4,11 @@ import com.stepuro.customer.model.enums.CardStatus;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -40,6 +42,10 @@ public class CardDto {
 
     @NotNull(message = "Status can't be null")
     private CardStatus status;
+
+    @Positive
+    @NotNull
+    private BigDecimal balance;
 
     private IndividualDto individualDto;
 }

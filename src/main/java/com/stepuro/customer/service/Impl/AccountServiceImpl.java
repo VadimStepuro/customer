@@ -69,6 +69,7 @@ public class AccountServiceImpl implements AccountService {
         account.setCreatedDate(accountDto.getCreatedDate());
         account.setUpdatedDate(accountDto.getUpdatedDate());
         account.setStatus(accountDto.getStatus());
+        account.setBalance(accountDto.getBalance());
         account.setLegalEntity(
                 LegalEntityMapper
                     .INSTANCE

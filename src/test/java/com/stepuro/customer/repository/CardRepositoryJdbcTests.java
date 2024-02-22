@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -34,6 +35,7 @@ public class CardRepositoryJdbcTests {
         assertEquals(card1.getCardNumber(), savedCard.getCardNumber());
         assertEquals(card1.getExpiryDate(), savedCard.getExpiryDate());
         assertEquals(card1.getStatus(), savedCard.getStatus());
+        assertEquals(card1.getBalance(), savedCard.getBalance());
     }
 
     @Test
@@ -51,6 +53,7 @@ public class CardRepositoryJdbcTests {
         assertEquals(card1.getStatus(), card.getStatus());
         assertEquals(card1.getCardNumber(), card.getCardNumber());
         assertEquals(card1.getExpiryDate(), card.getExpiryDate());
+        assertEquals(card1.getBalance(), card.getBalance());
     }
 
     @Test
@@ -65,6 +68,8 @@ public class CardRepositoryJdbcTests {
         savedCard.setUpdatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(3)));
         savedCard.setCardNumber("5425233430109333");
         savedCard.setExpiryDate(Date.valueOf(LocalDate.now().plusYears(4)));
+        savedCard.setBalance(new BigDecimal("600.00"));
+
 
         cardRepositoryJdbc.edit(savedCard);
 
@@ -80,6 +85,7 @@ public class CardRepositoryJdbcTests {
         assertEquals(savedCard.getUpdatedDate().getTime(), updatedCard.getUpdatedDate().getTime());
         assertEquals(savedCard.getCardNumber(), updatedCard.getCardNumber());
         assertEquals(savedCard.getExpiryDate(), updatedCard.getExpiryDate());
+        assertEquals(savedCard.getBalance(), updatedCard.getBalance());
     }
 
     @Test

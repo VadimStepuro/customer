@@ -70,6 +70,7 @@ public class CardServiceImpl implements CardService {
         card.setCreatedDate(cardDto.getCreatedDate());
         card.setUpdatedDate(cardDto.getUpdatedDate());
         card.setStatus(cardDto.getStatus());
+        card.setBalance(cardDto.getBalance());
         card.setIndividual(
                 IndividualMapper
                         .INSTANCE

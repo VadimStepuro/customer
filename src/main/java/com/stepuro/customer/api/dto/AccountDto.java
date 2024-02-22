@@ -4,8 +4,10 @@ import com.stepuro.customer.model.enums.AccountStatus;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.UUID;
 
@@ -31,6 +33,10 @@ public class AccountDto {
 
     @NotNull(message = "Status can't be null")
     private AccountStatus status;
+
+    @Positive
+    @NotNull
+    private BigDecimal balance;
 
     private LegalEntityDto legalEntityDto;
 }

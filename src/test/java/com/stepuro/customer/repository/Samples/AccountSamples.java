@@ -3,6 +3,7 @@ package com.stepuro.customer.repository.Samples;
 import com.stepuro.customer.model.Account;
 import com.stepuro.customer.model.enums.AccountStatus;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.Instant;
 
@@ -12,6 +13,7 @@ public class AccountSamples {
             .status(AccountStatus.ACTIVE)
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))
+            .balance(new BigDecimal("300.00"))
             .build();
 
     public static Account account2 = Account.builder()
@@ -19,6 +21,7 @@ public class AccountSamples {
             .status(AccountStatus.ACTIVE)
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))
+            .balance(new BigDecimal("400.00"))
             .build();
 
     public static Account account3 = Account.builder()
@@ -26,6 +29,7 @@ public class AccountSamples {
             .status(AccountStatus.ACTIVE)
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))
+            .balance(new BigDecimal("350.00"))
             .build();
 
     public static Account account4 = Account.builder()
@@ -33,5 +37,6 @@ public class AccountSamples {
             .status(AccountStatus.ACTIVE)
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))
+            .balance(new BigDecimal("200.00"))
             .build();
 }

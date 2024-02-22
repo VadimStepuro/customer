@@ -29,13 +29,14 @@ public class AccountRepositoryJdbc {
     public UUID save(Account account){
         account.setId(UUID.randomUUID());
         jdbcTemplate.update("INSERT INTO account " +
-                        "(id, account_number, created_date, updated_date, status, legal_entity_id) " +
-                        "VALUES (?, ?, ?, ?, ?, ?)",
+                        "(id, account_number, created_date, updated_date, status, balance, legal_entity_id) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?)",
                 account.getId(),
                 account.getAccountNumber(),
                 account.getCreatedDate().toString(),
                 account.getUpdatedDate().toString(),
                 account.getStatus().toString(),
+                account.getBalance(),
                 account.getLegalEntity() == null ? null : account.getLegalEntity().getLegalEntityId());
 
         return account.getId();
@@ -48,12 +49,14 @@ public class AccountRepositoryJdbc {
                 "created_date = ?, " +
                 "updated_date = ?, " +
                 "status = ?, " +
+                "balance = ?, " +
                 "legal_entity_id = ? " +
                 "WHERE id = ? ",
                 account.getAccountNumber(),
                 account.getCreatedDate().toString(),
                 account.getUpdatedDate().toString(),
                 account.getStatus().toString(),
+                account.getBalance(),
                 account.getLegalEntity() == null ? null : account.getLegalEntity().getLegalEntityId(),
                 account.getId());
     }
@@ -96,8 +99,8 @@ public class AccountRepositoryJdbc {
                     .address(rs.getString("address"))
                     .city(rs.getString("city"))
                     .inn(rs.getString("inn"))
-                    .createdDate(rs.getTimestamp(8))
-                    .updatedDate(rs.getTimestamp(9))
+                    .createdDate(rs.getTimestamp("legal_entity.created_date"))
+                    .updatedDate(rs.getTimestamp("legal_entity.updated_date"))
                     .build();
 
 
@@ -105,9 +108,10 @@ public class AccountRepositoryJdbc {
             Account account = new Account();
             account.setId(UUID.fromString(rs.getString("id")));
             account.setAccountNumber(rs.getString("account_number"));
-            account.setCreatedDate(rs.getTimestamp(2));
-            account.setUpdatedDate(rs.getTimestamp(3));
+            account.setCreatedDate(rs.getTimestamp("account.created_date"));
+            account.setUpdatedDate(rs.getTimestamp("account.updated_date"));
             account.setStatus(AccountStatus.valueOf(rs.getString("status")));
+            account.setBalance(rs.getBigDecimal("balance"));
             account.setLegalEntity(legalEntity);
 
             if(rs.getInt("legal_entity_id") == 0)
