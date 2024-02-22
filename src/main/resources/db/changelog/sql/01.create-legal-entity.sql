@@ -34,5 +34,6 @@ CREATE TABLE public.account (
 	CONSTRAINT status_check CHECK (status = 'ACTIVE' OR status = 'CLOSED'),
 	CONSTRAINT account_number_check CHECK (account_number ~* '^[A-Z]{2}\d{2}[A-Za-z\d]{1,30}$'),
 	CONSTRAINT balance_check CHECK (balance > 0),
+	CONSTRAINT account_number_unique UNIQUE (account_number),
 	CONSTRAINT account_fk FOREIGN KEY (legal_entity_id) REFERENCES public.legal_entity(legal_entity_id)
 );
