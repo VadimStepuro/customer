@@ -35,12 +35,8 @@ public class IndividualRepositoryJpaTests {
 
     @Test
     public void IndividualRepository_FindAll_ReturnsAllModels(){
-        individualRepositoryJpa.save(individual1);
-        individualRepositoryJpa.save(individual2);
-        individualRepositoryJpa.save(individual3);
-        individualRepositoryJpa.save(individual4);
+        List<Individual> individuals = individualRepositoryJpa.saveAll(individualList);
 
-        List<Individual> individuals = individualRepositoryJpa.findAll();
 
         assertNotNull(individuals);
         assertEquals(4, individuals.size());

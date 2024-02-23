@@ -1,5 +1,6 @@
 package com.stepuro.customer.repository;
 
+import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.LegalEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,8 +82,6 @@ public class LegalEntityRepositoryJdbcTests {
 
         legalEntityRepositoryJdbc.deleteById(id);
 
-        LegalEntity foundLegalEntity = legalEntityRepositoryJdbc.findById(id);
-
-        assertNull(foundLegalEntity);
+        assertThrows(ResourceNotFoundException.class, () -> legalEntityRepositoryJdbc.findById(id));
     }
 }

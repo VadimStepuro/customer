@@ -1,5 +1,6 @@
 package com.stepuro.customer.repository;
 
+import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.Account;
 import com.stepuro.customer.model.enums.AccountStatus;
 import org.junit.jupiter.api.Test;
@@ -78,8 +79,7 @@ public class AccountRepositoryJdbcTests {
 
         accountRepositoryJdbc.deleteById(uuid);
 
-        Account account = accountRepositoryJdbc.findById(uuid);
+        assertThrows(ResourceNotFoundException.class, () -> accountRepositoryJdbc.findById(uuid));
 
-        assertNull(account);
     }
 }

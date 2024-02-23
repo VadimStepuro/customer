@@ -37,12 +37,8 @@ public class CardRepositoryJpaTests {
 
     @Test
     public void CardRepository_FindAll_ReturnsAllModels(){
-        cardRepositoryJpa.save(card1);
-        cardRepositoryJpa.save(card2);
-        cardRepositoryJpa.save(card3);
-        cardRepositoryJpa.save(card4);
+        List<Card> cards = cardRepositoryJpa.saveAll(cardList);
 
-        List<Card> cards = cardRepositoryJpa.findAll();
 
         assertNotNull(cards);
         assertEquals(4, cards.size());

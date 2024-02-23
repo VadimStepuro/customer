@@ -6,6 +6,7 @@ import com.stepuro.customer.model.enums.AccountStatus;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 
 public class AccountSamples {
     public static Account account1 = Account.builder()
@@ -39,4 +40,6 @@ public class AccountSamples {
             .updatedDate(Timestamp.from(Instant.now()))
             .balance(new BigDecimal("200.00"))
             .build();
+
+    public static List<Account> accountList = List.of(account1, account2, account3, account4);
 }

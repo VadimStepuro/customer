@@ -1,5 +1,6 @@
 package com.stepuro.customer.repository;
 
+import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.Account;
 import com.stepuro.customer.model.LegalEntity;
 import com.stepuro.customer.model.enums.AccountStatus;
@@ -80,7 +81,7 @@ public class AccountRepositoryJdbc {
                     id);
         }
         catch (EmptyResultDataAccessException exception){
-            return null;
+            throw new ResourceNotFoundException("Account with id " + id + " not found");
         }
     }
 

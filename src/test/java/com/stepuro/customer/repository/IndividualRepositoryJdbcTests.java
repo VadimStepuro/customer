@@ -1,5 +1,6 @@
 package com.stepuro.customer.repository;
 
+import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.Individual;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,8 +89,6 @@ public class IndividualRepositoryJdbcTests {
 
         individualRepositoryJdbc.deleteById(id);
 
-        Individual foundIndividual = individualRepositoryJdbc.findById(id);
-
-        assertNull(foundIndividual);
+        assertThrows(ResourceNotFoundException.class, () -> individualRepositoryJdbc.findById(id));
     }
 }

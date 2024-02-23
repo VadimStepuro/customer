@@ -1,5 +1,6 @@
 package com.stepuro.customer.repository;
 
+import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.LegalEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +84,7 @@ public class LegalEntityRepositoryJdbc {
                     id);
         }
         catch (EmptyResultDataAccessException exception){
-            return null;
+            throw new ResourceNotFoundException("Individual with id " + id + " not found");
         }
     }
 

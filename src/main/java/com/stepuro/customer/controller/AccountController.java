@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,10 +32,10 @@ public class AccountController {
                     content = { @Content(mediaType = "application/json",
                             array = @ArraySchema(
                                     schema = @Schema(implementation = AccountDto.class)))}),
-            @ApiResponse(responseCode = "404", description = "Accounts not found",
-                    content = @Content) })
+            @ApiResponse(responseCode = "204", description = "Accounts not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/accounts")
+    @GetMapping(value = "/accounts", produces = "application/json")
     public ResponseEntity<List<AccountDto>> findAll(){
         List<AccountDto> allAccounts = accountService.findAll();
 
@@ -47,9 +48,9 @@ public class AccountController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = AccountDto.class))}),
             @ApiResponse(responseCode = "404", description = "Account not found",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/accounts/{id}")
+    @GetMapping(value = "/accounts/{id}", produces = "application/json")
     public ResponseEntity<AccountDto> findById(@PathVariable("id") UUID id){
         AccountDto foundAccount = accountService.findById(id);
 
@@ -62,9 +63,9 @@ public class AccountController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = AccountDto.class))}),
             @ApiResponse(responseCode = "404", description = "Account not found",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/accounts/get_by_account_number/{accountNumber}")
+    @GetMapping(value = "/accounts/get_by_account_number/{accountNumber}", produces = "application/json")
     public ResponseEntity<AccountDto> findByAccountNumber(@PathVariable("accountNumber") String accountNumber){
         AccountDto foundAccount = accountService.findByAccountNumber(accountNumber);
 
@@ -77,7 +78,7 @@ public class AccountController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Boolean.class))})})
     @Loggable
-    @GetMapping("/accounts/exists_by_account_number/{accountNumber}")
+    @GetMapping(value = "/accounts/exists_by_account_number/{accountNumber}", produces = "application/json")
     public ResponseEntity<Boolean> existsByAccountNumber(@PathVariable("accountNumber") String accountNumber){
         Boolean result = accountService.existsByAccountNumber(accountNumber);
 
@@ -88,9 +89,11 @@ public class AccountController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "True if account legal entity is owner, False if legal entity isn't owner",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Boolean.class))})})
+                            schema = @Schema(implementation = Boolean.class))}),
+            @ApiResponse(responseCode = "404", description = "Account not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/accounts/check_legal_entity/{accountNumber}/{legal_entity_id}")
+    @GetMapping(value = "/accounts/check_legal_entity/{accountNumber}/{legal_entity_id}", produces = "application/json")
     public ResponseEntity<Boolean> checkLegalEntity(@PathVariable("accountNumber") String accountNumber, @PathVariable("legal_entity_id") Integer legalEntityId){
         Boolean result = accountService.checkLegalEntityOwner(accountNumber, legalEntityId);
 
@@ -101,9 +104,11 @@ public class AccountController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "True if account has enough money, False if account doesn't have enough money",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Boolean.class))})})
+                            schema = @Schema(implementation = Boolean.class))}),
+            @ApiResponse(responseCode = "404", description = "Account not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/accounts/check_amount/{accountNumber}/{amount}")
+    @GetMapping(value = "/accounts/check_amount/{accountNumber}/{amount}", produces = "application/json")
     public ResponseEntity<Boolean> checkAmount(@PathVariable("accountNumber") String accountNumber, @PathVariable("amount") BigDecimal amount){
         Boolean result = accountService.validateAccountBalance(accountNumber, amount);
 
@@ -116,9 +121,9 @@ public class AccountController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = AccountDto.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid account",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = HashMap.class))) })
     @Loggable
-    @PostMapping("/accounts")
+    @PostMapping(value = "/accounts", consumes = "application/json", produces = "application/json")
     public ResponseEntity<AccountDto> create(@RequestBody @Valid AccountDto accountDto){
         AccountDto createdAccount = accountService.create(accountDto);
 
@@ -131,9 +136,9 @@ public class AccountController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = AccountDto.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid account",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = HashMap.class))) })
     @Loggable
-    @PutMapping("/accounts")
+    @PutMapping(value = "/accounts", consumes = "application/json", produces = "application/json")
     public ResponseEntity<AccountDto> edit(@RequestBody @Valid AccountDto accountDto){
         AccountDto editedAccount = accountService.edit(accountDto);
 
@@ -143,11 +148,11 @@ public class AccountController {
     @Operation(summary = "Delete account by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Deletes account by id",
-                    content = { @Content }),
+                    content = { @Content(mediaType = "application/json") }),
             @ApiResponse(responseCode = "404", description = "Account not found",
                     content = @Content) })
     @Loggable
-    @DeleteMapping("/accounts/{id}")
+    @DeleteMapping(value = "/accounts/{id}", produces = "application/json")
     public void delete(@PathVariable("id") UUID id){
         accountService.delete(id);
     }

@@ -38,9 +38,7 @@ public class CardServiceImplTests {
 
     @Test
     public void CardService_FindAll_ReturnsAllModels(){
-        List<Card> cards = List.of(card1, card2, card3, card4);
-
-        when(cardRepositoryJpa.findAll()).thenReturn(cards);
+        when(cardRepositoryJpa.findAll()).thenReturn(cardList);
 
         //Act
         List<CardDto> allCards = cardServiceImpl.findAll();

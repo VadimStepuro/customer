@@ -33,12 +33,7 @@ public class AccountRepositoryJpaTests {
 
     @Test
     public void AccountRepository_FindAll_ReturnsAllModels(){
-        accountRepositoryJpa.save(account1);
-        accountRepositoryJpa.save(account2);
-        accountRepositoryJpa.save(account3);
-        accountRepositoryJpa.save(account4);
-
-        List<Account> accounts = accountRepositoryJpa.findAll();
+        List<Account> accounts = accountRepositoryJpa.saveAll(accountList);
 
         assertNotNull(accounts);
         assertEquals(4, accounts.size());

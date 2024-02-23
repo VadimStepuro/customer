@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.List;
 
 public class CardSamples {
     public static Card card1 = Card.builder()
@@ -47,4 +48,5 @@ public class CardSamples {
             .balance(new BigDecimal("200.00"))
             .build();
 
+    public static List<Card> cardList = List.of(card1, card2, card3, card4);
 }

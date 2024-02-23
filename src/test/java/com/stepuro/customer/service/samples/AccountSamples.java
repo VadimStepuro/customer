@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public class AccountSamples {
@@ -47,6 +48,8 @@ public class AccountSamples {
             .updatedDate(Timestamp.from(Instant.now()))
             .balance(new BigDecimal("400.00"))
             .build();
+
+    public static List<Account> accountList = List.of(account1, account2, account3, account4);
 
     public static AccountDto accountDto = AccountMapper.INSTANCE.accountToAccountDto(account1);
 }

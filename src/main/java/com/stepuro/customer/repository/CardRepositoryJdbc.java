@@ -1,5 +1,6 @@
 package com.stepuro.customer.repository;
 
+import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.Card;
 import com.stepuro.customer.model.Individual;
 import com.stepuro.customer.model.enums.CardStatus;
@@ -86,7 +87,7 @@ public class CardRepositoryJdbc {
                     id);
         }
         catch (EmptyResultDataAccessException exception){
-            return null;
+            throw new ResourceNotFoundException("Card with id " + id + " not found");
         }
     }
 

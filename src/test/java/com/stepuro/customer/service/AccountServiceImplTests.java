@@ -36,9 +36,7 @@ public class AccountServiceImplTests {
 
     @Test
     public void AccountService_FindAll_ReturnsAllModels(){
-        List<Account> accounts = List.of(account1, account2, account3, account4);
-
-        when(accountRepositoryJpa.findAll()).thenReturn(accounts);
+        when(accountRepositoryJpa.findAll()).thenReturn(accountList);
 
         List<AccountDto> allAccounts = accountServiceImpl.findAll();
 

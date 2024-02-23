@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -29,10 +30,10 @@ public class LegalEntityController {
                     content = { @Content(mediaType = "application/json",
                             array = @ArraySchema(
                                     schema = @Schema(implementation = LegalEntityDto.class)))}),
-            @ApiResponse(responseCode = "404", description = "Legal entities not found",
-                    content = @Content) })
+            @ApiResponse(responseCode = "204", description = "Legal entities not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/legal_entities")
+    @GetMapping(value = "/legal_entities", produces = "application/json")
     public ResponseEntity<List<LegalEntityDto>> findAll(){
         List<LegalEntityDto> allLegalEntities = legalEntityService.findAll();
 
@@ -45,9 +46,9 @@ public class LegalEntityController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = LegalEntityDto.class))}),
             @ApiResponse(responseCode = "404", description = "Legal entity not found",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/legal_entities/{id}")
+    @GetMapping(value = "/legal_entities/{id}", produces = "application/json")
     public ResponseEntity<LegalEntityDto> findById(@PathVariable("id") Integer id){
         LegalEntityDto foundLegalEntity = legalEntityService.findById(id);
 
@@ -60,9 +61,9 @@ public class LegalEntityController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = LegalEntityDto.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid legal entity",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = HashMap.class))) })
     @Loggable
-    @PostMapping("/legal_entities")
+    @PostMapping(value = "/legal_entities", produces = "application/json", consumes = "application/json")
     public ResponseEntity<LegalEntityDto> create(@RequestBody @Valid LegalEntityDto legalEntityDto){
         LegalEntityDto createdLegalEntity = legalEntityService.create(legalEntityDto);
 
@@ -75,9 +76,11 @@ public class LegalEntityController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = LegalEntityDto.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid legal entity",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = HashMap.class))),
+            @ApiResponse(responseCode = "404", description = "Legal entity not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @PutMapping("/legal_entities")
+    @PutMapping(value = "/legal_entities", produces = "application/json", consumes = "application/json")
     public ResponseEntity<LegalEntityDto> edit(@RequestBody @Valid LegalEntityDto legalEntityDto){
         LegalEntityDto editedLegalEntity = legalEntityService.edit(legalEntityDto);
 
@@ -87,11 +90,11 @@ public class LegalEntityController {
     @Operation(summary = "Delete legal entity by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Deletes legal entity by id",
-                    content = { @Content}),
+                    content = { @Content(mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", description = "Legal entity not found",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json")) })
     @Loggable
-    @DeleteMapping("/legal_entities/{id}")
+    @DeleteMapping(value = "/legal_entities/{id}", produces = "application/json")
     public void delete(@PathVariable("id") Integer id){
         legalEntityService.delete(id);
     }

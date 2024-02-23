@@ -1,5 +1,6 @@
 package com.stepuro.customer.repository;
 
+import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.Card;
 import com.stepuro.customer.model.enums.CardStatus;
 import org.junit.jupiter.api.Test;
@@ -94,8 +95,6 @@ public class CardRepositoryJdbcTests {
 
         cardRepositoryJdbc.deleteById(savedId);
 
-        Card foundCard = cardRepositoryJdbc.findById(savedId);
-
-        assertNull(foundCard);
+        assertThrows(ResourceNotFoundException.class, () -> cardRepositoryJdbc.findById(savedId));
     }
 }

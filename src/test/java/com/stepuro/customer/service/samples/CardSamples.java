@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public class CardSamples {
@@ -56,6 +57,8 @@ public class CardSamples {
             .expiryDate(Date.valueOf(LocalDate.now().plusYears(3)))
             .balance(new BigDecimal("400.00"))
             .build();
+
+    public static List<Card> cardList = List.of(card1, card2, card3, card4);
 
     public static CardDto cardDto = CardMapper.INSTANCE.cardToCardDto(card1);
 }

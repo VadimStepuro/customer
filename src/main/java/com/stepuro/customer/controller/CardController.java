@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,10 +32,10 @@ public class CardController {
                     content = { @Content(mediaType = "application/json",
                             array = @ArraySchema(
                                     schema = @Schema(implementation = CardDto.class)))}),
-            @ApiResponse(responseCode = "404", description = "Cards not found",
-                    content = @Content) })
+            @ApiResponse(responseCode = "204", description = "Cards not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/cards")
+    @GetMapping(value = "/cards", produces = "application/json")
     public ResponseEntity<List<CardDto>> findAll(){
         List<CardDto> allCards = cardService.findAll();
 
@@ -47,9 +48,9 @@ public class CardController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CardDto.class))}),
             @ApiResponse(responseCode = "404", description = "Card not found",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/cards/{id}")
+    @GetMapping(value = "/cards/{id}", produces = "application/json")
     public ResponseEntity<CardDto> findById(@PathVariable("id") UUID id){
         CardDto foundCard = cardService.findById(id);
 
@@ -62,9 +63,9 @@ public class CardController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CardDto.class))}),
             @ApiResponse(responseCode = "404", description = "Card not found",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/cards/get_by_card_number/{cardNumber}")
+    @GetMapping(value = "/cards/get_by_card_number/{cardNumber}", produces = "application/json")
     public ResponseEntity<CardDto> findByAccountNumber(@PathVariable("cardNumber") String cardNumber){
         CardDto foundCard = cardService.findByCardNumber(cardNumber);
 
@@ -77,7 +78,7 @@ public class CardController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Boolean.class))})})
     @Loggable
-    @GetMapping("/cards/exists_by_card_number/{cardNumber}")
+    @GetMapping(value = "/cards/exists_by_card_number/{cardNumber}", produces = "application/json")
     public ResponseEntity<Boolean> existsByAccountNumber(@PathVariable("cardNumber") String cardNumber){
         Boolean result = cardService.existsByCardNumber(cardNumber);
 
@@ -88,9 +89,11 @@ public class CardController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "True if individual is owner, False if legal entity isn't owner",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Boolean.class))})})
+                            schema = @Schema(implementation = Boolean.class))}),
+            @ApiResponse(responseCode = "404", description = "Card not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/cards/check_individual/{cardNumber}/{individualId}")
+    @GetMapping(value = "/cards/check_individual/{cardNumber}/{individualId}", produces = "application/json")
     public ResponseEntity<Boolean> checkIndividual(@PathVariable("cardNumber") String cardNumber, @PathVariable("individual_id") Integer individualId){
         Boolean result = cardService.checkCardOwner(cardNumber, individualId);
 
@@ -101,9 +104,11 @@ public class CardController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "True if card has enough money, False if card doesn't have enough money",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Boolean.class))})})
+                            schema = @Schema(implementation = Boolean.class))}),
+            @ApiResponse(responseCode = "404", description = "Card not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/cards/check_amount/{cardNumber}/{amount}")
+    @GetMapping(value = "/cards/check_amount/{cardNumber}/{amount}", produces = "application/json")
     public ResponseEntity<Boolean> checkAmount(@PathVariable("cardNumber") String cardNumber, @PathVariable("amount") BigDecimal amount){
         Boolean result = cardService.validateCardBalance(cardNumber, amount);
 
@@ -116,9 +121,9 @@ public class CardController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CardDto.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid card",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = HashMap.class))) })
     @Loggable
-    @PostMapping("/cards")
+    @PostMapping(value = "/cards", consumes = "application/json", produces = "application/json")
     public ResponseEntity<CardDto> create(@RequestBody @Valid CardDto cardDto){
         CardDto createdCard = cardService.create(cardDto);
 
@@ -131,9 +136,11 @@ public class CardController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CardDto.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid card",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = HashMap.class))),
+            @ApiResponse(responseCode = "404", description = "Card not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @PutMapping("/cards")
+    @PutMapping(value = "/cards", consumes = "application/json", produces = "application/json")
     public ResponseEntity<CardDto> edit(@RequestBody @Valid CardDto cardDto){
         CardDto editedCard = cardService.edit(cardDto);
 
@@ -143,11 +150,11 @@ public class CardController {
     @Operation(summary = "Delete card by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Deletes card by id",
-                    content = { @Content }),
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = String.class)) }),
             @ApiResponse(responseCode = "404", description = "Card not found",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @DeleteMapping("/cards/{id}")
+    @DeleteMapping(value = "/cards/{id}", produces = "application/json")
     public void delete(@PathVariable("id") UUID id){
         cardService.delete(id);
     }

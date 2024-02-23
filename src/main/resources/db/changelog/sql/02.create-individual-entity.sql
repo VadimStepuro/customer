@@ -37,7 +37,7 @@ CREATE TABLE public.card (
 	CONSTRAINT status_check CHECK (status = 'ACTIVE' OR status = 'UNREACHABLE'),
 	CONSTRAINT account_number_check CHECK (account_number ~* '^[A-Z]{2}\d{2}[A-Za-z\d]{1,30}$'),
 	CONSTRAINT balance_check CHECK (balance > 0),
-	CONSTRAINT account_number_unique UNIQUE (account_number),
+	CONSTRAINT card_account_number_unique UNIQUE (account_number),
     CONSTRAINT card_number_unique UNIQUE (card_number),
 	CONSTRAINT card_fk FOREIGN KEY (individual_id) REFERENCES public.individual(individual_id)
 );
