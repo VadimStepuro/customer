@@ -1,8 +1,18 @@
 version: '3'
 
+networks:
+  bank-network:
+    name: bank-network
+    external: false
+    driver: bridge
+  customer-network:
+    name: customer-network
+    driver: bridge
+    external: false
+
 services:
   db:
-    container_name: customer_db
+    container_name: customer-db
     image: "postgres"
     ports:
       - "5432:5432"
@@ -16,28 +26,33 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1111
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
     restart: unless-stopped
+    networks:
+      - customer-network
 
   app:
-    container_name: customer_app
+    container_name: customer-app
     build: .
     ports:
-      - "8080:8080"
+      - "8082:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db/postgres
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 1111
       JDBC_DRIVER: org.postgresql.Driver
-      JDBC_URL: jdbc:postgresql://customer_db:5432/postgres
+      JDBC_URL: jdbc:postgresql://customer-db:5432/postgres
       JDBC_USERNAME: postgres
       JDBC_PASSWORD: 1111
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - bank-network
+      - customer-network
 
   pgadmin:
-    container_name: customer_pgadmin
+    container_name: customer-pgadmin
     image: dpage/pgadmin4:7
     restart: always
     environment:
@@ -46,8 +61,12 @@ services:
     ports:
       - "5050:80"
     volumes:
-      - pgadmin_data:/var/lib/pgadmin
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - customer-network
 
 volumes:
-  db_data:
-  pgadmin_data:
+  db-data:
+    name: customer-db-data
+  pgadmin-data:
+    name: customer-pgadmin-data
