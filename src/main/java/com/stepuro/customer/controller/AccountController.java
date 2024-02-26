@@ -2,6 +2,7 @@ package com.stepuro.customer.controller;
 
 import com.stepuro.customer.api.annotations.Loggable;
 import com.stepuro.customer.api.dto.AccountDto;
+import com.stepuro.customer.api.dto.TransferEntity;
 import com.stepuro.customer.service.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -15,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -72,47 +72,19 @@ public class AccountController {
         return new ResponseEntity<>(foundAccount, HttpStatus.OK);
     }
 
-    @Operation(summary = "Check if account with specified number exists")
+    @Operation(summary = "Transfer amount from one account to another")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "True if account exists, False if there's no account with specified number",
+            @ApiResponse(responseCode = "200", description = "Transfer was done",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Boolean.class))})})
-    @Loggable
-    @GetMapping(value = "/accounts/exists_by_account_number/{accountNumber}", produces = "application/json")
-    public ResponseEntity<Boolean> existsByAccountNumber(@PathVariable("accountNumber") String accountNumber){
-        Boolean result = accountService.existsByAccountNumber(accountNumber);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-    @Operation(summary = "Check if specified legal entity id is owner of account with specified number")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "True if account legal entity is owner, False if legal entity isn't owner",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Boolean.class))}),
+                            schema = @Schema)}),
             @ApiResponse(responseCode = "404", description = "Account not found",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "400", description = "Transfer isn't valid",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class, description = "Reason why transfer isn't valid")))})
     @Loggable
-    @GetMapping(value = "/accounts/check_legal_entity/{accountNumber}/{legal_entity_id}", produces = "application/json")
-    public ResponseEntity<Boolean> checkLegalEntity(@PathVariable("accountNumber") String accountNumber, @PathVariable("legal_entity_id") Integer legalEntityId){
-        Boolean result = accountService.checkLegalEntityOwner(accountNumber, legalEntityId);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-    @Operation(summary = "Check if account with specified number has enough balance for operation")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "True if account has enough money, False if account doesn't have enough money",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Boolean.class))}),
-            @ApiResponse(responseCode = "404", description = "Account not found",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
-    @Loggable
-    @GetMapping(value = "/accounts/check_amount/{accountNumber}/{amount}", produces = "application/json")
-    public ResponseEntity<Boolean> checkAmount(@PathVariable("accountNumber") String accountNumber, @PathVariable("amount") BigDecimal amount){
-        Boolean result = accountService.validateAccountBalance(accountNumber, amount);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    @PutMapping(value = "/accounts/transfer_amount", produces = "application/json", consumes = "application/json")
+    public void transferAmount(@RequestBody @Valid TransferEntity transferEntity){
+        accountService.transferAmount(transferEntity);
     }
 
     @Operation(summary = "Create account")

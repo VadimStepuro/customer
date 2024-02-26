@@ -12,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -76,33 +75,6 @@ public class CardServiceImplTests {
         assertEquals(cardDto.getCardNumber(), foundCard.getCardNumber());
         assertEquals(cardDto.getExpiryDate(), foundCard.getExpiryDate());
         assertEquals(cardDto.getStatus(), foundCard.getStatus());
-    }
-
-    @Test
-    public void AccountService_ExistsByAccountNumber_ReturnsTrue(){
-        when(cardRepositoryJpa.existsByCardNumber(any(String.class))).thenReturn(true);
-
-        boolean result = cardServiceImpl.existsByCardNumber("");
-
-        assertTrue(result);
-    }
-
-    @Test
-    public void AccountService_CheckLegalEntity_ReturnsFalse(){
-        when(cardRepositoryJpa.findByCardNumber(any(String.class))).thenReturn(Optional.of(card1));
-
-        boolean result = cardServiceImpl.checkCardOwner(card1.getAccountNumber(), 1);
-
-        assertFalse(result);
-    }
-
-    @Test
-    public void AccountService_CheckAmount_ReturnsTrue(){
-        when(cardRepositoryJpa.findByCardNumber(any(String.class))).thenReturn(Optional.of(card1));
-
-        boolean result = cardServiceImpl.validateCardBalance(cardDto.getCardNumber(), new BigDecimal("120.53"));
-
-        assertTrue(result);
     }
 
     @Test

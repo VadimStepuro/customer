@@ -33,6 +33,6 @@ public class LegalEntityDto {
     private String city;
 
     @NotNull(message = "Inn can't be null")
-    @Pattern(regexp = "^[\\d+]{10,12}$", message = "Invalid inn. It can contain only digits with length 10-12")
+    @Pattern(regexp = "^[0-9]{10}|[0-9]{12}$", message = "Invalid inn. It can contain only digits with length 10-12")
     private String inn;
 }

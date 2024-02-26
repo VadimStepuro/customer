@@ -71,33 +71,6 @@ public class AccountServiceImplTests {
     }
 
     @Test
-    public void AccountService_ExistsByAccountNumber_ReturnsTrue(){
-        when(accountRepositoryJpa.existsByAccountNumber(any(String.class))).thenReturn(true);
-
-        boolean result = accountServiceImpl.existsByAccountNumber("");
-
-        assertTrue(result);
-    }
-
-    @Test
-    public void AccountService_CheckLegalEntity_ReturnsFalse(){
-        when(accountRepositoryJpa.findByAccountNumber(any(String.class))).thenReturn(Optional.of(account1));
-
-        boolean result = accountServiceImpl.checkLegalEntityOwner(account1.getAccountNumber(), 1);
-
-        assertFalse(result);
-    }
-
-    @Test
-    public void AccountService_CheckAmount_ReturnsTrue(){
-        when(accountRepositoryJpa.findByAccountNumber(any(String.class))).thenReturn(Optional.of(account1));
-
-        boolean result = accountServiceImpl.validateAccountBalance(account1.getAccountNumber(), new BigDecimal("120.53"));
-
-        assertTrue(result);
-    }
-
-    @Test
     public void AccountService_Save_ReturnsSavedModel(){
         when(accountRepositoryJpa.save(any(Account.class))).thenReturn(account1);
 

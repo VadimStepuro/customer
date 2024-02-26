@@ -1,8 +1,8 @@
 package com.stepuro.customer.service;
 
 import com.stepuro.customer.api.dto.AccountDto;
+import com.stepuro.customer.api.dto.TransferEntity;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,11 +13,7 @@ public interface AccountService {
 
     AccountDto findByAccountNumber(String accountNumber);
 
-    boolean existsByAccountNumber(String accountNumber);
-
-    boolean checkLegalEntityOwner(String accountNumber, Integer legalEntityId);
-
-    boolean validateAccountBalance(String accountNumber, BigDecimal amount);
+    void transferAmount(TransferEntity transferEntity);
 
     AccountDto create(AccountDto accountDto);
 

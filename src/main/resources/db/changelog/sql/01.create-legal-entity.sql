@@ -16,7 +16,7 @@ CREATE TABLE public.legal_entity (
 	CONSTRAINT legal_entity_pk PRIMARY KEY (legal_entity_id),
 	CONSTRAINT created_date_check CHECK (created_date <= CURRENT_TIMESTAMP),
 	CONSTRAINT updated_date_check CHECK (updated_date <= CURRENT_TIMESTAMP),
-	CONSTRAINT inn_check CHECK (inn ~* '^[\d+]{10,12}$')
+	CONSTRAINT inn_check CHECK (inn ~* '^[0-9]{10,12}$')
 );
 
 CREATE TABLE public.account (

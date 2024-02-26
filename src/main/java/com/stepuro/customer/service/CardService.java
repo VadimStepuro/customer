@@ -1,8 +1,8 @@
 package com.stepuro.customer.service;
 
 import com.stepuro.customer.api.dto.CardDto;
+import com.stepuro.customer.api.dto.TransferEntity;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,11 +13,7 @@ public interface CardService {
 
     CardDto findByCardNumber(String cardNumber);
 
-    boolean existsByCardNumber(String cardNumber);
-
-    boolean checkCardOwner(String cardNumber, Integer individualId);
-
-    boolean validateCardBalance(String cardNumber, BigDecimal amount);
+    void transferAmount(TransferEntity transferEntity);
 
     CardDto create(CardDto cardDto);
 

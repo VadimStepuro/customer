@@ -1,10 +1,10 @@
 package com.stepuro.customer.service.Impl;
 
 import com.stepuro.customer.api.dto.AccountDto;
+import com.stepuro.customer.api.dto.TransferEntity;
 import com.stepuro.customer.api.dto.mapper.AccountMapper;
 import com.stepuro.customer.api.dto.mapper.LegalEntityMapper;
-import com.stepuro.customer.api.exceptions.NoContentException;
-import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
+import com.stepuro.customer.api.exceptions.*;
 import com.stepuro.customer.model.Account;
 import com.stepuro.customer.repository.AccountRepositoryJpa;
 import com.stepuro.customer.service.AccountService;
@@ -60,37 +60,29 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public boolean existsByAccountNumber(String accountNumber) {
-        return accountRepositoryJpa.existsByAccountNumber(accountNumber);
-    }
+    @Transactional
+    public void transferAmount(TransferEntity transferEntity) {
+        validateTransfer(transferEntity);
 
-    @Override
-    public boolean checkLegalEntityOwner(String accountNumber, Integer legalEntityId) {
-        Account foundAccount = accountRepositoryJpa
-                .findByAccountNumber(accountNumber)
+        Account sourceAccount = accountRepositoryJpa
+                .findByAccountNumber(transferEntity.getSourceNumber())
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Account with account number " +
-                                accountNumber +
+                                transferEntity.getSourceNumber() +
                                 " not found"));
 
-        if(foundAccount.getLegalEntity() == null)
-            return false;
-
-        return foundAccount.getLegalEntity().getLegalEntityId().equals(legalEntityId);
-    }
-
-    @Override
-    public boolean validateAccountBalance(String accountNumber, BigDecimal amount) {
-        Account foundAccount = accountRepositoryJpa
-                .findByAccountNumber(accountNumber)
+        Account destinationAccount = accountRepositoryJpa
+                .findByAccountNumber(transferEntity.getDestinationNumber())
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Account with account number " +
-                                accountNumber +
+                                transferEntity.getDestinationNumber() +
                                 " not found"));
 
-        int result = foundAccount.getBalance().compareTo(amount);
+        sourceAccount.setBalance(sourceAccount.getBalance().subtract(transferEntity.getAmount()));
+        destinationAccount.setBalance(destinationAccount.getBalance().add(transferEntity.getAmount()));
 
-        return result >= 0;
+        accountRepositoryJpa.save(sourceAccount);
+        accountRepositoryJpa.save(destinationAccount);
     }
 
     @Override
@@ -134,5 +126,50 @@ public class AccountServiceImpl implements AccountService {
         accountRepositoryJpa.deleteById(id);
     }
 
+    private boolean existsByAccountNumber(String accountNumber) {
+        return accountRepositoryJpa.existsByAccountNumber(accountNumber);
+    }
 
+    private boolean validateLegalEntityOwner(String accountNumber, Integer legalEntityId) {
+        Account foundAccount = accountRepositoryJpa
+                .findByAccountNumber(accountNumber)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Account with account number " +
+                                accountNumber +
+                                " not found"));
+
+        if(foundAccount.getLegalEntity() == null)
+            return false;
+
+        return foundAccount.getLegalEntity().getLegalEntityId().equals(legalEntityId);
+    }
+
+    private boolean validateAccountBalance(String accountNumber, BigDecimal amount) {
+        Account foundAccount = accountRepositoryJpa
+                .findByAccountNumber(accountNumber)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Account with account number " +
+                                accountNumber +
+                                " not found"));
+
+        int result = foundAccount.getBalance().compareTo(amount);
+
+        return result >= 0;
+    }
+
+    private void validateTransfer(TransferEntity transferEntity){
+        if(!transferEntity.getSourceNumber().equals(transferEntity.getDestinationNumber()))
+            throw new EqualNumberException("Account number can't be equal " +
+                    "(source number: " + transferEntity.getSourceNumber() +
+                    ", destination number: " + transferEntity.getDestinationNumber());
+
+        if(!validateLegalEntityOwner(transferEntity.getSourceNumber(), transferEntity.getUserId()))
+            throw new UserIdDoesntMatchException("Legal entity isn't owner of this account " +
+                    "(legalEntity id: " + transferEntity.getUserId() +
+                    ", account number: " + transferEntity.getSourceNumber());
+
+        if(!validateAccountBalance(transferEntity.getSourceNumber(), transferEntity.getAmount()))
+            throw new NotEnoughMoneyException("Not enough money on account with number " + transferEntity.getSourceNumber() +
+                    " to transfer " + transferEntity.getAmount());
+    }
 }

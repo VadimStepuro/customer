@@ -31,4 +31,16 @@ public class ValidationHandlers {
     public String handleSqlExceptions(SQLException ex){
         return ex.getLocalizedMessage();
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NotEnoughMoneyException.class)
+    public String handleNotEnoughMoneyException(NotEnoughMoneyException ex){return ex.getMessage();}
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(EqualNumberException.class)
+    public String handleEqualNumberException(EqualNumberException ex){return ex.getMessage();}
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(UserIdDoesntMatchException.class)
+    public String handleUserIdDoesntMatchException(UserIdDoesntMatchException ex){return ex.getMessage();}
 }

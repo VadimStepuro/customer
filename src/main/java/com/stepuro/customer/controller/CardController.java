@@ -2,6 +2,7 @@ package com.stepuro.customer.controller;
 
 import com.stepuro.customer.api.annotations.Loggable;
 import com.stepuro.customer.api.dto.CardDto;
+import com.stepuro.customer.api.dto.TransferEntity;
 import com.stepuro.customer.service.CardService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -15,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -72,47 +72,19 @@ public class CardController {
         return new ResponseEntity<>(foundCard, HttpStatus.OK);
     }
 
-    @Operation(summary = "Check if card with specified number exists")
+    @Operation(summary = "Transfer amount from one card to another")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "True if card exists, False if there's no card with specified number",
+            @ApiResponse(responseCode = "200", description = "Transfer is done",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Boolean.class))})})
-    @Loggable
-    @GetMapping(value = "/cards/exists_by_card_number/{cardNumber}", produces = "application/json")
-    public ResponseEntity<Boolean> existsByAccountNumber(@PathVariable("cardNumber") String cardNumber){
-        Boolean result = cardService.existsByCardNumber(cardNumber);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-    @Operation(summary = "Check if specified individual id is owner of card with specified number")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "True if individual is owner, False if legal entity isn't owner",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Boolean.class))}),
+                            schema = @Schema)}),
             @ApiResponse(responseCode = "404", description = "Card not found",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "400", description = "Transfer isn't valid",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class, description = "Reason why transfer isn't valid")))})
     @Loggable
-    @GetMapping(value = "/cards/check_individual/{cardNumber}/{individualId}", produces = "application/json")
-    public ResponseEntity<Boolean> checkIndividual(@PathVariable("cardNumber") String cardNumber, @PathVariable("individual_id") Integer individualId){
-        Boolean result = cardService.checkCardOwner(cardNumber, individualId);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-    @Operation(summary = "Check if card with specified number has enough balance for operation")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "True if card has enough money, False if card doesn't have enough money",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Boolean.class))}),
-            @ApiResponse(responseCode = "404", description = "Card not found",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
-    @Loggable
-    @GetMapping(value = "/cards/check_amount/{cardNumber}/{amount}", produces = "application/json")
-    public ResponseEntity<Boolean> checkAmount(@PathVariable("cardNumber") String cardNumber, @PathVariable("amount") BigDecimal amount){
-        Boolean result = cardService.validateCardBalance(cardNumber, amount);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    @PutMapping(value = "/cards/transfer_amount", produces = "application/json", consumes = "application/json")
+    public void transferAmount(@RequestBody TransferEntity transferEntity){
+        cardService.transferAmount(transferEntity);
     }
 
     @Operation(summary = "Create card")
