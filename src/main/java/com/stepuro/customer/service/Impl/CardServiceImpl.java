@@ -13,10 +13,10 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
-import java.util.regex.Pattern;
+
+import static com.stepuro.customer.utils.CardUtils.*;
 
 @Service
 public class CardServiceImpl implements CardService {
@@ -65,13 +65,21 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    public boolean existsByNumber(String cardNumber) {
+        if(isAccountNumber(cardNumber))
+            return cardRepositoryJpa.existsByAccountNumber(cardNumber);
+        else
+            return cardRepositoryJpa.existsByCardNumber(cardNumber);
+    }
+
+    @Override
     @Transactional
     public void transferAmount(TransferEntity transferEntity) {
-        validateTransfer(transferEntity);
-
         Card sourceCard = findCardByNumber(transferEntity.getSourceNumber());
 
         Card destinationCard = findCardByNumber(transferEntity.getDestinationNumber());
+
+        validateTransfer(transferEntity, sourceCard);
 
         sourceCard.setBalance(sourceCard.getBalance().subtract(transferEntity.getAmount()));
         destinationCard.setBalance(destinationCard.getBalance().add(transferEntity.getAmount()));
@@ -124,61 +132,31 @@ public class CardServiceImpl implements CardService {
         cardRepositoryJpa.deleteById(id);
     }
 
-    private void validateTransfer(TransferEntity transferEntity){
+    private void validateTransfer(TransferEntity transferEntity, Card sourceCard){
         if(transferEntity.getSourceNumber().equals(transferEntity.getDestinationNumber()))
-            throw new EqualNumberException("Card numbers for transfer can't be equals");
+            throw new EqualNumberException("Card numbers can't be equal " +
+                    "(source number: " + transferEntity.getSourceNumber() +
+                    ", destination number: " + transferEntity.getDestinationNumber() + ")");
 
-        if (!validateCardOwner(transferEntity.getSourceNumber(), transferEntity.getUserId()))
-            throw new UserIdDoesntMatchException("Individual isn't owner of the card");
+        if (!validateCardOwner(sourceCard, transferEntity.getUserId()))
+            throw new UserIdDoesntMatchException("Individual isn't owner of the card " +
+                    "(individual id: " + transferEntity.getUserId() +
+                    ", card number: " + transferEntity.getSourceNumber() + ")");
 
-        if(!validateCardBalance(transferEntity.getSourceNumber(), transferEntity.getAmount()))
+        if(!validateCardBalance(sourceCard, transferEntity.getAmount()))
             throw new NotEnoughMoneyException("Not enough money on card with number " + transferEntity.getSourceNumber() +
                     " to transfer " + transferEntity.getAmount());
 
     }
 
-    private boolean isCardNumber(String number){
-        Pattern pattern = Pattern.compile("^(?:4[0-9]{12}(?:[0-9]{3})?|(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\\d{3})\\d{11})$");
-
-        return pattern.matcher(number).matches();
-    }
-
-    private boolean validateSourceAndDestinationNumbers(String sourceNumber, String destinationNumber){
-        return !sourceNumber.equals(destinationNumber);
-    }
-
     private Card findCardByNumber(String cardNumber){
-        if(isCardNumber(cardNumber))
-            return cardRepositoryJpa
-                    .findByCardNumber(cardNumber)
-                    .orElseThrow(() -> new ResourceNotFoundException("Card with card number" + cardNumber + " not found"));
-        else
+        if(isAccountNumber(cardNumber))
             return cardRepositoryJpa
                     .findByAccountNumber(cardNumber)
                     .orElseThrow(() -> new ResourceNotFoundException("Card with account number" + cardNumber + " not found"));
-    }
-
-    private boolean existsByCardNumber(String cardNumber) {
-        if(isCardNumber(cardNumber))
-            return cardRepositoryJpa.existsByCardNumber(cardNumber);
         else
-            return cardRepositoryJpa.existsByAccountNumber(cardNumber);
-    }
-
-    private boolean validateCardOwner(String cardNumber, Integer individualId) {
-        Card foundCard = findCardByNumber(cardNumber);
-
-        if(foundCard.getIndividual() == null)
-            return false;
-
-        return foundCard.getIndividual().getIndividualId().equals(individualId);
-    }
-
-    private boolean validateCardBalance(String cardNumber, BigDecimal amount) {
-        Card foundCard = findCardByNumber(cardNumber);
-
-        int result = foundCard.getBalance().compareTo(amount);
-
-        return result >= 0;
+            return cardRepositoryJpa
+                    .findByCardNumber(cardNumber)
+                    .orElseThrow(() -> new ResourceNotFoundException("Card with card number" + cardNumber + " not found"));
     }
 }

@@ -12,9 +12,11 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
+
+import static com.stepuro.customer.utils.AccountUtils.validateAccountBalance;
+import static com.stepuro.customer.utils.AccountUtils.validateLegalEntityOwner;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -60,10 +62,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public boolean existsByAccountNumber(String accountNumber) {
+        return accountRepositoryJpa.existsByAccountNumber(accountNumber);
+    }
+
+    @Override
     @Transactional
     public void transferAmount(TransferEntity transferEntity) {
-        validateTransfer(transferEntity);
-
         Account sourceAccount = accountRepositoryJpa
                 .findByAccountNumber(transferEntity.getSourceNumber())
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -77,6 +82,8 @@ public class AccountServiceImpl implements AccountService {
                         "Account with account number " +
                                 transferEntity.getDestinationNumber() +
                                 " not found"));
+
+        validateTransfer(transferEntity, sourceAccount);
 
         sourceAccount.setBalance(sourceAccount.getBalance().subtract(transferEntity.getAmount()));
         destinationAccount.setBalance(destinationAccount.getBalance().add(transferEntity.getAmount()));
@@ -126,49 +133,18 @@ public class AccountServiceImpl implements AccountService {
         accountRepositoryJpa.deleteById(id);
     }
 
-    private boolean existsByAccountNumber(String accountNumber) {
-        return accountRepositoryJpa.existsByAccountNumber(accountNumber);
-    }
-
-    private boolean validateLegalEntityOwner(String accountNumber, Integer legalEntityId) {
-        Account foundAccount = accountRepositoryJpa
-                .findByAccountNumber(accountNumber)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Account with account number " +
-                                accountNumber +
-                                " not found"));
-
-        if(foundAccount.getLegalEntity() == null)
-            return false;
-
-        return foundAccount.getLegalEntity().getLegalEntityId().equals(legalEntityId);
-    }
-
-    private boolean validateAccountBalance(String accountNumber, BigDecimal amount) {
-        Account foundAccount = accountRepositoryJpa
-                .findByAccountNumber(accountNumber)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Account with account number " +
-                                accountNumber +
-                                " not found"));
-
-        int result = foundAccount.getBalance().compareTo(amount);
-
-        return result >= 0;
-    }
-
-    private void validateTransfer(TransferEntity transferEntity){
-        if(!transferEntity.getSourceNumber().equals(transferEntity.getDestinationNumber()))
+    private void validateTransfer(TransferEntity transferEntity, Account sourceAccount){
+        if(transferEntity.getSourceNumber().equals(transferEntity.getDestinationNumber()))
             throw new EqualNumberException("Account number can't be equal " +
                     "(source number: " + transferEntity.getSourceNumber() +
-                    ", destination number: " + transferEntity.getDestinationNumber());
+                    ", destination number: " + transferEntity.getDestinationNumber() + ")");
 
-        if(!validateLegalEntityOwner(transferEntity.getSourceNumber(), transferEntity.getUserId()))
+        if(!validateLegalEntityOwner(sourceAccount, transferEntity.getUserId()))
             throw new UserIdDoesntMatchException("Legal entity isn't owner of this account " +
                     "(legalEntity id: " + transferEntity.getUserId() +
                     ", account number: " + transferEntity.getSourceNumber());
 
-        if(!validateAccountBalance(transferEntity.getSourceNumber(), transferEntity.getAmount()))
+        if(!validateAccountBalance(sourceAccount, transferEntity.getAmount()))
             throw new NotEnoughMoneyException("Not enough money on account with number " + transferEntity.getSourceNumber() +
                     " to transfer " + transferEntity.getAmount());
     }

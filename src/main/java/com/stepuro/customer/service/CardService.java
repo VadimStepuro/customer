@@ -13,6 +13,8 @@ public interface CardService {
 
     CardDto findByCardNumber(String cardNumber);
 
+    boolean existsByNumber(String number);
+
     void transferAmount(TransferEntity transferEntity);
 
     CardDto create(CardDto cardDto);

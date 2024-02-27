@@ -13,6 +13,8 @@ public interface AccountService {
 
     AccountDto findByAccountNumber(String accountNumber);
 
+    boolean existsByAccountNumber(String accountNumber);
+
     void transferAmount(TransferEntity transferEntity);
 
     AccountDto create(AccountDto accountDto);
