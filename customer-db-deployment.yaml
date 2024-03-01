@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: customer-db
+  namespace: customer
+spec:
+  serviceName: customer-db-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-db
+  template:
+    metadata:
+      labels:
+        app: customer-db
+    spec:
+      containers:
+        - name: customer-db
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: "postgres"
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: customer-db-secret
+                  key: customer-db-root-username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: customer-db-secret
+                  key: customer-db-root-password
+          livenessProbe:
+            exec:
+              command:
+                - bash
+                - -ec
+                - 'PGPASSWORD=$POSTGRES_PASSWORD psql -w -U "postgres" -d "postgres"  -h 127.0.0.1 -c "SELECT 1"'
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 6
+          readinessProbe:
+              exec:
+                command:
+                  - bash
+                  - -ec
+                  - 'PGPASSWORD=$POSTGRES_PASSWORD psql -w -U "postgres" -d "postgres"  -h 127.0.0.1 -c "SELECT 1"'
+              initialDelaySeconds: 5
+              periodSeconds: 10
+              timeoutSeconds: 5
+              successThreshold: 1
+              failureThreshold: 6
+          volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: db-volume
+      volumes:
+        - name: db-volume
+          persistentVolumeClaim:
+            claimName: customer-pv-claim
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-db-service
+  namespace: customer
+spec:
+  selector:
+    app: customer-db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+---
