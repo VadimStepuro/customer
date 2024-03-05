@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
-import static com.stepuro.customer.utils.AccountUtils.validateAccountBalance;
-import static com.stepuro.customer.utils.AccountUtils.validateLegalEntityOwner;
+import static com.stepuro.customer.utils.AccountUtils.*;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -83,7 +82,7 @@ public class AccountServiceImpl implements AccountService {
                                 transferEntity.getDestinationNumber() +
                                 " not found"));
 
-        validateTransfer(transferEntity, sourceAccount);
+        validateTransfer(transferEntity, sourceAccount, destinationAccount);
 
         sourceAccount.setBalance(sourceAccount.getBalance().subtract(transferEntity.getAmount()));
         destinationAccount.setBalance(destinationAccount.getBalance().add(transferEntity.getAmount()));
@@ -133,7 +132,7 @@ public class AccountServiceImpl implements AccountService {
         accountRepositoryJpa.deleteById(id);
     }
 
-    private void validateTransfer(TransferEntity transferEntity, Account sourceAccount){
+    private void validateTransfer(TransferEntity transferEntity, Account sourceAccount, Account destinationAccount){
         if(transferEntity.getSourceNumber().equals(transferEntity.getDestinationNumber()))
             throw new EqualNumberException("Account number can't be equal " +
                     "(source number: " + transferEntity.getSourceNumber() +
@@ -143,6 +142,12 @@ public class AccountServiceImpl implements AccountService {
             throw new UserIdDoesntMatchException("Legal entity isn't owner of this account " +
                     "(legalEntity id: " + transferEntity.getUserId() +
                     ", account number: " + transferEntity.getSourceNumber());
+
+        if(!validateStatus(sourceAccount))
+            throw new StatusException("Source account is closed");
+
+        if(!validateStatus(destinationAccount))
+            throw new StatusException("Destination account is closed");
 
         if(!validateAccountBalance(sourceAccount, transferEntity.getAmount()))
             throw new NotEnoughMoneyException("Not enough money on account with number " + transferEntity.getSourceNumber() +

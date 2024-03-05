@@ -5,7 +5,7 @@ metadata:
   namespace: customer
 data:
   database-url: customer-db-service
-  spring-datasource-url: jdbc:postgresql://customer-db-service/postgres
+  spring-datasource-url: jdbc:postgresql://customer-pgpool-service/postgres
   jdbc-driver: org.postgresql.Driver
 ---
 apiVersion: apps/v1

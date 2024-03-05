@@ -56,4 +56,10 @@ public class ValidationHandlers {
     public ApiError handleUserIdDoesntMatchException(UserIdDoesntMatchException ex){
         return new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), ex);
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(StatusException.class)
+    public ApiError handleStatusException(StatusException ex){
+        return new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), ex);
+    }
 }

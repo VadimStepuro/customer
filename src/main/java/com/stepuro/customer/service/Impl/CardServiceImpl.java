@@ -79,7 +79,7 @@ public class CardServiceImpl implements CardService {
 
         Card destinationCard = findCardByNumber(transferEntity.getDestinationNumber());
 
-        validateTransfer(transferEntity, sourceCard);
+        validateTransfer(transferEntity, sourceCard, destinationCard);
 
         sourceCard.setBalance(sourceCard.getBalance().subtract(transferEntity.getAmount()));
         destinationCard.setBalance(destinationCard.getBalance().add(transferEntity.getAmount()));
@@ -132,7 +132,7 @@ public class CardServiceImpl implements CardService {
         cardRepositoryJpa.deleteById(id);
     }
 
-    private void validateTransfer(TransferEntity transferEntity, Card sourceCard){
+    private void validateTransfer(TransferEntity transferEntity, Card sourceCard, Card destinationCard){
         if(transferEntity.getSourceNumber().equals(transferEntity.getDestinationNumber()))
             throw new EqualNumberException("Card numbers can't be equal " +
                     "(source number: " + transferEntity.getSourceNumber() +
@@ -142,6 +142,12 @@ public class CardServiceImpl implements CardService {
             throw new UserIdDoesntMatchException("Individual isn't owner of the card " +
                     "(individual id: " + transferEntity.getUserId() +
                     ", card number: " + transferEntity.getSourceNumber() + ")");
+
+        if(!validateCardStatus(sourceCard))
+            throw new StatusException("Source card is unreachable");
+
+        if(!validateCardStatus(destinationCard))
+            throw new StatusException("Destination card is unreachable");
 
         if(!validateCardBalance(sourceCard, transferEntity.getAmount()))
             throw new NotEnoughMoneyException("Not enough money on card with number " + transferEntity.getSourceNumber() +

@@ -1,6 +1,7 @@
 package com.stepuro.customer.utils;
 
 import com.stepuro.customer.model.Card;
+import com.stepuro.customer.model.enums.CardStatus;
 
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
@@ -23,5 +24,9 @@ public class CardUtils {
         Pattern pattern = Pattern.compile("^[A-Z]{2}\\d{2}[A-Za-z\\d]{1,30}$");
 
         return pattern.matcher(number).matches();
+    }
+
+    public static boolean validateCardStatus(Card card){
+        return card.getStatus().equals(CardStatus.ACTIVE);
     }
 }

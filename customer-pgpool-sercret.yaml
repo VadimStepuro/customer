@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: customer-pgpool-secret
+  namespace: customer
+data:
+  admin-password: "SFRzaVZxYjdSZQ=="

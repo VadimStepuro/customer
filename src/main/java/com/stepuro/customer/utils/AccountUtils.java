@@ -1,6 +1,7 @@
 package com.stepuro.customer.utils;
 
 import com.stepuro.customer.model.Account;
+import com.stepuro.customer.model.enums.AccountStatus;
 
 import java.math.BigDecimal;
 
@@ -16,5 +17,9 @@ public class AccountUtils {
         int result = sourceAccount.getBalance().compareTo(amount);
 
         return result >= 0;
+    }
+
+    public static boolean validateStatus(Account account){
+        return account.getStatus().equals(AccountStatus.ACTIVE);
     }
 }
