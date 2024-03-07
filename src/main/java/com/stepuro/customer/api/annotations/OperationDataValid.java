@@ -1,0 +1,26 @@
+package com.stepuro.customer.api.annotations;
+
+import com.stepuro.customer.utils.validator.OperationDataValidValidator;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Constraint(validatedBy = OperationDataValidValidator.class)
+@Target({ ElementType.TYPE })
+@Retention(RetentionPolicy.RUNTIME)
+public @interface OperationDataValid {
+    String message() default "Operation data is invalid";
+    String sourceCardNumber();
+    String destinationCardNumber();
+    String sourceAccountNumber();
+    String destinationAccountNumber();
+    String paymentType();
+
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
+
+}

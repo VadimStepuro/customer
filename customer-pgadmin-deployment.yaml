@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-pgadmin-deployment
+  namespace: customer
+spec:
+  selector:
+    matchLabels:
+      app: customer-pgadmin
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: customer-pgadmin
+    spec:
+      containers:
+        - name: pgadmin4
+          image: dpage/pgadmin4
+          env:
+            - name: PGADMIN_DEFAULT_EMAIL
+              value: "admin@admin.com"
+            - name: PGADMIN_DEFAULT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: customer-pgadmin-secret
+                  key: pgadmin-default-password
+            - name: PGADMIN_PORT
+              value: "80"
+          ports:
+            - containerPort: 80
+              name: pgadminport
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-pgadmin-service
+  namespace: customer
+  labels:
+    app: customer-pgadmin
+spec:
+  selector:
+    app: customer-pgadmin
+  type: NodePort
+  ports:
+    - port: 80
+      nodePort: 30200

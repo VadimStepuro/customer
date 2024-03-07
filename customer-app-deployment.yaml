@@ -4,9 +4,11 @@ metadata:
   name: customer-app-env
   namespace: customer
 data:
-  database-url: customer-db-service
+  database-url: customer-pgpool-service
   spring-datasource-url: jdbc:postgresql://customer-pgpool-service/postgres
   jdbc-driver: org.postgresql.Driver
+  spring-kafka-bootstrap-servers: kafka-service.kafka:9092
+  kafka-topic-name-transfer-amount: transferAmount
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -25,7 +27,7 @@ spec:
     spec:
       containers:
         - name: customer-app
-          image: vadimstepuro/customer-app
+          image: vadimstepuro/customer-app:1.0.4
           ports:
             - containerPort: 8080
           env:
@@ -70,6 +72,16 @@ spec:
                 secretKeyRef:
                   name: customer-db-secret
                   key: customer-db-root-password
+            - name: SPRING_KAFKA_BOOTSTRAP-SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: customer-app-env
+                  key: spring-kafka-bootstrap-servers
+            - name: KAFKA_TOPIC-NAME_TRANSFER-AMOUNT
+              valueFrom:
+                configMapKeyRef:
+                  name: customer-app-env
+                  key: kafka-topic-name-transfer-amount
 ---
 apiVersion: v1
 kind: Service
