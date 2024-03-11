@@ -10,6 +10,10 @@ import com.stepuro.customer.repository.AccountRepositoryJpa;
 import com.stepuro.customer.service.AccountService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +27,7 @@ public class AccountServiceImpl implements AccountService {
     private AccountRepositoryJpa accountRepositoryJpa;
 
     @Override
+    @Cacheable(cacheNames = "accounts", keyGenerator = "newKeyGenerator")
     public List<AccountDto> findAll(){
         List<AccountDto> accountDtos = accountRepositoryJpa
                 .findAll()
@@ -37,6 +42,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Cacheable(cacheNames = "accountById", key = "#id")
     public AccountDto findById(UUID id){
         return AccountMapper
                 .INSTANCE
@@ -48,6 +54,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Cacheable(cacheNames = "accountByNumber", key = "#accountNumber")
     public AccountDto findByAccountNumber(String accountNumber) {
         return AccountMapper
                 .INSTANCE
@@ -67,6 +74,14 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = "accounts", allEntries = true),
+                    @CacheEvict(cacheNames = "accountById", allEntries = true),
+                    @CacheEvict(cacheNames = "accountByNumber", key = "#transferEntity.sourceNumber"),
+                    @CacheEvict(cacheNames = "accountByNumber", key = "#transferEntity.destinationNumber")
+            }
+    )
     public void transferAmount(TransferEntity transferEntity) {
         Account sourceAccount = accountRepositoryJpa
                 .findByAccountNumber(transferEntity.getSourceNumber())
@@ -93,6 +108,15 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
+    @Caching(
+            put = {
+                    @CachePut(cacheNames = "accountById", key = "#accountDto.id"),
+                    @CachePut(cacheNames = "accountByNumber", key = "#accountDto.accountNumber")
+            },
+            evict = {
+                    @CacheEvict(cacheNames = "accounts", allEntries = true)
+            }
+    )
     public AccountDto create(AccountDto accountDto){
         return AccountMapper
                 .INSTANCE
@@ -106,6 +130,15 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
+    @Caching(
+            put = {
+                    @CachePut(cacheNames = "accountById", key = "#accountDto.id"),
+                    @CachePut(cacheNames = "accountByNumber", key = "#accountDto.accountNumber")
+            },
+            evict = {
+                    @CacheEvict(cacheNames = "accounts", allEntries = true)
+            }
+    )
     public AccountDto edit(AccountDto accountDto){
         Account account = accountRepositoryJpa
                 .findById(accountDto.getId())
@@ -128,6 +161,13 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = "accounts", allEntries = true),
+                    @CacheEvict(cacheNames = "accountByNumber", allEntries = true),
+                    @CacheEvict(cacheNames = "accountById", key = "#id")
+            }
+    )
     public void delete(UUID id){
         accountRepositoryJpa.deleteById(id);
     }

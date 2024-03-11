@@ -7,10 +7,13 @@ import com.stepuro.customer.api.dto.mapper.IndividualMapper;
 import com.stepuro.customer.api.exceptions.*;
 import com.stepuro.customer.model.Card;
 import com.stepuro.customer.repository.CardRepositoryJpa;
-import com.stepuro.customer.repository.IndividualRepositoryJpa;
 import com.stepuro.customer.service.CardService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,10 +26,8 @@ public class CardServiceImpl implements CardService {
     @Autowired
     private CardRepositoryJpa cardRepositoryJpa;
 
-    @Autowired
-    private IndividualRepositoryJpa individualRepositoryJpa;
-
     @Override
+    @Cacheable(cacheNames = "cards",  keyGenerator = "newKeyGenerator")
     public List<CardDto> findAll(){
         List<CardDto> cardDtos = cardRepositoryJpa
                 .findAll()
@@ -41,6 +42,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    @Cacheable(cacheNames = "cardById", key = "#id")
     public CardDto findById(UUID id){
         return CardMapper
                 .INSTANCE
@@ -52,6 +54,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    @Cacheable(cacheNames = "cardByNumber", key = "#cardNumber")
     public CardDto findByCardNumber(String cardNumber) {
         return CardMapper
                 .INSTANCE
@@ -74,6 +77,14 @@ public class CardServiceImpl implements CardService {
 
     @Override
     @Transactional
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = "cards", allEntries = true),
+                    @CacheEvict(cacheNames = "cardById", allEntries = true),
+                    @CacheEvict(cacheNames = "cardByNumber", key = "#transferEntity.sourceNumber"),
+                    @CacheEvict(cacheNames = "cardByNumber", key = "#transferEntity.destinationNumber")
+            }
+    )
     public void transferAmount(TransferEntity transferEntity) {
         Card sourceCard = findCardByNumber(transferEntity.getSourceNumber());
 
@@ -91,6 +102,15 @@ public class CardServiceImpl implements CardService {
 
     @Override
     @Transactional
+    @Caching(
+            put = {
+                    @CachePut(cacheNames = "cardById", key = "#cardDto.id"),
+                    @CachePut(cacheNames = "cardByNumber", key = "#cardDto.cardNumber")
+            },
+            evict = {
+                    @CacheEvict(cacheNames = "cards", allEntries = true)
+            }
+    )
     public CardDto create(CardDto cardDto){
         return CardMapper
                 .INSTANCE
@@ -104,6 +124,15 @@ public class CardServiceImpl implements CardService {
 
     @Override
     @Transactional
+    @Caching(
+            put = {
+                    @CachePut(cacheNames = "cardById", key = "#cardDto.id"),
+                    @CachePut(cacheNames = "cardByNumber", key = "#cardDto.cardNumber")
+            },
+            evict = {
+                    @CacheEvict(cacheNames = "cards", allEntries = true)
+            }
+    )
     public CardDto edit(CardDto cardDto){
         Card card = cardRepositoryJpa
                 .findById(cardDto.getId())
@@ -128,6 +157,13 @@ public class CardServiceImpl implements CardService {
 
     @Override
     @Transactional
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = "cards", allEntries = true),
+                    @CacheEvict(cacheNames = "cardByNumber", allEntries = true),
+                    @CacheEvict(cacheNames = "cardById", key = "#id")
+            }
+    )
     public void delete(UUID id){
         cardRepositoryJpa.deleteById(id);
     }
