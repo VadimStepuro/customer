@@ -16,7 +16,7 @@ metadata:
   name: customer-app
   namespace: customer
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: customer-app
@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: customer-app
-          image: vadimstepuro/customer-app:1.0.4
+          image: vadimstepuro/customer-app:1.0.10
           ports:
             - containerPort: 8080
           env:

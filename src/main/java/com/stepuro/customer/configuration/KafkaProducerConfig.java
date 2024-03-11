@@ -31,6 +31,10 @@ public class KafkaProducerConfig {
         configProps.put(
                 ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
                 JsonSerializer.class);
+        configProps.put(
+                JsonSerializer.TYPE_MAPPINGS,
+                "payment:com.stepuro.customer.api.dto.PaymentOrderEntityDto");
+
         return new DefaultKafkaProducerFactory<>(configProps);
     }
 
