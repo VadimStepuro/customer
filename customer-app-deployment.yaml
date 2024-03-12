@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: customer-app
-          image: vadimstepuro/customer-app:1.0.15
+          image: vadimstepuro/customer-app:1.0.17
           ports:
             - containerPort: 8080
           env:
@@ -111,7 +111,6 @@ spec:
                 secretKeyRef:
                   name: customer-app-secret
                   key: redis-password
-
 ---
 apiVersion: v1
 kind: Service

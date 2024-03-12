@@ -59,7 +59,7 @@ spec:
             - name: BITNAMI_DEBUG
               value: "true"
             - name: PGPOOL_BACKEND_NODES
-              value: 0:replicable-customer-db-0.customer-db-headless-service:5432,1:replicable-customer-db-1.customer-db-headless-service:5432,2:replicable-customer-db-2.customer-db-headless-service:5432
+              value: 0:customer-replicable-db-0.customer-db-headless-service:5432,1:customer-replicable-db-1.customer-db-headless-service:5432,2:customer-replicable-db-2.customer-db-headless-service:5432
             - name: PGPOOL_SR_CHECK_USER
               valueFrom:
                 secretKeyRef:

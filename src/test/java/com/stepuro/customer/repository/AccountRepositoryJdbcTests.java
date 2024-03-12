@@ -3,9 +3,13 @@ package com.stepuro.customer.repository;
 import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.Account;
 import com.stepuro.customer.model.enums.AccountStatus;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -15,10 +19,25 @@ import java.util.UUID;
 import static com.stepuro.customer.repository.Samples.AccountSamples.account1;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@JdbcTest
 public class AccountRepositoryJdbcTests {
-    @Autowired
     private AccountRepositoryJdbc accountRepositoryJdbc;
+    private EmbeddedDatabase embeddedDatabase;
+
+    @BeforeEach
+    public void setup(){
+        embeddedDatabase = new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2)
+                .addScript("/sql/01.create-legal-entity.sql")
+                .build();
+
+        accountRepositoryJdbc = new AccountRepositoryJdbc();
+        accountRepositoryJdbc.setDataSource(embeddedDatabase);
+    }
+
+    @AfterEach
+    public void tearDown(){
+        embeddedDatabase.shutdown();
+    }
 
     @Test
     public void AccountRepositoryJdbc_Save_SavesModel(){

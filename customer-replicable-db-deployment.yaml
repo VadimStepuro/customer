@@ -17,9 +17,10 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: replicable-customer-db
+  name: customer-replicable-db
   namespace: customer
 spec:
+  podManagementPolicy: Parallel
   serviceName: customer-db-headless-service
   replicas: 3
   selector:
@@ -94,9 +95,9 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
             - name: REPMGR_PARTNER_NODES
-              value: replicable-customer-db-0.customer-db-headless-service.$(REPMGR_NAMESPACE).svc.cluster.local,replicable-customer-db-1.customer-db-headless-service.$(REPMGR_NAMESPACE).svc.cluster.local,replicable-customer-db-2.customer-db-headless-service.$(REPMGR_NAMESPACE).svc.cluster.local
+              value: customer-replicable-db-0.customer-db-headless-service.$(REPMGR_NAMESPACE).svc.cluster.local,customer-replicable-db-1.customer-db-headless-service.$(REPMGR_NAMESPACE).svc.cluster.local,customer-replicable-db-2.customer-db-headless-service.$(REPMGR_NAMESPACE).svc.cluster.local
             - name: REPMGR_PRIMARY_HOST
-              value: replicable-customer-db-0.customer-db-headless-service.$(REPMGR_NAMESPACE).svc.cluster.local
+              value: customer-replicable-db-0.customer-db-headless-service.$(REPMGR_NAMESPACE).svc.cluster.local
             - name: REPMGR_NODE_NAME
               value: $(MY_POD_NAME)
             - name: REPMGR_NODE_NETWORK_NAME

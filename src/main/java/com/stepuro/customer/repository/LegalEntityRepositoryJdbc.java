@@ -31,7 +31,7 @@ public class LegalEntityRepositoryJdbc {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         String INSERT_MESSAGE = "INSERT INTO legal_entity " +
-                "(legal_entity_id, name, inn, created_date, updated_date, address, city) " +
+                "(legal_entity_id, \"name\", inn, created_date, updated_date, address, city) " +
                 "VALUES (nextval('legal_entity_id_sequence'), ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(connection -> {
@@ -53,7 +53,7 @@ public class LegalEntityRepositoryJdbc {
 
     public int edit(LegalEntity legalEntity){
         return jdbcTemplate.update("UPDATE legal_entity " +
-                        "SET name = ?, " +
+                        "SET \"name\" = ?, " +
                         "inn = ?, " +
                         "created_date = ?, " +
                         "updated_date = ?, " +

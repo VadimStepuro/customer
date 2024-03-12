@@ -31,7 +31,7 @@ public class IndividualRepositoryJdbc {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         String INSERT_MESSAGE = "INSERT INTO individual " +
-                "(individual_id, name, last_name, created_date, updated_date, address, city, day_of_birth) " +
+                "(individual_id, \"name\", last_name, created_date, updated_date, address, city, day_of_birth) " +
                 "VALUES (nextval('individual_id_sequence'), ?, ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(connection -> {
@@ -54,7 +54,7 @@ public class IndividualRepositoryJdbc {
 
     public int edit(Individual individual){
         return jdbcTemplate.update("UPDATE individual " +
-                        "SET name = ?, " +
+                        "SET \"name\" = ?, " +
                         "last_name = ?, " +
                         "created_date = ?, " +
                         "updated_date = ?, " +
