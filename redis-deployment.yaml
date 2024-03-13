@@ -44,7 +44,7 @@ spec:
     spec:
       containers:
         - name: redis-server
-          image: redis
+          image: redis:7.2.4
           args: ["--appendonly", "yes", "--requirepass", "$(REDIS_PASS)"]
           ports:
             - name: redis-server

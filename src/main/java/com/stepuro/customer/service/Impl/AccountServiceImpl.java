@@ -110,7 +110,6 @@ public class AccountServiceImpl implements AccountService {
     @Transactional
     @Caching(
             put = {
-                    @CachePut(cacheNames = "accountById", key = "#accountDto.id"),
                     @CachePut(cacheNames = "accountByNumber", key = "#accountDto.accountNumber")
             },
             evict = {

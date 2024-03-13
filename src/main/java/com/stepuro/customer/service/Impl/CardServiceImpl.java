@@ -104,7 +104,6 @@ public class CardServiceImpl implements CardService {
     @Transactional
     @Caching(
             put = {
-                    @CachePut(cacheNames = "cardById", key = "#cardDto.id"),
                     @CachePut(cacheNames = "cardByNumber", key = "#cardDto.cardNumber")
             },
             evict = {

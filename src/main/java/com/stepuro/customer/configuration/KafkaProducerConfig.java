@@ -22,6 +22,7 @@ public class KafkaProducerConfig {
     @Bean
     public ProducerFactory<String, PaymentOrderEntityDto> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
+
         configProps.put(
                 ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 bootstrapAddress);

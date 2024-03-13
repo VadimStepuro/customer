@@ -35,7 +35,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: customer-pgpool-deployment
+  name: customer-pgpool
   namespace: customer
 spec:
   replicas: 1

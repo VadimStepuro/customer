@@ -1,8 +1,12 @@
-package com.stepuro.customer.api.exceptions;
+package com.stepuro.customer.api.exceptions.handler;
 
 import com.stepuro.customer.api.dto.ApiError;
 import com.stepuro.customer.api.dto.ApiSubError;
 import com.stepuro.customer.api.dto.ApiValidationError;
+import com.stepuro.customer.api.exceptions.EqualNumberException;
+import com.stepuro.customer.api.exceptions.NotEnoughMoneyException;
+import com.stepuro.customer.api.exceptions.StatusException;
+import com.stepuro.customer.api.exceptions.UserIdDoesntMatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
