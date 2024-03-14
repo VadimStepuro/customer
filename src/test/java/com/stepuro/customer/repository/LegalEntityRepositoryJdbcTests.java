@@ -1,20 +1,42 @@
 package com.stepuro.customer.repository;
 
+import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.LegalEntity;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-import static com.stepuro.customer.repository.Samples.LegalEntitySamples.*;
+import static com.stepuro.customer.repository.Samples.LegalEntitySamples.legalEntity1;
+import static com.stepuro.customer.repository.Samples.LegalEntitySamples.legalEntity2;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@JdbcTest
 public class LegalEntityRepositoryJdbcTests {
-    @Autowired
     private LegalEntityRepositoryJdbc legalEntityRepositoryJdbc;
+    private EmbeddedDatabase embeddedDatabase;
+
+    @BeforeEach
+    public void setup(){
+
+        embeddedDatabase = new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2)
+                .addScript("/sql/01.create-legal-entity.sql")
+                .build();
+
+        legalEntityRepositoryJdbc = new LegalEntityRepositoryJdbc();
+        legalEntityRepositoryJdbc.setDataSource(embeddedDatabase);
+    }
+
+    @AfterEach
+    public void tearDown(){
+        embeddedDatabase.shutdown();
+    }
 
     @Test
     public void LegalEntityRepositoryJdbc_Save_SavesModel(){
@@ -81,8 +103,6 @@ public class LegalEntityRepositoryJdbcTests {
 
         legalEntityRepositoryJdbc.deleteById(id);
 
-        LegalEntity foundLegalEntity = legalEntityRepositoryJdbc.findById(id);
-
-        assertNull(foundLegalEntity);
+        assertThrows(ResourceNotFoundException.class, () -> legalEntityRepositoryJdbc.findById(id));
     }
 }

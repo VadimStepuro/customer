@@ -2,6 +2,7 @@ package com.stepuro.customer.controller;
 
 import com.stepuro.customer.api.annotations.Loggable;
 import com.stepuro.customer.api.dto.CardDto;
+import com.stepuro.customer.api.dto.TransferEntity;
 import com.stepuro.customer.service.CardService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,10 +32,10 @@ public class CardController {
                     content = { @Content(mediaType = "application/json",
                             array = @ArraySchema(
                                     schema = @Schema(implementation = CardDto.class)))}),
-            @ApiResponse(responseCode = "404", description = "Cards not found",
-                    content = @Content) })
+            @ApiResponse(responseCode = "204", description = "Cards not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/cards")
+    @GetMapping(value = "/cards", produces = "application/json")
     public ResponseEntity<List<CardDto>> findAll(){
         List<CardDto> allCards = cardService.findAll();
 
@@ -46,13 +48,43 @@ public class CardController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CardDto.class))}),
             @ApiResponse(responseCode = "404", description = "Card not found",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/cards/{id}")
+    @GetMapping(value = "/cards/{id}", produces = "application/json")
     public ResponseEntity<CardDto> findById(@PathVariable("id") UUID id){
         CardDto foundCard = cardService.findById(id);
 
         return new ResponseEntity<>(foundCard, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Get card by card number")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found card by card number",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CardDto.class))}),
+            @ApiResponse(responseCode = "404", description = "Card not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
+    @Loggable
+    @GetMapping(value = "/cards/get_by_card_number/{cardNumber}", produces = "application/json")
+    public ResponseEntity<CardDto> findByAccountNumber(@PathVariable("cardNumber") String cardNumber){
+        CardDto foundCard = cardService.findByCardNumber(cardNumber);
+
+        return new ResponseEntity<>(foundCard, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Transfer amount from one card to another")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Transfer is done",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema)}),
+            @ApiResponse(responseCode = "404", description = "Card not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "400", description = "Transfer isn't valid",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class, description = "Reason why transfer isn't valid")))})
+    @Loggable
+    @PutMapping(value = "/cards/transfer_amount", produces = "application/json", consumes = "application/json")
+    public void transferAmount(@RequestBody TransferEntity transferEntity){
+        cardService.transferAmount(transferEntity);
     }
 
     @Operation(summary = "Create card")
@@ -61,9 +93,9 @@ public class CardController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CardDto.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid card",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = HashMap.class))) })
     @Loggable
-    @PostMapping("/cards")
+    @PostMapping(value = "/cards", consumes = "application/json", produces = "application/json")
     public ResponseEntity<CardDto> create(@RequestBody @Valid CardDto cardDto){
         CardDto createdCard = cardService.create(cardDto);
 
@@ -76,9 +108,11 @@ public class CardController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CardDto.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid card",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = HashMap.class))),
+            @ApiResponse(responseCode = "404", description = "Card not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @PutMapping("/cards")
+    @PutMapping(value = "/cards", consumes = "application/json", produces = "application/json")
     public ResponseEntity<CardDto> edit(@RequestBody @Valid CardDto cardDto){
         CardDto editedCard = cardService.edit(cardDto);
 
@@ -88,11 +122,11 @@ public class CardController {
     @Operation(summary = "Delete card by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Deletes card by id",
-                    content = { @Content }),
+                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = String.class)) }),
             @ApiResponse(responseCode = "404", description = "Card not found",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @DeleteMapping("/cards/{id}")
+    @DeleteMapping(value = "/cards/{id}", produces = "application/json")
     public void delete(@PathVariable("id") UUID id){
         cardService.delete(id);
     }

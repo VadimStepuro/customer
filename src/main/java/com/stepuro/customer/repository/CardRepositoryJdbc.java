@@ -1,5 +1,6 @@
 package com.stepuro.customer.repository;
 
+import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.Card;
 import com.stepuro.customer.model.Individual;
 import com.stepuro.customer.model.enums.CardStatus;
@@ -29,8 +30,8 @@ public class CardRepositoryJdbc {
     public UUID save(Card card){
         card.setId(UUID.randomUUID());
         jdbcTemplate.update("INSERT INTO card " +
-                        "(id, card_number, account_number, created_date, updated_date, status, expiry_date, individual_id) " +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                        "(id, card_number, account_number, created_date, updated_date, status, expiry_date, balance, individual_id) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 card.getId(),
                 card.getCardNumber(),
                 card.getAccountNumber(),
@@ -38,6 +39,7 @@ public class CardRepositoryJdbc {
                 card.getUpdatedDate().toString(),
                 card.getStatus().toString(),
                 card.getExpiryDate(),
+                card.getBalance(),
                 card.getIndividual() == null ? null : card.getIndividual());
 
         return card.getId();
@@ -52,7 +54,8 @@ public class CardRepositoryJdbc {
                         "updated_date = ?, " +
                         "status = ?, " +
                         "expiry_date = ?, " +
-                        "individual_id = ? " +
+                        "individual_id = ?, " +
+                        "balance = ? " +
                         "WHERE card.id = ? ",
                 card.getCardNumber(),
                 card.getAccountNumber(),
@@ -61,6 +64,7 @@ public class CardRepositoryJdbc {
                 card.getStatus().toString(),
                 card.getExpiryDate(),
                 card.getIndividual() == null ? null : card.getIndividual().getIndividualId(),
+                card.getBalance(),
                 card.getId());
     }
 
@@ -83,7 +87,7 @@ public class CardRepositoryJdbc {
                     id);
         }
         catch (EmptyResultDataAccessException exception){
-            return null;
+            throw new ResourceNotFoundException("Card with id " + id + " not found");
         }
     }
 
@@ -103,17 +107,18 @@ public class CardRepositoryJdbc {
                     .dayOfBirth(rs.getDate("day_of_birth"))
                     .address(rs.getString("address"))
                     .city(rs.getString("city"))
-                    .createdDate(rs.getTimestamp(12))
-                    .updatedDate(rs.getTimestamp(13))
+                    .createdDate(rs.getTimestamp("individual.created_date"))
+                    .updatedDate(rs.getTimestamp("individual.updated_date"))
                     .build();
 
             Card card = new Card();
             card.setId(UUID.fromString(rs.getString("id")));
             card.setCardNumber(rs.getString("card_number"));
             card.setAccountNumber(rs.getString("account_number"));
-            card.setCreatedDate(rs.getTimestamp(3));
-            card.setUpdatedDate(rs.getTimestamp(4));
+            card.setCreatedDate(rs.getTimestamp("card.created_date"));
+            card.setUpdatedDate(rs.getTimestamp("card.updated_date"));
             card.setStatus(CardStatus.valueOf(rs.getString("status")));
+            card.setBalance(rs.getBigDecimal("balance"));
             card.setExpiryDate(rs.getDate("expiry_date"));
 
             if(rs.getInt("individual_id") == 0)

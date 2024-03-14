@@ -37,9 +37,7 @@ public class CardServiceImplTests {
 
     @Test
     public void CardService_FindAll_ReturnsAllModels(){
-        List<Card> cards = List.of(card1, card2, card3, card4);
-
-        when(cardRepositoryJpa.findAll()).thenReturn(cards);
+        when(cardRepositoryJpa.findAll()).thenReturn(cardList);
 
         //Act
         List<CardDto> allCards = cardServiceImpl.findAll();
@@ -54,6 +52,21 @@ public class CardServiceImplTests {
         when(cardRepositoryJpa.findById(any(UUID.class))).thenReturn(Optional.of(card1));
 
         CardDto foundCard = cardServiceImpl.findById(UUID.randomUUID());
+
+        assertNotNull(foundCard);
+        assertEquals(cardDto.getAccountNumber(), foundCard.getAccountNumber());
+        assertEquals(cardDto.getCreatedDate(), foundCard.getCreatedDate());
+        assertEquals(cardDto.getUpdatedDate(), foundCard.getUpdatedDate());
+        assertEquals(cardDto.getCardNumber(), foundCard.getCardNumber());
+        assertEquals(cardDto.getExpiryDate(), foundCard.getExpiryDate());
+        assertEquals(cardDto.getStatus(), foundCard.getStatus());
+    }
+
+    @Test
+    public void AccountService_FindByNumber_ReturnsModel(){
+        when(cardRepositoryJpa.findByCardNumber(any(String.class))).thenReturn(Optional.of(card1));
+
+        CardDto foundCard = cardServiceImpl.findByCardNumber("");
 
         assertNotNull(foundCard);
         assertEquals(cardDto.getAccountNumber(), foundCard.getAccountNumber());

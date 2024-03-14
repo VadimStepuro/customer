@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -31,16 +32,13 @@ public class CardRepositoryJpaTests {
         assertEquals(card1.getCardNumber(), savedCard.getCardNumber());
         assertEquals(card1.getExpiryDate(), savedCard.getExpiryDate());
         assertEquals(card1.getStatus(), savedCard.getStatus());
+        assertEquals(card1.getBalance(), savedCard.getBalance());
     }
 
     @Test
     public void CardRepository_FindAll_ReturnsAllModels(){
-        cardRepositoryJpa.save(card1);
-        cardRepositoryJpa.save(card2);
-        cardRepositoryJpa.save(card3);
-        cardRepositoryJpa.save(card4);
+        List<Card> cards = cardRepositoryJpa.saveAll(cardList);
 
-        List<Card> cards = cardRepositoryJpa.findAll();
 
         assertNotNull(cards);
         assertEquals(4, cards.size());
@@ -62,6 +60,34 @@ public class CardRepositoryJpaTests {
         assertEquals(savedCard.getStatus(), card.getStatus());
         assertEquals(savedCard.getCardNumber(), card.getCardNumber());
         assertEquals(savedCard.getExpiryDate(), card.getExpiryDate());
+        assertEquals(savedCard.getBalance(), card.getBalance());
+    }
+
+    @Test
+    public void CardRepository_FindByNumber_ReturnsModel(){
+        Card savedCard = cardRepositoryJpa.save(card1);
+        cardRepositoryJpa.save(card2);
+
+        Card card = cardRepositoryJpa.findByCardNumber(savedCard.getCardNumber()).get();
+
+        assertNotNull(card);
+        assertEquals(savedCard.getId(), card.getId());
+        assertEquals(savedCard.getAccountNumber(), card.getAccountNumber());
+        assertEquals(savedCard.getCreatedDate(), card.getCreatedDate());
+        assertEquals(savedCard.getUpdatedDate(), card.getUpdatedDate());
+        assertEquals(savedCard.getStatus(), card.getStatus());
+        assertEquals(savedCard.getCardNumber(), card.getCardNumber());
+        assertEquals(savedCard.getExpiryDate(), card.getExpiryDate());
+        assertEquals(savedCard.getBalance(), card.getBalance());
+    }
+
+    @Test
+    public void CardRepository_ExistsByNumber_ReturnsTrue(){
+        Card savedCard = cardRepositoryJpa.save(card1);
+
+        Boolean result = cardRepositoryJpa.existsByCardNumber(savedCard.getCardNumber());
+
+        assertTrue(result);
     }
 
     @Test
@@ -74,6 +100,7 @@ public class CardRepositoryJpaTests {
         savedCard.setUpdatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(3)));
         savedCard.setCardNumber("5425233430109333");
         savedCard.setExpiryDate(Date.valueOf(LocalDate.now().plusYears(4)));
+        savedCard.setBalance(new BigDecimal("233.50"));
 
         Card updatedCard = cardRepositoryJpa.save(savedCard);
 
@@ -85,6 +112,7 @@ public class CardRepositoryJpaTests {
         assertEquals(savedCard.getUpdatedDate(), updatedCard.getUpdatedDate());
         assertEquals(savedCard.getCardNumber(), updatedCard.getCardNumber());
         assertEquals(savedCard.getExpiryDate(), updatedCard.getExpiryDate());
+        assertEquals(savedCard.getBalance(), updatedCard.getBalance());
     }
 
     @Test

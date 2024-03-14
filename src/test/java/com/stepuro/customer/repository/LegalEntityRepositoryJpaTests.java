@@ -1,6 +1,7 @@
 package com.stepuro.customer.repository;
 
 import com.stepuro.customer.model.LegalEntity;
+import com.stepuro.customer.repository.Samples.LegalEntitySamples;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -32,12 +33,7 @@ public class LegalEntityRepositoryJpaTests {
 
     @Test
     public void LegalEntityRepository_FindAll_ReturnsAllModels(){
-        legalEntityRepositoryJpa.save(legalEntity1);
-        legalEntityRepositoryJpa.save(legalEntity2);
-        legalEntityRepositoryJpa.save(legalEntity3);
-        legalEntityRepositoryJpa.save(legalEntity4);
-
-        List<LegalEntity> legalEntities = legalEntityRepositoryJpa.findAll();
+        List<LegalEntity> legalEntities = legalEntityRepositoryJpa.saveAll(LegalEntitySamples.legalEntityList);
 
         assertNotNull(legalEntities);
         assertEquals(4, legalEntities.size());

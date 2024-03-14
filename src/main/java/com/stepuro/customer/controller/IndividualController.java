@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -30,9 +31,9 @@ public class IndividualController {
                             array = @ArraySchema(
                                     schema = @Schema(implementation = IndividualDto.class)))}),
             @ApiResponse(responseCode = "404", description = "Individuals not found",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/individuals")
+    @GetMapping(value = "/individuals", produces = "application/json")
     public ResponseEntity<List<IndividualDto>> findAll(){
         List<IndividualDto> allIndividuals = individualService.findAll();
 
@@ -45,9 +46,9 @@ public class IndividualController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = IndividualDto.class))}),
             @ApiResponse(responseCode = "404", description = "Individual not found",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))) })
     @Loggable
-    @GetMapping("/individuals/{id}")
+    @GetMapping(value = "/individuals/{id}", produces = "application/json")
     public ResponseEntity<IndividualDto> findById(@PathVariable("id") Integer id){
         IndividualDto foundIndividual = individualService.findById(id);
 
@@ -60,9 +61,9 @@ public class IndividualController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = IndividualDto.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid individual",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = HashMap.class))) })
     @Loggable
-    @PostMapping("/individuals")
+    @PostMapping(value = "/individuals", produces = "application/json", consumes = "application/json")
     public ResponseEntity<IndividualDto> create(@RequestBody @Valid IndividualDto individualDto){
         IndividualDto createdIndividual = individualService.create(individualDto);
 
@@ -75,9 +76,11 @@ public class IndividualController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = IndividualDto.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid individual",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = HashMap.class))),
+            @ApiResponse(responseCode = "404", description = "Individual not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class)))})
     @Loggable
-    @PutMapping("/individuals")
+    @PutMapping(value = "/individuals", produces = "application/json", consumes = "application/json")
     public ResponseEntity<IndividualDto> edit(@RequestBody @Valid IndividualDto individualDto){
         IndividualDto editedIndividual = individualService.edit(individualDto);
 
@@ -87,11 +90,11 @@ public class IndividualController {
     @Operation(summary = "Delete individual by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Deletes individual by id",
-                    content = { @Content}),
+                    content = { @Content(mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", description = "Individual not found",
-                    content = @Content) })
+                    content = @Content(mediaType = "application/json")) })
     @Loggable
-    @DeleteMapping("/individuals/{id}")
+    @DeleteMapping(value = "/individuals/{id}", produces = "application/json")
     public void delete(@PathVariable("id") Integer id){
         individualService.delete(id);
     }

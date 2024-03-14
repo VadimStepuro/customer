@@ -4,6 +4,7 @@ import com.stepuro.customer.model.enums.AccountStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.UUID;
 
@@ -33,6 +34,9 @@ public class Account {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private AccountStatus status;
+
+    @Column(name = "balance")
+    private BigDecimal balance;
 
     @ManyToOne
     @JoinColumn(name = "legal_entity_id", referencedColumnName = "legal_entity_id")

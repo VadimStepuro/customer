@@ -4,6 +4,7 @@ import com.stepuro.customer.model.LegalEntity;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 
 public class LegalEntitySamples {
     public static LegalEntity legalEntity1 = LegalEntity.builder()
@@ -38,4 +39,6 @@ public class LegalEntitySamples {
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))
             .build();
+
+    public static List<LegalEntity> legalEntityList = List.of(legalEntity1, legalEntity2, legalEntity3, legalEntity4);
 }

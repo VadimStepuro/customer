@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,9 +36,7 @@ public class AccountServiceImplTests {
 
     @Test
     public void AccountService_FindAll_ReturnsAllModels(){
-        List<Account> accounts = List.of(account1, account2, account3, account4);
-
-        when(accountRepositoryJpa.findAll()).thenReturn(accounts);
+        when(accountRepositoryJpa.findAll()).thenReturn(accountList);
 
         List<AccountDto> allAccounts = accountServiceImpl.findAll();
 
@@ -51,7 +50,20 @@ public class AccountServiceImplTests {
 
         AccountDto foundAccount = accountServiceImpl.findById(UUID.randomUUID());
 
-        assertNotNull(account1);
+        assertNotNull(foundAccount);
+        assertEquals(accountDto.getAccountNumber(), foundAccount.getAccountNumber());
+        assertEquals(accountDto.getCreatedDate(), foundAccount.getCreatedDate());
+        assertEquals(accountDto.getUpdatedDate(), foundAccount.getUpdatedDate());
+        assertEquals(accountDto.getStatus(), foundAccount.getStatus());
+    }
+
+    @Test
+    public void AccountService_FindByNumber_ReturnsModel(){
+        when(accountRepositoryJpa.findByAccountNumber(any(String.class))).thenReturn(Optional.of(account1));
+
+        AccountDto foundAccount = accountServiceImpl.findByAccountNumber("");
+
+        assertNotNull(foundAccount);
         assertEquals(accountDto.getAccountNumber(), foundAccount.getAccountNumber());
         assertEquals(accountDto.getCreatedDate(), foundAccount.getCreatedDate());
         assertEquals(accountDto.getUpdatedDate(), foundAccount.getUpdatedDate());
@@ -82,7 +94,7 @@ public class AccountServiceImplTests {
         savedAccount.setAccountNumber("IE12BOFI90000112345555");
         savedAccount.setCreatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(5)));
         savedAccount.setUpdatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(3)));
-
+        savedAccount.setBalance(new BigDecimal("550.00"));
 
         AccountDto editedAccount = accountServiceImpl.edit(savedAccount);
 

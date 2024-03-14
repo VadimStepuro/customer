@@ -1,11 +1,17 @@
 package com.stepuro.customer.repository;
 
+import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.Card;
 import com.stepuro.customer.model.enums.CardStatus;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -16,10 +22,25 @@ import static com.stepuro.customer.repository.Samples.CardSamples.card1;
 import static com.stepuro.customer.repository.Samples.CardSamples.card2;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@JdbcTest
 public class CardRepositoryJdbcTests {
-    @Autowired
     private CardRepositoryJdbc cardRepositoryJdbc;
+    private EmbeddedDatabase embeddedDatabase;
+
+    @BeforeEach
+    public void setup(){
+        embeddedDatabase = new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2)
+                .addScript("/sql/02.create-individual-entity.sql")
+                .build();
+
+        cardRepositoryJdbc = new CardRepositoryJdbc();
+        cardRepositoryJdbc.setDataSource(embeddedDatabase);
+    }
+
+    @AfterEach
+    public void tearDown(){
+        embeddedDatabase.shutdown();
+    }
 
     @Test
     public void CardRepositoryJdbc_Save_SavesModel(){
@@ -34,6 +55,7 @@ public class CardRepositoryJdbcTests {
         assertEquals(card1.getCardNumber(), savedCard.getCardNumber());
         assertEquals(card1.getExpiryDate(), savedCard.getExpiryDate());
         assertEquals(card1.getStatus(), savedCard.getStatus());
+        assertEquals(card1.getBalance(), savedCard.getBalance());
     }
 
     @Test
@@ -51,6 +73,7 @@ public class CardRepositoryJdbcTests {
         assertEquals(card1.getStatus(), card.getStatus());
         assertEquals(card1.getCardNumber(), card.getCardNumber());
         assertEquals(card1.getExpiryDate(), card.getExpiryDate());
+        assertEquals(card1.getBalance(), card.getBalance());
     }
 
     @Test
@@ -65,6 +88,8 @@ public class CardRepositoryJdbcTests {
         savedCard.setUpdatedDate(Timestamp.valueOf(LocalDateTime.now().minusMonths(3)));
         savedCard.setCardNumber("5425233430109333");
         savedCard.setExpiryDate(Date.valueOf(LocalDate.now().plusYears(4)));
+        savedCard.setBalance(new BigDecimal("600.00"));
+
 
         cardRepositoryJdbc.edit(savedCard);
 
@@ -80,6 +105,7 @@ public class CardRepositoryJdbcTests {
         assertEquals(savedCard.getUpdatedDate().getTime(), updatedCard.getUpdatedDate().getTime());
         assertEquals(savedCard.getCardNumber(), updatedCard.getCardNumber());
         assertEquals(savedCard.getExpiryDate(), updatedCard.getExpiryDate());
+        assertEquals(savedCard.getBalance(), updatedCard.getBalance());
     }
 
     @Test
@@ -88,8 +114,6 @@ public class CardRepositoryJdbcTests {
 
         cardRepositoryJdbc.deleteById(savedId);
 
-        Card foundCard = cardRepositoryJdbc.findById(savedId);
-
-        assertNull(foundCard);
+        assertThrows(ResourceNotFoundException.class, () -> cardRepositoryJdbc.findById(savedId));
     }
 }

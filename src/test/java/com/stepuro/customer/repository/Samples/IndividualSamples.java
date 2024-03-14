@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.List;
 
 public class IndividualSamples {
     public static Individual individual1 = Individual.builder()
@@ -44,4 +45,6 @@ public class IndividualSamples {
             .createdDate(Timestamp.from(Instant.now()))
             .updatedDate(Timestamp.from(Instant.now()))
             .build();
+
+    public static List<Individual> individualList = List.of(individual1, individual2, individual3, individual4);
 }

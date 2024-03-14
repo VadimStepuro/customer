@@ -33,9 +33,7 @@ public class IndividualServiceImplTests {
 
     @Test
     public void IndividualService_FindAll_ReturnsAllModels(){
-        List<Individual> individuals = List.of(individual1, individual2, individual3, individual4);
-
-        when(individualRepositoryJpa.findAll()).thenReturn(individuals);
+        when(individualRepositoryJpa.findAll()).thenReturn(individualList);
 
         List<IndividualDto> individualDtos = individualServiceImpl.findAll();
 

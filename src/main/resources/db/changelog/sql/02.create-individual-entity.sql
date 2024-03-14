@@ -27,12 +27,17 @@ CREATE TABLE public.card (
 	updated_date timestamp NULL,
 	status varchar NOT NULL,
 	expiry_date date NOT NULL,
+    balance numeric NOT NULL,
 	individual_id INTEGER NULL,
+
 	CONSTRAINT card_pk PRIMARY KEY (id),
-	CONSTRAINT card_number_check CHECK (card_number ~* '^(?:4[0-9]{12}(?:[0-9]{3})? | (?:5[1-5][0-9]{2} | 222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12} | 3[47][0-9]{13} | 3(?:0[0-5]|[68][0-9])[0-9]{11} | 6(?:011|5[0-9]{2})[0-9]{12} |  (?:2131|1800|35\d{3})\d{11})$'),
+	CONSTRAINT card_number_check CHECK (card_number ~* '^(?:4[0-9]{12}(?:[0-9]{3})?|(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\d{3})\d{11})$'),
 	CONSTRAINT created_date_check CHECK (created_date <= CURRENT_TIMESTAMP),
 	CONSTRAINT updated_date_check CHECK (updated_date <= CURRENT_TIMESTAMP),
 	CONSTRAINT status_check CHECK (status = 'ACTIVE' OR status = 'UNREACHABLE'),
 	CONSTRAINT account_number_check CHECK (account_number ~* '^[A-Z]{2}\d{2}[A-Za-z\d]{1,30}$'),
+	CONSTRAINT balance_check CHECK (balance > 0),
+	CONSTRAINT card_account_number_unique UNIQUE (account_number),
+    CONSTRAINT card_number_unique UNIQUE (card_number),
 	CONSTRAINT card_fk FOREIGN KEY (individual_id) REFERENCES public.individual(individual_id)
 );

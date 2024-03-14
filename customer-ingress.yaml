@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: customer-ingress
+  namespace: customer
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: customer.com
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: customer-app-service
+                port:
+                  number: 8082
+          - path: "/adminer-4.7.6"
+            pathType: Prefix
+            backend:
+              service:
+                name: customer-adminer-service
+                port:
+                  number: 8084
