@@ -15,6 +15,6 @@ public class TransferAmountServiceImpl implements TransferAmountService {
     private String transferAmountTopicName;
     @Override
     public void transferAmount(PaymentOrderEntityDto paymentOrderEntityDto) {
-        kafkaTemplate.send(transferAmountTopicName, paymentOrderEntityDto);
+        kafkaTemplate.send(transferAmountTopicName, paymentOrderEntityDto.getUserId().toString(), paymentOrderEntityDto);
     }
 }

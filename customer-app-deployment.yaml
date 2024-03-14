@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: customer-app
-          image: vadimstepuro/customer-app:1.1.7
+          image: vadimstepuro/customer-app:1.1.8
           ports:
             - containerPort: 8080
           env:
