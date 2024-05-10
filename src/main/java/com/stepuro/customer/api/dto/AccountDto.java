@@ -17,7 +17,7 @@ import java.util.UUID;
 @ToString
 @Setter
 @Getter
-public class AccountDto {
+public class AccountDto implements TransferableEntity{
     private UUID id;
 
     @NotNull(message = "Account number can't be null")
@@ -39,4 +39,19 @@ public class AccountDto {
     private BigDecimal balance;
 
     private LegalEntityDto legalEntityDto;
+
+    @Override
+    public String getEntityStatus(){
+        return status.toString();
+    }
+
+    @Override
+    public Integer getUserId() {
+        return legalEntityDto.getLegalEntityId();
+    }
+
+    @Override
+    public BigDecimal getAmount() {
+        return balance;
+    }
 }

@@ -35,6 +35,11 @@ spec:
         fsGroup: 1001
       containers:
         - name: postgresql
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "500m"
+              ephemeral-storage: "4Gi"
           lifecycle:
             preStop:
               exec:

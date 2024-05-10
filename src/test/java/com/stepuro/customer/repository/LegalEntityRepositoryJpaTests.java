@@ -14,12 +14,12 @@ import static com.stepuro.customer.repository.Samples.LegalEntitySamples.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-public class LegalEntityRepositoryJpaTests {
+class LegalEntityRepositoryJpaTests {
     @Autowired
     private LegalEntityRepositoryJpa legalEntityRepositoryJpa;
 
     @Test
-    public void LegalEntityRepository_Save_ReturnsSavedModel(){
+    void LegalEntityRepository_Save_ReturnsSavedModel(){
         LegalEntity savedLegalEntity = legalEntityRepositoryJpa.save(legalEntity1);
 
         assertNotNull(savedLegalEntity);
@@ -32,7 +32,7 @@ public class LegalEntityRepositoryJpaTests {
     }
 
     @Test
-    public void LegalEntityRepository_FindAll_ReturnsAllModels(){
+    void LegalEntityRepository_FindAll_ReturnsAllModels(){
         List<LegalEntity> legalEntities = legalEntityRepositoryJpa.saveAll(LegalEntitySamples.legalEntityList);
 
         assertNotNull(legalEntities);
@@ -40,7 +40,7 @@ public class LegalEntityRepositoryJpaTests {
     }
 
     @Test
-    public void LegalEntityRepository_FindById_ReturnsModel(){
+    void LegalEntityRepository_FindById_ReturnsModel(){
         LegalEntity savedLegalEntity = legalEntityRepositoryJpa.save(legalEntity1);
         legalEntityRepositoryJpa.save(legalEntity2);
 
@@ -58,7 +58,7 @@ public class LegalEntityRepositoryJpaTests {
     }
 
     @Test
-    public void LegalEntityRepository_Update_ChangesModel(){
+    void LegalEntityRepository_Update_ChangesModel(){
         LegalEntity savedLegalEntity = legalEntityRepositoryJpa.save(legalEntity1);
 
         savedLegalEntity.setName("Ivan");
@@ -81,7 +81,7 @@ public class LegalEntityRepositoryJpaTests {
     }
 
     @Test
-    public void IndividualRepository_Remove_RemovesModel(){
+    void IndividualRepository_Remove_RemovesModel(){
         LegalEntity savedLegalEntity = legalEntityRepositoryJpa.save(legalEntity1);
 
         legalEntityRepositoryJpa.deleteById(savedLegalEntity.getLegalEntityId());

@@ -17,12 +17,12 @@ import static com.stepuro.customer.repository.Samples.CardSamples.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-public class CardRepositoryJpaTests {
+class CardRepositoryJpaTests {
     @Autowired
     private CardRepositoryJpa cardRepositoryJpa;
 
     @Test
-    public void CardRepository_Save_ReturnsSavedModel(){
+    void CardRepository_Save_ReturnsSavedModel(){
         Card savedCard = cardRepositoryJpa.save(card1);
 
         assertNotNull(savedCard);
@@ -36,7 +36,7 @@ public class CardRepositoryJpaTests {
     }
 
     @Test
-    public void CardRepository_FindAll_ReturnsAllModels(){
+    void CardRepository_FindAll_ReturnsAllModels(){
         List<Card> cards = cardRepositoryJpa.saveAll(cardList);
 
 
@@ -45,7 +45,7 @@ public class CardRepositoryJpaTests {
     }
 
     @Test
-    public void CardRepository_FindById_ReturnsModel(){
+    void CardRepository_FindById_ReturnsModel(){
         Card savedCard = cardRepositoryJpa.save(card1);
         cardRepositoryJpa.save(card2);
 
@@ -64,7 +64,7 @@ public class CardRepositoryJpaTests {
     }
 
     @Test
-    public void CardRepository_FindByNumber_ReturnsModel(){
+    void CardRepository_FindByNumber_ReturnsModel(){
         Card savedCard = cardRepositoryJpa.save(card1);
         cardRepositoryJpa.save(card2);
 
@@ -82,7 +82,7 @@ public class CardRepositoryJpaTests {
     }
 
     @Test
-    public void CardRepository_ExistsByNumber_ReturnsTrue(){
+    void CardRepository_ExistsByNumber_ReturnsTrue(){
         Card savedCard = cardRepositoryJpa.save(card1);
 
         Boolean result = cardRepositoryJpa.existsByCardNumber(savedCard.getCardNumber());
@@ -91,7 +91,7 @@ public class CardRepositoryJpaTests {
     }
 
     @Test
-    public void CardRepository_Update_ChangesModel(){
+    void CardRepository_Update_ChangesModel(){
         Card savedCard = cardRepositoryJpa.save(card1);
 
         savedCard.setStatus(CardStatus.UNREACHABLE);
@@ -116,7 +116,7 @@ public class CardRepositoryJpaTests {
     }
 
     @Test
-    public void CardRepository_Remove_RemovesModel(){
+    void CardRepository_Remove_RemovesModel(){
         Card savedCard = cardRepositoryJpa.save(card1);
 
         cardRepositoryJpa.deleteById(savedCard.getId());

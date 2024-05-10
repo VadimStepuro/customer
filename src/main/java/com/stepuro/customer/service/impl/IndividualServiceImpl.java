@@ -1,4 +1,4 @@
-package com.stepuro.customer.service.Impl;
+package com.stepuro.customer.service.impl;
 
 import com.stepuro.customer.api.dto.IndividualDto;
 import com.stepuro.customer.api.dto.mapper.IndividualMapper;
@@ -8,15 +8,17 @@ import com.stepuro.customer.model.Individual;
 import com.stepuro.customer.repository.IndividualRepositoryJpa;
 import com.stepuro.customer.service.IndividualService;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class IndividualServiceImpl implements IndividualService {
-    @Autowired
-    private IndividualRepositoryJpa individualRepositoryJpa;
+    private final IndividualRepositoryJpa individualRepositoryJpa;
+
+    public IndividualServiceImpl(IndividualRepositoryJpa individualRepositoryJpa) {
+        this.individualRepositoryJpa = individualRepositoryJpa;
+    }
 
     @Override
     public List<IndividualDto> findAll(){

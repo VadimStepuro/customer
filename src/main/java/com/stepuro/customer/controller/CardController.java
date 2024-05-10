@@ -4,6 +4,8 @@ import com.stepuro.customer.api.annotations.Loggable;
 import com.stepuro.customer.api.dto.CardDto;
 import com.stepuro.customer.api.dto.TransferEntity;
 import com.stepuro.customer.service.CardService;
+import com.stepuro.customer.service.TransferAmountService;
+import com.stepuro.customer.service.impl.TransferAmountServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -11,7 +13,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,13 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1")
 public class CardController {
-    @Autowired
-    private CardService cardService;
+    private final CardService cardService;
+    private final TransferAmountServiceImpl<CardDto> transferAmountService;
+
+    public CardController(CardService cardService, TransferAmountServiceImpl<CardDto> transferAmountService) {
+        this.cardService = cardService;
+        this.transferAmountService = transferAmountService;
+    }
 
     @Operation(summary = "Get all cards")
     @ApiResponses(value = {
@@ -67,7 +73,7 @@ public class CardController {
     @Loggable
     @GetMapping(value = "/cards/get_by_card_number/{cardNumber}", produces = "application/json")
     public ResponseEntity<CardDto> findByAccountNumber(@PathVariable("cardNumber") String cardNumber){
-        CardDto foundCard = cardService.findByCardNumber(cardNumber);
+        CardDto foundCard = cardService.findByNumber(cardNumber);
 
         return new ResponseEntity<>(foundCard, HttpStatus.OK);
     }
@@ -84,7 +90,7 @@ public class CardController {
     @Loggable
     @PutMapping(value = "/cards/transfer_amount", produces = "application/json", consumes = "application/json")
     public void transferAmount(@RequestBody TransferEntity transferEntity){
-        cardService.transferAmount(transferEntity);
+        transferAmountService.transferAmount(transferEntity);
     }
 
     @Operation(summary = "Create card")

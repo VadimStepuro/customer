@@ -4,7 +4,7 @@ import com.stepuro.customer.api.dto.IndividualDto;
 import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.Individual;
 import com.stepuro.customer.repository.IndividualRepositoryJpa;
-import com.stepuro.customer.service.Impl.IndividualServiceImpl;
+import com.stepuro.customer.service.impl.IndividualServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,7 +24,7 @@ import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class IndividualServiceImplTests {
+class IndividualServiceImplTests {
     @Mock
     private IndividualRepositoryJpa individualRepositoryJpa;
 
@@ -32,7 +32,7 @@ public class IndividualServiceImplTests {
     private IndividualServiceImpl individualServiceImpl;
 
     @Test
-    public void IndividualService_FindAll_ReturnsAllModels(){
+    void IndividualService_FindAll_ReturnsAllModels(){
         when(individualRepositoryJpa.findAll()).thenReturn(individualList);
 
         List<IndividualDto> individualDtos = individualServiceImpl.findAll();
@@ -42,7 +42,7 @@ public class IndividualServiceImplTests {
     }
 
     @Test
-    public void IndividualService_FindById_ReturnsModel(){
+    void IndividualService_FindById_ReturnsModel(){
         when(individualRepositoryJpa.findById(any(Integer.class))).thenReturn(Optional.of(individual1));
 
         IndividualDto individual = individualServiceImpl.findById(1);
@@ -58,7 +58,7 @@ public class IndividualServiceImplTests {
     }
 
     @Test
-    public void IndividualService_Save_ReturnsSavedModel(){
+    void IndividualService_Save_ReturnsSavedModel(){
         when(individualRepositoryJpa.save(any(Individual.class))).thenReturn(individual1);
 
         IndividualDto savedIndividual = individualServiceImpl.create(individualDto);
@@ -74,7 +74,7 @@ public class IndividualServiceImplTests {
     }
 
     @Test
-    public void IndividualService_Edit_ReturnsEditedModel(){
+    void IndividualService_Edit_ReturnsEditedModel(){
         when(individualRepositoryJpa.save(any(Individual.class))).thenReturn(individual1);
         when(individualRepositoryJpa.findById(any(Integer.class))).thenReturn(Optional.of(individual1));
 
@@ -101,7 +101,7 @@ public class IndividualServiceImplTests {
         assertEquals(savedIndividual.getUpdatedDate(), updatedIndividual.getUpdatedDate());
     }
     @Test
-    public void IndividualService_Delete_DeletesModel(){
+    void IndividualService_Delete_DeletesModel(){
         when(individualRepositoryJpa.findById(any(Integer.class))).thenReturn(Optional.empty());
         doNothing().when(individualRepositoryJpa).deleteById(isA(Integer.class));
 

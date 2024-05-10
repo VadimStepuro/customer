@@ -11,7 +11,7 @@ public interface AccountService {
 
     AccountDto findById(UUID id);
 
-    AccountDto findByAccountNumber(String accountNumber);
+    AccountDto findByNumber(String accountNumber);
 
     boolean existsByAccountNumber(String accountNumber);
 

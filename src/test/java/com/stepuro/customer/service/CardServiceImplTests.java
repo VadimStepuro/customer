@@ -5,7 +5,7 @@ import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.Card;
 import com.stepuro.customer.model.enums.CardStatus;
 import com.stepuro.customer.repository.CardRepositoryJpa;
-import com.stepuro.customer.service.Impl.CardServiceImpl;
+import com.stepuro.customer.service.impl.CardServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,7 +28,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class CardServiceImplTests {
+class CardServiceImplTests {
     @Mock
     private CardRepositoryJpa cardRepositoryJpa;
 
@@ -36,7 +36,7 @@ public class CardServiceImplTests {
     private CardServiceImpl cardServiceImpl;
 
     @Test
-    public void CardService_FindAll_ReturnsAllModels(){
+    void CardService_FindAll_ReturnsAllModels(){
         when(cardRepositoryJpa.findAll()).thenReturn(cardList);
 
         //Act
@@ -48,7 +48,7 @@ public class CardServiceImplTests {
     }
 
     @Test
-    public void CardService_FindById_ReturnsModel(){
+    void CardService_FindById_ReturnsModel(){
         when(cardRepositoryJpa.findById(any(UUID.class))).thenReturn(Optional.of(card1));
 
         CardDto foundCard = cardServiceImpl.findById(UUID.randomUUID());
@@ -63,10 +63,10 @@ public class CardServiceImplTests {
     }
 
     @Test
-    public void AccountService_FindByNumber_ReturnsModel(){
+    void AccountService_FindByNumber_ReturnsModel(){
         when(cardRepositoryJpa.findByCardNumber(any(String.class))).thenReturn(Optional.of(card1));
 
-        CardDto foundCard = cardServiceImpl.findByCardNumber("");
+        CardDto foundCard = cardServiceImpl.findByNumber("");
 
         assertNotNull(foundCard);
         assertEquals(cardDto.getAccountNumber(), foundCard.getAccountNumber());
@@ -78,7 +78,7 @@ public class CardServiceImplTests {
     }
 
     @Test
-    public void AccountService_Save_ReturnsSavedModel(){
+    void AccountService_Save_ReturnsSavedModel(){
         when(cardRepositoryJpa.save(any(Card.class))).thenReturn(card1);
 
         CardDto savedCard = cardServiceImpl.create(cardDto);
@@ -93,7 +93,7 @@ public class CardServiceImplTests {
     }
 
     @Test
-    public void AccountService_Edit_ReturnsEditedModel(){
+    void AccountService_Edit_ReturnsEditedModel(){
         when(cardRepositoryJpa.save(any(Card.class))).thenReturn(card1);
         when(cardRepositoryJpa.findById(any(UUID.class))).thenReturn(Optional.of(card1));
 
@@ -121,12 +121,14 @@ public class CardServiceImplTests {
 
 
     @Test
-    public void AccountService_Delete_DeletesModel(){
+    void AccountService_Delete_DeletesModel(){
         when(cardRepositoryJpa.findById(any(UUID.class))).thenReturn(Optional.empty());
         doNothing().when(cardRepositoryJpa).deleteById(isA(UUID.class));
 
         cardServiceImpl.delete(UUID.randomUUID());
 
-        assertThrows(ResourceNotFoundException.class, () -> cardServiceImpl.findById(UUID.randomUUID()));
+        UUID uuid = UUID.randomUUID();
+
+        assertThrows(ResourceNotFoundException.class, () -> cardServiceImpl.findById(uuid));
     }
 }

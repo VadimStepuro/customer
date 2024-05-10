@@ -1,4 +1,4 @@
-package com.stepuro.customer.service.Impl;
+package com.stepuro.customer.service.impl;
 
 import com.stepuro.customer.api.dto.AccountDto;
 import com.stepuro.customer.api.dto.TransferEntity;
@@ -8,8 +8,8 @@ import com.stepuro.customer.api.exceptions.*;
 import com.stepuro.customer.model.Account;
 import com.stepuro.customer.repository.AccountRepositoryJpa;
 import com.stepuro.customer.service.AccountService;
+import com.stepuro.customer.service.TransferableEntityService;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,12 +19,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
-import static com.stepuro.customer.utils.AccountUtils.*;
-
 @Service
-public class AccountServiceImpl implements AccountService {
-    @Autowired
-    private AccountRepositoryJpa accountRepositoryJpa;
+public class AccountServiceImpl implements AccountService, TransferableEntityService<AccountDto> {
+    private final AccountRepositoryJpa accountRepositoryJpa;
+
+
+    public AccountServiceImpl(AccountRepositoryJpa accountRepositoryJpa) {
+        this.accountRepositoryJpa = accountRepositoryJpa;
+    }
 
     @Override
     @Cacheable(cacheNames = "accounts", keyGenerator = "newKeyGenerator")
@@ -55,7 +57,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Cacheable(cacheNames = "accountByNumber", key = "#accountNumber")
-    public AccountDto findByAccountNumber(String accountNumber) {
+    public AccountDto findByNumber(String accountNumber) {
         return AccountMapper
                 .INSTANCE
                 .accountToAccountDto(
@@ -96,8 +98,6 @@ public class AccountServiceImpl implements AccountService {
                         "Account with account number " +
                                 transferEntity.getDestinationNumber() +
                                 " not found"));
-
-        validateTransfer(transferEntity, sourceAccount, destinationAccount);
 
         sourceAccount.setBalance(sourceAccount.getBalance().subtract(transferEntity.getAmount()));
         destinationAccount.setBalance(destinationAccount.getBalance().add(transferEntity.getAmount()));
@@ -169,27 +169,5 @@ public class AccountServiceImpl implements AccountService {
     )
     public void delete(UUID id){
         accountRepositoryJpa.deleteById(id);
-    }
-
-    private void validateTransfer(TransferEntity transferEntity, Account sourceAccount, Account destinationAccount){
-        if(transferEntity.getSourceNumber().equals(transferEntity.getDestinationNumber()))
-            throw new EqualNumberException("Account number can't be equal " +
-                    "(source number: " + transferEntity.getSourceNumber() +
-                    ", destination number: " + transferEntity.getDestinationNumber() + ")");
-
-        if(!validateLegalEntityOwner(sourceAccount, transferEntity.getUserId()))
-            throw new UserIdDoesntMatchException("Legal entity isn't owner of this account " +
-                    "(legalEntity id: " + transferEntity.getUserId() +
-                    ", account number: " + transferEntity.getSourceNumber());
-
-        if(!validateStatus(sourceAccount))
-            throw new StatusException("Source account is closed");
-
-        if(!validateStatus(destinationAccount))
-            throw new StatusException("Destination account is closed");
-
-        if(!validateAccountBalance(sourceAccount, transferEntity.getAmount()))
-            throw new NotEnoughMoneyException("Not enough money on account with number " + transferEntity.getSourceNumber() +
-                    " to transfer " + transferEntity.getAmount());
     }
 }

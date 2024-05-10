@@ -19,7 +19,7 @@ import java.util.UUID;
 @ToString
 @Setter
 @Getter
-public class CardDto {
+public class CardDto implements TransferableEntity{
     private UUID id;
 
     @NotNull(message = "Credit card number can't be null")
@@ -48,4 +48,18 @@ public class CardDto {
     private BigDecimal balance;
 
     private IndividualDto individualDto;
+
+    public String getEntityStatus(){
+        return status.toString();
+    }
+
+    @Override
+    public Integer getUserId() {
+        return individualDto.getIndividualId();
+    }
+
+    @Override
+    public BigDecimal getAmount() {
+        return getBalance();
+    }
 }

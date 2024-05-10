@@ -52,6 +52,11 @@ spec:
           volumeMounts:
             - name: lv-storage
               mountPath: /data
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "500m"
+              ephemeral-storage: "4Gi"
           env:
             - name: REDIS_PASS
               valueFrom:

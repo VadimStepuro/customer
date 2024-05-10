@@ -30,13 +30,13 @@ public class IndividualRepositoryJdbc {
     public Integer save(Individual individual){
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        String INSERT_MESSAGE = "INSERT INTO individual " +
+        String insertMessage = "INSERT INTO individual " +
                 "(individual_id, \"name\", last_name, created_date, updated_date, address, city, day_of_birth) " +
                 "VALUES (nextval('individual_id_sequence'), ?, ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection
-                    .prepareStatement(INSERT_MESSAGE, Statement.RETURN_GENERATED_KEYS);
+                    .prepareStatement(insertMessage, Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, individual.getName());
             ps.setString(2, individual.getLastName());

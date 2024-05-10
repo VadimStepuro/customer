@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
 public class CardUtils {
+    private CardUtils() {}
+
     public static boolean validateCardOwner(Card sourceCard, Integer individualId) {
         if(sourceCard.getIndividual() == null)
             return false;
