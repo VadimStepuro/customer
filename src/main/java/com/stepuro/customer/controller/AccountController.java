@@ -4,7 +4,7 @@ import com.stepuro.customer.api.annotations.Loggable;
 import com.stepuro.customer.api.dto.AccountDto;
 import com.stepuro.customer.api.dto.TransferEntity;
 import com.stepuro.customer.service.AccountService;
-import com.stepuro.customer.service.impl.TransferAmountServiceImpl;
+import com.stepuro.customer.service.TransferAmountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,9 +24,9 @@ import java.util.UUID;
 @RequestMapping("/api/v1")
 public class AccountController {
     private final AccountService accountService;
-    private final TransferAmountServiceImpl<AccountDto> transferAmountService;
+    private final TransferAmountService transferAmountService;
 
-    public AccountController(AccountService accountService, TransferAmountServiceImpl<AccountDto> transferAmountService) {
+    public AccountController(AccountService accountService, TransferAmountService transferAmountService) {
         this.accountService = accountService;
         this.transferAmountService = transferAmountService;
     }
@@ -89,7 +89,7 @@ public class AccountController {
     @Loggable
     @PutMapping(value = "/accounts/transfer_amount", produces = "application/json", consumes = "application/json")
     public void transferAmount(@RequestBody @Valid TransferEntity transferEntity){
-        transferAmountService.transferAmount(transferEntity);
+        transferAmountService.transferAccountAmount(transferEntity);
     }
 
     @Operation(summary = "Create account")

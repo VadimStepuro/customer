@@ -8,7 +8,6 @@ import com.stepuro.customer.api.exceptions.*;
 import com.stepuro.customer.model.Account;
 import com.stepuro.customer.repository.AccountRepositoryJpa;
 import com.stepuro.customer.service.AccountService;
-import com.stepuro.customer.service.TransferableEntityService;
 import jakarta.transaction.Transactional;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class AccountServiceImpl implements AccountService, TransferableEntityService<AccountDto> {
+public class AccountServiceImpl implements AccountService {
     private final AccountRepositoryJpa accountRepositoryJpa;
 
 

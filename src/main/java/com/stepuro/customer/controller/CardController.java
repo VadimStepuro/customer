@@ -5,7 +5,6 @@ import com.stepuro.customer.api.dto.CardDto;
 import com.stepuro.customer.api.dto.TransferEntity;
 import com.stepuro.customer.service.CardService;
 import com.stepuro.customer.service.TransferAmountService;
-import com.stepuro.customer.service.impl.TransferAmountServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,9 +24,9 @@ import java.util.UUID;
 @RequestMapping("/api/v1")
 public class CardController {
     private final CardService cardService;
-    private final TransferAmountServiceImpl<CardDto> transferAmountService;
+    private final TransferAmountService transferAmountService;
 
-    public CardController(CardService cardService, TransferAmountServiceImpl<CardDto> transferAmountService) {
+    public CardController(CardService cardService, TransferAmountService transferAmountService) {
         this.cardService = cardService;
         this.transferAmountService = transferAmountService;
     }
@@ -90,7 +89,7 @@ public class CardController {
     @Loggable
     @PutMapping(value = "/cards/transfer_amount", produces = "application/json", consumes = "application/json")
     public void transferAmount(@RequestBody TransferEntity transferEntity){
-        transferAmountService.transferAmount(transferEntity);
+        transferAmountService.transferCardAmount(transferEntity);
     }
 
     @Operation(summary = "Create card")

@@ -1,32 +1,48 @@
 package com.stepuro.customer.service.impl;
 
 import com.stepuro.customer.api.dto.TransferEntity;
-import com.stepuro.customer.api.dto.TransferableEntity;
 import com.stepuro.customer.context.TransferValidationContext;
-import com.stepuro.customer.context.init.TransferContextInitializer;
+import com.stepuro.customer.context.init.AccountTransferContextInitializer;
+import com.stepuro.customer.context.init.CardTransferContextInitializer;
+import com.stepuro.customer.service.AccountService;
+import com.stepuro.customer.service.CardService;
 import com.stepuro.customer.service.TransferAmountService;
-import com.stepuro.customer.service.TransferableEntityService;
 import com.stepuro.customer.validation.TransferValidationProcessor;
 
-public class TransferAmountServiceImpl<T extends TransferableEntity> implements TransferAmountService {
+public class TransferAmountServiceImpl implements TransferAmountService {
     private final TransferValidationProcessor transferValidationProcessor;
-    private final TransferContextInitializer<T> transferContextInitializer;
-    private final TransferableEntityService<T> accountService;
+    private final CardTransferContextInitializer cardTransferContextInitializer;
+    private final AccountTransferContextInitializer accountTransferContextInitializer;
+    private final CardService cardService;
+    private final AccountService accountService;
 
     public TransferAmountServiceImpl(
             TransferValidationProcessor transferValidationProcessor,
-            TransferContextInitializer<T> transferContextInitializer,
-            TransferableEntityService<T> transferableEntityService
+            CardTransferContextInitializer cardTransferContextInitializer,
+            AccountTransferContextInitializer accountTransferContextInitializer,
+            CardService cardService,
+            AccountService accountService
     ) {
         this.transferValidationProcessor = transferValidationProcessor;
-        this.transferContextInitializer = transferContextInitializer;
-        this.accountService = transferableEntityService;
+        this.cardTransferContextInitializer = cardTransferContextInitializer;
+        this.accountTransferContextInitializer = accountTransferContextInitializer;
+        this.cardService = cardService;
+        this.accountService = accountService;
     }
 
 
     @Override
-    public void transferAmount(TransferEntity transferEntity) {
-        TransferValidationContext transferValidationContext = transferContextInitializer.initialize(transferEntity);
+    public void transferCardAmount(TransferEntity transferEntity) {
+        TransferValidationContext transferValidationContext = cardTransferContextInitializer.initialize(transferEntity);
+
+        transferValidationProcessor.process(transferValidationContext);
+
+        cardService.transferAmount(transferEntity);
+    }
+
+    @Override
+    public void transferAccountAmount(TransferEntity transferEntity) {
+        TransferValidationContext transferValidationContext = accountTransferContextInitializer.initialize(transferEntity);
 
         transferValidationProcessor.process(transferValidationContext);
 

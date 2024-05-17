@@ -1,9 +1,9 @@
 package com.stepuro.customer.context;
 
-import com.stepuro.customer.api.dto.AccountDto;
-import com.stepuro.customer.api.dto.CardDto;
-import com.stepuro.customer.context.init.TransferContextInitializer;
-import com.stepuro.customer.service.TransferableEntityService;
+import com.stepuro.customer.context.init.AccountTransferContextInitializer;
+import com.stepuro.customer.context.init.CardTransferContextInitializer;
+import com.stepuro.customer.service.AccountService;
+import com.stepuro.customer.service.CardService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,12 +11,12 @@ import org.springframework.context.annotation.Configuration;
 public class ContextConfig {
 
     @Bean
-    public TransferContextInitializer<CardDto> cardTransferContextInitializer(final TransferableEntityService<CardDto> cardService) {
-        return new TransferContextInitializer<>(cardService);
+    public CardTransferContextInitializer cardTransferContextInitializer(final CardService cardService) {
+        return new CardTransferContextInitializer(cardService);
     }
 
     @Bean
-    public TransferContextInitializer<AccountDto> accountTransferContextInitializer(final TransferableEntityService<AccountDto> accountService) {
-        return new TransferContextInitializer<>(accountService);
+    public AccountTransferContextInitializer accountTransferContextInitializer(final AccountService accountService) {
+        return new AccountTransferContextInitializer(accountService);
     }
 }

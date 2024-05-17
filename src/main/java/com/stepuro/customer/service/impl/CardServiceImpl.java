@@ -8,7 +8,6 @@ import com.stepuro.customer.api.exceptions.*;
 import com.stepuro.customer.model.Card;
 import com.stepuro.customer.repository.CardRepositoryJpa;
 import com.stepuro.customer.service.CardService;
-import com.stepuro.customer.service.TransferableEntityService;
 import jakarta.transaction.Transactional;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -22,7 +21,7 @@ import java.util.UUID;
 import static com.stepuro.customer.utils.CardUtils.*;
 
 @Service
-public class CardServiceImpl implements CardService, TransferableEntityService<CardDto> {
+public class CardServiceImpl implements CardService {
     private final CardRepositoryJpa cardRepositoryJpa;
 
     public CardServiceImpl(CardRepositoryJpa cardRepositoryJpa) {
