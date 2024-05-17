@@ -68,7 +68,6 @@ spec:
         app: redisinsight #label for pod/s
     spec:
       containers:
-
         - name:  redisinsight #Container name (DNS_LABEL, unique)
           image: redis/redisinsight:latest #repo/image
           imagePullPolicy: IfNotPresent #Installs the latest RedisInsight version
@@ -78,6 +77,11 @@ spec:
           ports:
             - containerPort: 5540 #exposed container port and protocol
               protocol: TCP
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "500m"
+              ephemeral-storage: "4Gi"
       volumes:
         - name: redisinsight
           emptyDir: {} # node-ephemeral volume https://kubernetes.io/docs/concepts/storage/volumes/#emptydir

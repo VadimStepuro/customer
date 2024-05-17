@@ -1,16 +1,15 @@
 package com.stepuro.customer.controller;
 
 import com.stepuro.customer.api.annotations.Loggable;
-import com.stepuro.customer.api.dto.ApiError;
+import com.stepuro.customer.api.dto.errors.ApiError;
 import com.stepuro.customer.api.dto.PaymentOrderEntityDto;
-import com.stepuro.customer.service.TransferAmountService;
+import com.stepuro.customer.service.SendTransferMessage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1")
 public class TransferAmountController {
-    @Autowired
-    private TransferAmountService transferAmountService;
+    private final SendTransferMessage transferAmountService;
+
+    public TransferAmountController(SendTransferMessage transferAmountService) {
+        this.transferAmountService = transferAmountService;
+    }
 
     @Operation(summary = "Transfer amount")
     @ApiResponses(value = {

@@ -23,7 +23,7 @@ import static com.stepuro.customer.repository.Samples.CardSamples.card2;
 import static org.junit.jupiter.api.Assertions.*;
 
 @JdbcTest
-public class CardRepositoryJdbcTests {
+class CardRepositoryJdbcTests {
     private CardRepositoryJdbc cardRepositoryJdbc;
     private EmbeddedDatabase embeddedDatabase;
 
@@ -43,7 +43,7 @@ public class CardRepositoryJdbcTests {
     }
 
     @Test
-    public void CardRepositoryJdbc_Save_SavesModel(){
+    void CardRepositoryJdbc_Save_SavesModel(){
         UUID result = cardRepositoryJdbc.save(card1);
 
         Card savedCard = cardRepositoryJdbc.findById(result);
@@ -59,7 +59,7 @@ public class CardRepositoryJdbcTests {
     }
 
     @Test
-    public void CardRepositoryJdbc_FindById_ReturnsModel(){
+    void CardRepositoryJdbc_FindById_ReturnsModel(){
         UUID id = cardRepositoryJdbc.save(card1);
         cardRepositoryJdbc.save(card2);
 
@@ -77,7 +77,7 @@ public class CardRepositoryJdbcTests {
     }
 
     @Test
-    public void CardRepositoryJdbc_Edit_ChangesModel(){
+    void CardRepositoryJdbc_Edit_ChangesModel(){
         UUID id = cardRepositoryJdbc.save(card1);
 
         Card savedCard = cardRepositoryJdbc.findById(id);
@@ -109,7 +109,7 @@ public class CardRepositoryJdbcTests {
     }
 
     @Test
-    public void CardRepositoryJdbc_Remove_RemovesModel(){
+    void CardRepositoryJdbc_Remove_RemovesModel(){
         UUID savedId = cardRepositoryJdbc.save(card1);
 
         cardRepositoryJdbc.deleteById(savedId);

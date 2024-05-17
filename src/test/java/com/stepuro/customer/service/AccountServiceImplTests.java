@@ -5,7 +5,7 @@ import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import com.stepuro.customer.model.Account;
 import com.stepuro.customer.model.enums.AccountStatus;
 import com.stepuro.customer.repository.AccountRepositoryJpa;
-import com.stepuro.customer.service.Impl.AccountServiceImpl;
+import com.stepuro.customer.service.impl.AccountServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,7 +27,7 @@ import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class AccountServiceImplTests {
+class AccountServiceImplTests {
     @Mock
     private AccountRepositoryJpa accountRepositoryJpa;
 
@@ -35,7 +35,7 @@ public class AccountServiceImplTests {
     private AccountServiceImpl accountServiceImpl;
 
     @Test
-    public void AccountService_FindAll_ReturnsAllModels(){
+    void AccountService_FindAll_ReturnsAllModels(){
         when(accountRepositoryJpa.findAll()).thenReturn(accountList);
 
         List<AccountDto> allAccounts = accountServiceImpl.findAll();
@@ -45,7 +45,7 @@ public class AccountServiceImplTests {
     }
 
     @Test
-    public void AccountService_FindById_ReturnsModel(){
+    void AccountService_FindById_ReturnsModel(){
         when(accountRepositoryJpa.findById(any(UUID.class))).thenReturn(Optional.of(account1));
 
         AccountDto foundAccount = accountServiceImpl.findById(UUID.randomUUID());
@@ -58,10 +58,10 @@ public class AccountServiceImplTests {
     }
 
     @Test
-    public void AccountService_FindByNumber_ReturnsModel(){
+    void AccountService_FindByNumber_ReturnsModel(){
         when(accountRepositoryJpa.findByAccountNumber(any(String.class))).thenReturn(Optional.of(account1));
 
-        AccountDto foundAccount = accountServiceImpl.findByAccountNumber("");
+        AccountDto foundAccount = accountServiceImpl.findByNumber("");
 
         assertNotNull(foundAccount);
         assertEquals(accountDto.getAccountNumber(), foundAccount.getAccountNumber());
@@ -71,7 +71,7 @@ public class AccountServiceImplTests {
     }
 
     @Test
-    public void AccountService_Save_ReturnsSavedModel(){
+    void AccountService_Save_ReturnsSavedModel(){
         when(accountRepositoryJpa.save(any(Account.class))).thenReturn(account1);
 
         AccountDto savedAccount = accountServiceImpl.create(accountDto);
@@ -84,7 +84,7 @@ public class AccountServiceImplTests {
     }
 
     @Test
-    public void AccountService_Edit_ReturnsEditedModel(){
+    void AccountService_Edit_ReturnsEditedModel(){
         when(accountRepositoryJpa.save(any(Account.class))).thenReturn(account1);
         when(accountRepositoryJpa.findById(any(UUID.class))).thenReturn(Optional.of(account1));
 
@@ -108,12 +108,14 @@ public class AccountServiceImplTests {
 
 
     @Test
-    public void AccountService_Delete_DeletesModel(){
+    void AccountService_Delete_DeletesModel(){
         when(accountRepositoryJpa.findById(any(UUID.class))).thenReturn(Optional.empty());
         Mockito.doNothing().when(accountRepositoryJpa).deleteById(isA(UUID.class));
 
         accountServiceImpl.delete(UUID.randomUUID());
 
-        assertThrows(ResourceNotFoundException.class, () -> accountServiceImpl.findById(UUID.randomUUID()));
+        UUID uuid = UUID.randomUUID();
+
+        assertThrows(ResourceNotFoundException.class, () -> accountServiceImpl.findById(uuid));
     }
 }

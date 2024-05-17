@@ -20,7 +20,7 @@ import static com.stepuro.customer.repository.Samples.IndividualSamples.individu
 import static org.junit.jupiter.api.Assertions.*;
 
 @JdbcTest
-public class IndividualRepositoryJdbcTests {
+class IndividualRepositoryJdbcTests {
     private IndividualRepositoryJdbc individualRepositoryJdbc;
     private EmbeddedDatabase embeddedDatabase;
 
@@ -40,7 +40,7 @@ public class IndividualRepositoryJdbcTests {
     }
 
     @Test
-    public void IndividualRepositoryJdbc_Save_SavesModel(){
+    void IndividualRepositoryJdbc_Save_SavesModel(){
         Integer id = individualRepositoryJdbc.save(individual1);
 
         Individual savedIndividual = individualRepositoryJdbc.findById(id);
@@ -56,7 +56,7 @@ public class IndividualRepositoryJdbcTests {
     }
 
     @Test
-    public void IndividualRepositoryJdbc_FindById_ReturnsModel(){
+    void IndividualRepositoryJdbc_FindById_ReturnsModel(){
         Integer id = individualRepositoryJdbc.save(individual1);
         individualRepositoryJdbc.save(individual2);
 
@@ -74,7 +74,7 @@ public class IndividualRepositoryJdbcTests {
     }
 
     @Test
-    public void IndividualRepositoryJdbc_Edit_ChangesModel(){
+    void IndividualRepositoryJdbc_Edit_ChangesModel(){
         Integer id = individualRepositoryJdbc.save(individual1);
 
         Individual savedIndividual = individualRepositoryJdbc.findById(id);
@@ -103,7 +103,7 @@ public class IndividualRepositoryJdbcTests {
     }
 
     @Test
-    public void IndividualRepositoryJdbc_Remove_RemovesModel(){
+    void IndividualRepositoryJdbc_Remove_RemovesModel(){
         Integer id = individualRepositoryJdbc.save(individual1);
 
         individualRepositoryJdbc.deleteById(id);

@@ -1,4 +1,4 @@
-package com.stepuro.customer.service.Impl;
+package com.stepuro.customer.service.impl;
 
 import com.stepuro.customer.api.dto.CardDto;
 import com.stepuro.customer.api.dto.TransferEntity;
@@ -9,7 +9,6 @@ import com.stepuro.customer.model.Card;
 import com.stepuro.customer.repository.CardRepositoryJpa;
 import com.stepuro.customer.service.CardService;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -23,8 +22,11 @@ import static com.stepuro.customer.utils.CardUtils.*;
 
 @Service
 public class CardServiceImpl implements CardService {
-    @Autowired
-    private CardRepositoryJpa cardRepositoryJpa;
+    private final CardRepositoryJpa cardRepositoryJpa;
+
+    public CardServiceImpl(CardRepositoryJpa cardRepositoryJpa) {
+        this.cardRepositoryJpa = cardRepositoryJpa;
+    }
 
     @Override
     @Cacheable(cacheNames = "cards",  keyGenerator = "newKeyGenerator")
@@ -55,7 +57,7 @@ public class CardServiceImpl implements CardService {
 
     @Override
     @Cacheable(cacheNames = "cardByNumber", key = "#cardNumber")
-    public CardDto findByCardNumber(String cardNumber) {
+    public CardDto findByNumber(String cardNumber) {
         return CardMapper
                 .INSTANCE
                 .cardToCardDto(
@@ -87,10 +89,7 @@ public class CardServiceImpl implements CardService {
     )
     public void transferAmount(TransferEntity transferEntity) {
         Card sourceCard = findCardByNumber(transferEntity.getSourceNumber());
-
         Card destinationCard = findCardByNumber(transferEntity.getDestinationNumber());
-
-        validateTransfer(transferEntity, sourceCard, destinationCard);
 
         sourceCard.setBalance(sourceCard.getBalance().subtract(transferEntity.getAmount()));
         destinationCard.setBalance(destinationCard.getBalance().add(transferEntity.getAmount()));
@@ -165,29 +164,6 @@ public class CardServiceImpl implements CardService {
     )
     public void delete(UUID id){
         cardRepositoryJpa.deleteById(id);
-    }
-
-    private void validateTransfer(TransferEntity transferEntity, Card sourceCard, Card destinationCard){
-        if(transferEntity.getSourceNumber().equals(transferEntity.getDestinationNumber()))
-            throw new EqualNumberException("Card numbers can't be equal " +
-                    "(source number: " + transferEntity.getSourceNumber() +
-                    ", destination number: " + transferEntity.getDestinationNumber() + ")");
-
-        if (!validateCardOwner(sourceCard, transferEntity.getUserId()))
-            throw new UserIdDoesntMatchException("Individual isn't owner of the card " +
-                    "(individual id: " + transferEntity.getUserId() +
-                    ", card number: " + transferEntity.getSourceNumber() + ")");
-
-        if(!validateCardStatus(sourceCard))
-            throw new StatusException("Source card is unreachable");
-
-        if(!validateCardStatus(destinationCard))
-            throw new StatusException("Destination card is unreachable");
-
-        if(!validateCardBalance(sourceCard, transferEntity.getAmount()))
-            throw new NotEnoughMoneyException("Not enough money on card with number " + transferEntity.getSourceNumber() +
-                    " to transfer " + transferEntity.getAmount());
-
     }
 
     private Card findCardByNumber(String cardNumber){

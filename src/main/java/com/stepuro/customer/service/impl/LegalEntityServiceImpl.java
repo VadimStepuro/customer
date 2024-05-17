@@ -1,4 +1,4 @@
-package com.stepuro.customer.service.Impl;
+package com.stepuro.customer.service.impl;
 
 import com.stepuro.customer.api.dto.LegalEntityDto;
 import com.stepuro.customer.api.dto.mapper.LegalEntityMapper;
@@ -8,15 +8,17 @@ import com.stepuro.customer.model.LegalEntity;
 import com.stepuro.customer.repository.LegalEntityRepositoryJpa;
 import com.stepuro.customer.service.LegalEntityService;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class LegalEntityServiceImpl implements LegalEntityService {
-    @Autowired
-    private LegalEntityRepositoryJpa individualRepositoryJpa;
+    private final LegalEntityRepositoryJpa individualRepositoryJpa;
+
+    public LegalEntityServiceImpl(LegalEntityRepositoryJpa individualRepositoryJpa) {
+        this.individualRepositoryJpa = individualRepositoryJpa;
+    }
 
     @Override
     public List<LegalEntityDto> findAll(){

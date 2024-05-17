@@ -17,7 +17,7 @@ import java.util.UUID;
 @ToString
 @Setter
 @Getter
-public class AccountDto {
+public class AccountDto{
     private UUID id;
 
     @NotNull(message = "Account number can't be null")

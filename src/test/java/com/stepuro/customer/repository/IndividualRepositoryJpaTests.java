@@ -15,12 +15,12 @@ import static com.stepuro.customer.repository.Samples.IndividualSamples.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-public class IndividualRepositoryJpaTests {
+class IndividualRepositoryJpaTests {
     @Autowired
     private IndividualRepositoryJpa individualRepositoryJpa;
 
     @Test
-    public void IndividualRepository_Save_ReturnsSavedModel(){
+    void IndividualRepository_Save_ReturnsSavedModel(){
         Individual savedIndividual = individualRepositoryJpa.save(individual1);
 
         assertNotNull(savedIndividual);
@@ -34,7 +34,7 @@ public class IndividualRepositoryJpaTests {
     }
 
     @Test
-    public void IndividualRepository_FindAll_ReturnsAllModels(){
+    void IndividualRepository_FindAll_ReturnsAllModels(){
         List<Individual> individuals = individualRepositoryJpa.saveAll(individualList);
 
 
@@ -43,7 +43,7 @@ public class IndividualRepositoryJpaTests {
     }
 
     @Test
-    public void IndividualRepository_FindById_ReturnsModel(){
+    void IndividualRepository_FindById_ReturnsModel(){
         Individual savedIndividual = individualRepositoryJpa.save(individual1);
         individualRepositoryJpa.save(individual2);
 
@@ -62,7 +62,7 @@ public class IndividualRepositoryJpaTests {
     }
 
     @Test
-    public void IndividualRepository_Update_ChangesModel(){
+    void IndividualRepository_Update_ChangesModel(){
         Individual savedIndividual = individualRepositoryJpa.save(individual1);
 
         savedIndividual.setName("Ivan");
@@ -87,7 +87,7 @@ public class IndividualRepositoryJpaTests {
     }
 
     @Test
-    public void IndividualRepository_Remove_RemovesModel(){
+    void IndividualRepository_Remove_RemovesModel(){
         Individual savedIndividual = individualRepositoryJpa.save(individual1);
 
         individualRepositoryJpa.deleteById(savedIndividual.getIndividualId());

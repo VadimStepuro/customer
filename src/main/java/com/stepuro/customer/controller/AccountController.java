@@ -4,6 +4,7 @@ import com.stepuro.customer.api.annotations.Loggable;
 import com.stepuro.customer.api.dto.AccountDto;
 import com.stepuro.customer.api.dto.TransferEntity;
 import com.stepuro.customer.service.AccountService;
+import com.stepuro.customer.service.TransferAmountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -11,7 +12,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +23,13 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1")
 public class AccountController {
-    @Autowired
-    private AccountService accountService;
+    private final AccountService accountService;
+    private final TransferAmountService transferAmountService;
+
+    public AccountController(AccountService accountService, TransferAmountService transferAmountService) {
+        this.accountService = accountService;
+        this.transferAmountService = transferAmountService;
+    }
 
     @Operation(summary = "Get all accounts")
     @ApiResponses(value = {
@@ -67,7 +72,7 @@ public class AccountController {
     @Loggable
     @GetMapping(value = "/accounts/get_by_account_number/{accountNumber}", produces = "application/json")
     public ResponseEntity<AccountDto> findByAccountNumber(@PathVariable("accountNumber") String accountNumber){
-        AccountDto foundAccount = accountService.findByAccountNumber(accountNumber);
+        AccountDto foundAccount = accountService.findByNumber(accountNumber);
 
         return new ResponseEntity<>(foundAccount, HttpStatus.OK);
     }
@@ -84,7 +89,7 @@ public class AccountController {
     @Loggable
     @PutMapping(value = "/accounts/transfer_amount", produces = "application/json", consumes = "application/json")
     public void transferAmount(@RequestBody @Valid TransferEntity transferEntity){
-        accountService.transferAmount(transferEntity);
+        transferAmountService.transferAccountAmount(transferEntity);
     }
 
     @Operation(summary = "Create account")
