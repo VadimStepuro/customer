@@ -19,9 +19,10 @@ public class CardTransferContextInitializer {
         CardDto targetCard = cardService.findByNumber(transferEntity.getDestinationNumber());
 
         validationContext.setTransferEntity(transferEntity);
-        validationContext.setSourceStatus(sourceCard.getStatus().toString());
+        validationContext.setSourceStatus(sourceCard.getStatus());
         validationContext.setSourceBalance(sourceCard.getBalance());
-        validationContext.setTargetStatus(targetCard.getStatus().toString());
+        validationContext.setTargetStatus(targetCard.getStatus());
+        validationContext.setSourceUserId(sourceCard.getIndividualDto().getIndividualId());
 
         return validationContext;
     }

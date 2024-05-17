@@ -1,6 +1,6 @@
 package com.stepuro.customer.api.exceptions.handler;
 
-import com.stepuro.customer.api.dto.ApiError;
+import com.stepuro.customer.api.dto.errors.ApiError;
 import com.stepuro.customer.api.exceptions.NoContentException;
 import com.stepuro.customer.api.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;

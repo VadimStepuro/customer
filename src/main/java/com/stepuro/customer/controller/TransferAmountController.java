@@ -1,7 +1,7 @@
 package com.stepuro.customer.controller;
 
 import com.stepuro.customer.api.annotations.Loggable;
-import com.stepuro.customer.api.dto.ApiError;
+import com.stepuro.customer.api.dto.errors.ApiError;
 import com.stepuro.customer.api.dto.PaymentOrderEntityDto;
 import com.stepuro.customer.service.SendTransferMessage;
 import io.swagger.v3.oas.annotations.Operation;

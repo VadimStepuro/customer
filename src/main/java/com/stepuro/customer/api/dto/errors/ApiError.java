@@ -1,4 +1,4 @@
-package com.stepuro.customer.api.dto;
+package com.stepuro.customer.api.dto.errors;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,6 +22,7 @@ public class ApiError {
     private List<ApiSubError> subErrors;
 
     private ApiError() {
+        subErrors = new ArrayList<>();
         timestamp = Timestamp.from(Instant.now());
     }
 
@@ -52,5 +54,9 @@ public class ApiError {
         this.debugMessage = ex.getLocalizedMessage();
         this.exceptionName = ex.getClass().getName();
         this.subErrors = subErrors;
+    }
+
+    public void addSubError(ApiSubError subError){
+        this.subErrors.add(subError);
     }
 }

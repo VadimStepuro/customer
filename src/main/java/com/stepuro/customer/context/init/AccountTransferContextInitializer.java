@@ -20,8 +20,9 @@ public class AccountTransferContextInitializer {
 
         validationContext.setTransferEntity(transferEntity);
         validationContext.setSourceBalance(sourceAccount.getBalance());
-        validationContext.setSourceStatus(sourceAccount.getStatus().toString());
-        validationContext.setTargetStatus(targetAccount.getStatus().toString());
+        validationContext.setSourceStatus(sourceAccount.getStatus());
+        validationContext.setTargetStatus(targetAccount.getStatus());
+        validationContext.setSourceUserId(sourceAccount.getLegalEntityDto().getLegalEntityId());
 
         return validationContext;
     }

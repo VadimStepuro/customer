@@ -1,7 +1,6 @@
 package com.stepuro.customer.service.impl;
 
 import com.stepuro.customer.api.dto.TransferEntity;
-import com.stepuro.customer.context.TransferValidationContext;
 import com.stepuro.customer.context.init.AccountTransferContextInitializer;
 import com.stepuro.customer.context.init.CardTransferContextInitializer;
 import com.stepuro.customer.service.AccountService;
@@ -33,7 +32,7 @@ public class TransferAmountServiceImpl implements TransferAmountService {
 
     @Override
     public void transferCardAmount(TransferEntity transferEntity) {
-        TransferValidationContext transferValidationContext = cardTransferContextInitializer.initialize(transferEntity);
+        var transferValidationContext = cardTransferContextInitializer.initialize(transferEntity);
 
         transferValidationProcessor.process(transferValidationContext);
 
@@ -42,7 +41,7 @@ public class TransferAmountServiceImpl implements TransferAmountService {
 
     @Override
     public void transferAccountAmount(TransferEntity transferEntity) {
-        TransferValidationContext transferValidationContext = accountTransferContextInitializer.initialize(transferEntity);
+        var transferValidationContext = accountTransferContextInitializer.initialize(transferEntity);
 
         transferValidationProcessor.process(transferValidationContext);
 
