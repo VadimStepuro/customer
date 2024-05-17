@@ -30,8 +30,16 @@ spec:
         app: customer-app
     spec:
       containers:
+        - resources:
+            limits:
+              cpu: "500m"
+              memory: "500m"
         - name: customer-app
           image: vadimstepuro/customer-app:1.1.8
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "500m"
           ports:
             - containerPort: 8080
           env:

@@ -30,13 +30,13 @@ public class LegalEntityRepositoryJdbc {
     public Integer save(LegalEntity legalEntity){
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        String INSERT_MESSAGE = "INSERT INTO legal_entity " +
+        String insertMessage = "INSERT INTO legal_entity " +
                 "(legal_entity_id, \"name\", inn, created_date, updated_date, address, city) " +
                 "VALUES (nextval('legal_entity_id_sequence'), ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection
-                    .prepareStatement(INSERT_MESSAGE, Statement.RETURN_GENERATED_KEYS);
+                    .prepareStatement(insertMessage, Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, legalEntity.getName());
             ps.setString(2, legalEntity.getInn());

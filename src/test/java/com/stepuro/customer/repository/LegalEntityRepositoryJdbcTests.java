@@ -18,7 +18,7 @@ import static com.stepuro.customer.repository.Samples.LegalEntitySamples.legalEn
 import static org.junit.jupiter.api.Assertions.*;
 
 @JdbcTest
-public class LegalEntityRepositoryJdbcTests {
+class LegalEntityRepositoryJdbcTests {
     private LegalEntityRepositoryJdbc legalEntityRepositoryJdbc;
     private EmbeddedDatabase embeddedDatabase;
 
@@ -39,7 +39,7 @@ public class LegalEntityRepositoryJdbcTests {
     }
 
     @Test
-    public void LegalEntityRepositoryJdbc_Save_SavesModel(){
+    void LegalEntityRepositoryJdbc_Save_SavesModel(){
         Integer id = legalEntityRepositoryJdbc.save(legalEntity1);
 
         LegalEntity savedLegalEntity = legalEntityRepositoryJdbc.findById(id);
@@ -54,7 +54,7 @@ public class LegalEntityRepositoryJdbcTests {
     }
 
     @Test
-    public void LegalEntityRepositoryJdbc_FindById_ReturnsModel(){
+    void LegalEntityRepositoryJdbc_FindById_ReturnsModel(){
         Integer id = legalEntityRepositoryJdbc.save(legalEntity1);
         legalEntityRepositoryJdbc.save(legalEntity2);
 
@@ -71,7 +71,7 @@ public class LegalEntityRepositoryJdbcTests {
     }
 
     @Test
-    public void LegalEntityRepositoryJdbc_Edit_ChangesModel(){
+    void LegalEntityRepositoryJdbc_Edit_ChangesModel(){
         Integer id = legalEntityRepositoryJdbc.save(legalEntity1);
 
         LegalEntity savedLegalEntity = legalEntityRepositoryJdbc.findById(id);
@@ -98,7 +98,7 @@ public class LegalEntityRepositoryJdbcTests {
     }
 
     @Test
-    public void LegalEntityRepositoryJdbc_Remove_RemovesModel(){
+    void LegalEntityRepositoryJdbc_Remove_RemovesModel(){
         Integer id = legalEntityRepositoryJdbc.save(legalEntity1);
 
         legalEntityRepositoryJdbc.deleteById(id);

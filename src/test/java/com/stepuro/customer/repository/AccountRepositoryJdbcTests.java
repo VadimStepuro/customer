@@ -20,7 +20,7 @@ import static com.stepuro.customer.repository.Samples.AccountSamples.account1;
 import static org.junit.jupiter.api.Assertions.*;
 
 @JdbcTest
-public class AccountRepositoryJdbcTests {
+class AccountRepositoryJdbcTests {
     private AccountRepositoryJdbc accountRepositoryJdbc;
     private EmbeddedDatabase embeddedDatabase;
 
@@ -40,7 +40,7 @@ public class AccountRepositoryJdbcTests {
     }
 
     @Test
-    public void AccountRepositoryJdbc_Save_SavesModel(){
+    void AccountRepositoryJdbc_Save_SavesModel(){
         UUID id = accountRepositoryJdbc.save(account1);
 
         Account savedAccount = accountRepositoryJdbc.findById(id);
@@ -54,7 +54,7 @@ public class AccountRepositoryJdbcTests {
     }
 
     @Test
-    public void AccountRepositoryJdbc_Edit_ChangesModel(){
+    void AccountRepositoryJdbc_Edit_ChangesModel(){
         UUID uuid = accountRepositoryJdbc.save(account1);
 
         Account savedAccount = accountRepositoryJdbc.findById(uuid);
@@ -79,7 +79,7 @@ public class AccountRepositoryJdbcTests {
     }
 
     @Test
-    public void AccountRepositoryJdbc_FindById_ReturnsModel(){
+    void AccountRepositoryJdbc_FindById_ReturnsModel(){
         UUID uuid = accountRepositoryJdbc.save(account1);
 
         Account account = accountRepositoryJdbc.findById(uuid);
@@ -93,7 +93,7 @@ public class AccountRepositoryJdbcTests {
     }
 
     @Test
-    public void AccountRepositoryJdbc_Remove_RemovesModel(){
+    void AccountRepositoryJdbc_Remove_RemovesModel(){
         UUID uuid = accountRepositoryJdbc.save(account1);
 
         accountRepositoryJdbc.deleteById(uuid);

@@ -54,9 +54,18 @@ spec:
               timeoutSeconds: 5
               successThreshold: 1
               failureThreshold: 6
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "500m"
+              ephemeral-storage: "4Gi"
           volumeMounts:
           - mountPath: /var/lib/postgresql/data
             name: db-volume
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "500m"
       volumes:
         - name: db-volume
           persistentVolumeClaim:

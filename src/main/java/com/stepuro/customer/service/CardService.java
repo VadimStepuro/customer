@@ -11,7 +11,7 @@ public interface CardService {
 
     CardDto findById(UUID id);
 
-    CardDto findByCardNumber(String cardNumber);
+    CardDto findByNumber(String cardNumber);
 
     boolean existsByNumber(String number);
 

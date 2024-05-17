@@ -6,6 +6,8 @@ import com.stepuro.customer.model.enums.AccountStatus;
 import java.math.BigDecimal;
 
 public class AccountUtils {
+    private AccountUtils() {}
+
     public static boolean validateLegalEntityOwner(Account sourceAccount, Integer legalEntityId) {
         if(sourceAccount.getLegalEntity() == null)
             return false;

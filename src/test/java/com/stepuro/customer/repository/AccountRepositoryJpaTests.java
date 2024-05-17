@@ -15,12 +15,12 @@ import static com.stepuro.customer.repository.Samples.AccountSamples.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-public class AccountRepositoryJpaTests {
+class AccountRepositoryJpaTests {
     @Autowired
     private AccountRepositoryJpa accountRepositoryJpa;
 
     @Test
-    public void AccountRepository_Save_ReturnsSavedModel(){
+    void AccountRepository_Save_ReturnsSavedModel(){
         Account savedAccount = accountRepositoryJpa.save(account1);
 
         assertNotNull(savedAccount);
@@ -32,7 +32,7 @@ public class AccountRepositoryJpaTests {
     }
 
     @Test
-    public void AccountRepository_FindAll_ReturnsAllModels(){
+    void AccountRepository_FindAll_ReturnsAllModels(){
         List<Account> accounts = accountRepositoryJpa.saveAll(accountList);
 
         assertNotNull(accounts);
@@ -40,7 +40,7 @@ public class AccountRepositoryJpaTests {
     }
 
     @Test
-    public void AccountRepository_FindById_ReturnsModel(){
+    void AccountRepository_FindById_ReturnsModel(){
         Account savedAccount = accountRepositoryJpa.save(account1);
         accountRepositoryJpa.save(account2);
 
@@ -56,7 +56,7 @@ public class AccountRepositoryJpaTests {
     }
 
     @Test
-    public void AccountRepository_FindByNumber_ReturnsModel(){
+    void AccountRepository_FindByNumber_ReturnsModel(){
         Account savedAccount = accountRepositoryJpa.save(account1);
         accountRepositoryJpa.save(account2);
 
@@ -72,7 +72,7 @@ public class AccountRepositoryJpaTests {
     }
 
     @Test
-    public void AccountRepository_ExistsByNumber_ReturnsTrue(){
+    void AccountRepository_ExistsByNumber_ReturnsTrue(){
         Account savedAccount = accountRepositoryJpa.save(account1);
 
         Boolean result = accountRepositoryJpa.existsByAccountNumber(savedAccount.getAccountNumber());
@@ -81,7 +81,7 @@ public class AccountRepositoryJpaTests {
     }
 
     @Test
-    public void AccountRepository_Update_ChangesModel(){
+    void AccountRepository_Update_ChangesModel(){
         Account savedAccount = accountRepositoryJpa.save(account1);
 
         savedAccount.setStatus(AccountStatus.CLOSED);
@@ -103,7 +103,7 @@ public class AccountRepositoryJpaTests {
     }
 
     @Test
-    public void AccountRepository_Remove_RemovesModel(){
+    void AccountRepository_Remove_RemovesModel(){
         Account savedAircompany = accountRepositoryJpa.save(account1);
 
         accountRepositoryJpa.deleteById(savedAircompany.getId());

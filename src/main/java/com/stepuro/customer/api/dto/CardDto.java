@@ -19,7 +19,7 @@ import java.util.UUID;
 @ToString
 @Setter
 @Getter
-public class CardDto {
+public class CardDto{
     private UUID id;
 
     @NotNull(message = "Credit card number can't be null")
