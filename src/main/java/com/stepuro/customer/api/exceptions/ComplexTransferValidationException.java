@@ -13,6 +13,8 @@ public class ComplexTransferValidationException extends RuntimeException{
     private final List<TransferValidationException> subExceptions;
 
     public ComplexTransferValidationException(){
+        super("There are exceptions in transfer validation");
+
         subExceptions = new ArrayList<>();
     }
 
