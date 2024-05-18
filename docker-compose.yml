@@ -26,7 +26,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1111
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     restart: unless-stopped
     networks:
       - customer-network
@@ -85,6 +85,8 @@ services:
       - ALLOW_ANONYMOUS_LOGIN=yes
     networks:
       - customer-network
+    volumes:
+      - zookeeper_data:/bitnami
 
   kafka:
     depends_on:
@@ -104,9 +106,13 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_EXTERNAL:PLAINTEXT
       KAFKA_LISTENERS: PLAINTEXT://:9092,PLAINTEXT_EXTERNAL://:29092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://host.docker.internal:9092,PLAINTEXT_EXTERNAL://localhost:29092
+      KAFKA_JMX_PORT: 9997
+      KAFKA_JMX_HOSTNAME: kafka
     networks:
       - customer-network
       - bank-network
+    volumes:
+      - kafka_data:/bitnami/kafka
 
   pgadmin:
     container_name: customer-pgadmin
@@ -118,14 +124,33 @@ services:
     ports:
       - "5050:80"
     volumes:
-      - pgadmin-data:/var/lib/pgadmin
+      - pgadmin_data:/var/lib/pgadmin
     networks:
       - customer-network
 
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - "8083:8080"
+    environment:
+      DYNAMIC_CONFIG_ENABLED: true
+    networks:
+      - customer-network
+      - bank-network
+    volumes:
+      - kafka_ui_data:/etc/kafkaui
+
 volumes:
-  db-data:
-    name: customer-db-data
-  pgadmin-data:
-    name: customer-pgadmin-data
+  db_data:
+    driver: local
+  pgadmin_data:
+    driver: local
   cache:
-    name: customer-cache-data
+    driver: local
+  kafka_data:
+    driver: local
+  zookeeper_data:
+    driver: local
+  kafka_ui_data:
+    driver: local
