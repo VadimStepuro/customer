@@ -46,6 +46,7 @@ services:
       JDBC_PASSWORD: 1111
       SPRING_KAFKA_BOOTSTRAP-SERVERS: "customer-kafka:9092"
       KAFKA_TOPIC-NAME_TRANSFER-AMOUNT: transferAmount
+      KAFKA_TYPE-MAPPING_PAYMENT: "payment"
       SPRING_DATA_REDIS_HOST: cache
       SPRING_DATA_REDIS_PORT: 6379
       SPRING_DATA_REDIS_DATABASE: 0
@@ -71,6 +72,7 @@ services:
       - cache:/data
     networks:
       - customer-network
+      - bank-network
 
   zookeeper:
     image: 'bitnami/zookeeper:3.9.1'
@@ -104,6 +106,7 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://host.docker.internal:9092,PLAINTEXT_EXTERNAL://localhost:29092
     networks:
       - customer-network
+      - bank-network
 
   pgadmin:
     container_name: customer-pgadmin

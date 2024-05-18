@@ -67,6 +67,7 @@ spec:
       labels:
         app: redisinsight #label for pod/s
     spec:
+      automountServiceAccountToken: false
       containers:
         - name:  redisinsight #Container name (DNS_LABEL, unique)
           image: redis/redisinsight:latest #repo/image
