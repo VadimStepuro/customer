@@ -13,6 +13,7 @@ spec:
       labels:
         app: customer-pgadmin
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: pgadmin4
           resources:
