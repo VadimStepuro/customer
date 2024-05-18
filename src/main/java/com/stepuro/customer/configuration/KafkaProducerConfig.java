@@ -19,6 +19,9 @@ public class KafkaProducerConfig {
     @Value(value = "${spring.kafka.bootstrap-servers}")
     private String bootstrapAddress;
 
+    @Value(value = "${kafka.type-mapping.payment}")
+    private String paymentMapString;
+
     @Bean
     public ProducerFactory<String, PaymentOrderEntityDto> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
@@ -34,7 +37,7 @@ public class KafkaProducerConfig {
                 JsonSerializer.class);
         configProps.put(
                 JsonSerializer.TYPE_MAPPINGS,
-                "payment:com.stepuro.customer.api.dto.PaymentOrderEntityDto");
+                paymentMapString + ":" + PaymentOrderEntityDto.class.getName());
 
         return new DefaultKafkaProducerFactory<>(configProps);
     }

@@ -47,6 +47,7 @@ spec:
       labels:
         app: pgpool
     spec:
+      automountServiceAccountToken: false
       securityContext:
         fsGroup: 1001
       containers:

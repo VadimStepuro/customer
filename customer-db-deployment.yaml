@@ -14,6 +14,7 @@ spec:
       labels:
         app: customer-db
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: customer-db
           image: postgres:latest
@@ -62,10 +63,6 @@ spec:
           volumeMounts:
           - mountPath: /var/lib/postgresql/data
             name: db-volume
-          resources:
-            limits:
-              cpu: "500m"
-              memory: "500m"
       volumes:
         - name: db-volume
           persistentVolumeClaim:
