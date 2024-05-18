@@ -29,7 +29,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Cacheable(cacheNames = "accounts", keyGenerator = "newKeyGenerator")
-    public List<AccountDto> findAll(){
+    public List<AccountDto> findAll() throws NoContentException{
         List<AccountDto> accountDtos = accountRepositoryJpa
                 .findAll()
                 .stream()
